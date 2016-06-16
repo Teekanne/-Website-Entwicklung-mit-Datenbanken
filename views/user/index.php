@@ -8,10 +8,10 @@
      <label>E-Mail</label><input type="text" name="EMAIL" /><br />
     <label>Passwort</label><input type="text" name="PASSWORD" /><br />
     <label>Role</label>
-    <select name="ROLE1">
-        <option value="default">Default</option>
-        <option value="admin">Admin</option>
-        <option value="ownder">Owner</option>
+    <select name="ROLE">
+        <option value="Default">Default</option>
+        <option value="Administrator">Administrator</option>
+        <option value="User">User</option>
     </select><br />
     <label>FK_STATE</label><input type="text" name="FK_STATE" /><br />
     <label>FK_DEPARTMENT</label><input type="text" name="FK_DEPARTMENT" /><br />

@@ -10,7 +10,7 @@ class Login_Model extends Model
 
 	public function run()
 	{
-		 $sth= $this->db->prepare("SELECT ID, ROLE1 FROM T_TUTOR WHERE EMAIL = :login AND PASSWORD = MD5(:password)");
+		 $sth= $this->db->prepare("SELECT ID, ROLE FROM T_TUTOR WHERE EMAIL = :login AND PASSWORD = MD5(:password)");
 		$sth->execute(array(
 			':login' => $_POST['login'],
 			':password' => $_POST['password']
@@ -28,7 +28,7 @@ class Login_Model extends Model
 			// login
 			Session::init();
                         //set key for session
-			Session::set('ROLE1', $data['ROLE1']);
+			Session::set('ROLE', $data['ROLE']);
 			Session::set('loggedIn', true);
 			header('location: ../dashboard');
 		} else {

@@ -1,3 +1,3 @@
 <?php
  //@TODO: Error Handling
-define('URL', 'http://localhost/PHP_Team/');
+define('URL', 'http://localhost/Mentimeter/');

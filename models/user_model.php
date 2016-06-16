@@ -17,14 +17,14 @@ class User_Model extends Model
 	}
 	
         public function create($data){
-                $sth = $this->db->prepare('INSERT INTO T_TUTOR(`TITLE`, `FIRSTNAME`, `LASTNAME`, `EMAIL`, `PASSWORD`, `ROLE1`, `FK_STATE`, `FK_DEPARTMENT`, `FK_ROLE`)VALUES (:TITLE, :FIRSTNAME, :LASTNAME, :EMAIL, :PASSWORD, :ROLE1, :FK_STATE, :FK_DEPARTMENT, :FK_ROLE)');
+                $sth = $this->db->prepare('INSERT INTO T_TUTOR(`TITLE`, `FIRSTNAME`, `LASTNAME`, `EMAIL`, `PASSWORD`, `ROLE`, `FK_STATE`, `FK_DEPARTMENT`, `FK_ROLE`)VALUES (:TITLE, :FIRSTNAME, :LASTNAME, :EMAIL, :PASSWORD, :ROLE1, :FK_STATE, :FK_DEPARTMENT, :FK_ROLE)');
                 $sth->execute(array(
         ':TITLE' => $data['TITLE'],
         ':FIRSTNAME' =>  $data['FIRSTNAME'],
         ':LASTNAME' => $data['LASTNAME'],
         ':EMAIL' =>  $data['EMAIL'],
         ':PASSWORD' =>  $data['PASSWORD'],
-        ':ROLE!' =>  $data['ROLE1'],
+        ':ROLE!' =>  $data['ROLE'],
         ':FK_STATE' =>   $data['FK_STATE'],
         ':FK_DEPARTMENT' =>  $data['FK_DEPARTMENT'],
         ':FK_ROLE' =>  $data['FK_ROLE']
