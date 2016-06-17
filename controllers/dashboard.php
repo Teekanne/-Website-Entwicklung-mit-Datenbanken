@@ -1,5 +1,5 @@
 <?php
-
+/* XD */
 class Dashboard extends Controller {
 
 	function __construct() {
