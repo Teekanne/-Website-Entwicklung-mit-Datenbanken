@@ -31,7 +31,7 @@
         echo '<td>' . $value['FIRSTNAME'] . '</td>';
         echo '<td>' . $value['LASTNAME'] . '</td>';
         echo '<td>' . $value['EMAIL'] . '</td>';
-        echo '<td>' . $value['ROLE1'] . '</td>';
+        echo '<td>' . $value['ROLE'] . '</td>';
         echo '<td>
 				<a href="' . URL . 'user/edit/' . $value['ID'] . '">Edit</a> 
 				<a href="' . URL . 'user/delete/' . $value['ID'] . '">Delete</a></td>';

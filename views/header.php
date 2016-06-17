@@ -28,7 +28,7 @@
 	<?php if (Session::get('loggedIn') == true):?>
 		<a href="<?php echo URL; ?>dashboard">Dashboard</a>
 		
-		<?php if (Session::get('ROLE1') == 'owner'):?>
+		<?php if (Session::get('ROLE') == 'Administrator'):?>
 		<a href="<?php echo URL; ?>user">Users</a>
 		<?php endif; ?>
 		
