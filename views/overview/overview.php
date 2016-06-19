@@ -136,22 +136,68 @@
 
 <?php
 
-    echo "test1<br />";
+    $Tutor_ID = 2;
 
     $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
     
     if (!$pdo) {
-        echo "nicht verbunden<br />";
+        echo "Verbindungsfehler!<br />";
+    } 
+    
+    $CategoryParentSelect = 
+            "SELECT * FROM T_CATEGORY ".
+            "WHERE FK_PARENT_ID IS NULL AND FK_TUTOR = ".$Tutor_ID." ".
+            "ORDER BY ID";
+    
+    $CategoryParentResult = $pdo->query($CategoryParentSelect);
+    
+    if ($CategoryParentResult && $CategoryParentResult->rowCount() > 0) {
+        
+        while ($CategoryParent = $CategoryParentResult->fetch(PDO::FETCH_ASSOC)) {
+            
+            echo "CatParent: ".$CategoryParent['CATNAME']."<br /><br />";
+            
+            $CategoryParentID = $CategoryParent['ID'];
+            
+            $CategoryChildSelect = 
+                "SELECT * FROM T_CATEGORY ".
+                "WHERE ".
+                "FK_PARENT_ID IS NOT NULL AND ".
+                "FK_TUTOR = ".$Tutor_ID." AND ".
+                "FK_PARENT_ID = ".$CategoryParentID." ".
+                "ORDER BY ID";
+    
+            $CategoryChildResult = $pdo->query($CategoryChildSelect);
+            
+            if ($CategoryChildResult && $CategoryChildResult->rowCount() > 0) {
+                while ($CategoryChild = $CategoryChildResult->fetch(PDO::FETCH_ASSOC)) {
+                    
+                    echo "CatChild: ".$CategoryChild['CATNAME']."<br />";
+                    
+                    $CategoryChildID = $CategoryChild['ID'];
+            
+                    $QuizSelect = 
+                        "SELECT * FROM T_QUIZ ".
+                        "WHERE ".
+                        "FK_TUTOR = ".$Tutor_ID." AND ".
+                        "FK_CATEGORY = ".$CategoryChildID." ".
+                        "ORDER BY ID";
+                    
+                    $QuizResult = $pdo->query($QuizSelect);
+            
+                    if ($QuizResult && $QuizResult->rowCount() > 0) {
+                        while ($Quiz = $QuizResult->fetch(PDO::FETCH_ASSOC)) {
+                            echo "Quiz: ".$Quiz['QUIZNAME']."<br />";
+                        }
+                    }
+                }
+            }
+            echo "<br /><br /><br />";
+        }
     } else {
-        echo "verbunden<br />";
+        echo "Leere Ergebnismenge!<br />";
     }
-    
-    echo "test2<br />";
 
-    $sql = "SELECT QUESTION FROM T_QUESTION WHERE ID = 35";
-    
-    $question = $pdo->query($sql)->fetch();
-    echo $question['QUESTION']."<br />";
 
 
     /*
