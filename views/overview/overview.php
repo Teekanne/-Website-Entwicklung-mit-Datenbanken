@@ -146,15 +146,22 @@
                                 '<td>&nbsp</td>'.
                                 '<td>&nbsp</td>'.
                                 '<td>&nbsp</td>'.
-                                '<td style="padding-right: 25px">'.
-                                $Quiz['QUIZNAME'].
+                                '<td style="padding-right: 25px">';
+                            
+                            if($Quiz['ISACTIVE'] == 1) {
+                                echo '<a href="../question/'.$Quiz['ID'].'">'.$Quiz['QUIZNAME'].'</a>';
+                            } else {
+                                echo $Quiz['QUIZNAME'];
+                            }
+                                        
+                            echo
                                 '</td>'.
                                 '<td style="text-align: center">';
 
                             if($Quiz['ISACTIVE'] == 0) {
                                     echo
                                     '<form style="margin: 0; padding:0">'.
-                                            '<button type="button" id="berechnen">starten</button>'.
+                                            '<button type="button" id="'.$Quiz['ID'].'">starten</button>'.
                                     '</form>';
                             } else {
                                     echo '&nbsp';
@@ -167,7 +174,7 @@
                             if($Quiz['ISACTIVE'] == 1) {
                                     echo
                                     '<form style="margin: 0; padding:0">'.
-                                            '<button type="button" id="berechnen">beenden</button>'.
+                                            '<button type="button" id="'.$Quiz['ID'].'">beenden</button>'.
                                     '</form>';
                             } else {
                                     echo '&nbsp';
