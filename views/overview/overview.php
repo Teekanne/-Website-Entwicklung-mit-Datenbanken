@@ -1,3 +1,4 @@
+<html>
 <!doctype html public "-//W3C//DTD HTML 4.0 //EN">
 <head>
 	<title>
@@ -63,12 +64,12 @@
         '<table style="border:0px solid #647852; border-collapse: collapse;" border="0">'.
         '<tbody>'.
         '<tr style="text-align: center; font-size: 75%; line-height: 0px;">'.
-                '<td style="width:50px">&nbsp</td>'.
-                '<td style="width:100px">&nbsp</td>'.
-                '<td style="width:100px">&nbsp</td>'.
-                '<td style="width:400px">&nbsp</td>'.
-                '<td style="width:100px">&nbsp</td>'.
-                '<td style="width:100px">&nbsp</td>'.
+            '<td style="width:50px">&nbsp</td>'.
+            '<td style="width:100px">&nbsp</td>'.
+            '<td style="width:100px">&nbsp</td>'.
+            '<td style="width:400px">&nbsp</td>'.
+            '<td style="width:100px">&nbsp</td>'.
+            '<td style="width:100px">&nbsp</td>'.
         '</tr>';
     
     
@@ -81,7 +82,6 @@
     $CategoryParentResult = $pdo->query($CategoryParentSelect);
     
     if ($CategoryParentResult && $CategoryParentResult->rowCount() > 0) {
-        
         while ($CategoryParent = $CategoryParentResult->fetch(PDO::FETCH_ASSOC)) {
             
             echo
@@ -149,7 +149,7 @@
                                 '<td style="padding-right: 25px">';
                             
                             if($Quiz['ISACTIVE'] == 1) {
-                                echo '<a href="../question/'.$Quiz['ID'].'">'.$Quiz['QUIZNAME'].'</a>';
+                                echo '<a href="../question/question.php?QUIZ_ID='.$Quiz['ID'].'">'.$Quiz['QUIZNAME'].'</a>';
                             } else {
                                 echo $Quiz['QUIZNAME'];
                             }
@@ -195,4 +195,6 @@
         echo "Leere Ergebnismenge!<br />";
     }
 ?>
+
+</body>
 </html>
