@@ -1,6 +1,9 @@
-</div>
-<div id="footer">
-    (C) Team 1
-</div>
-</body>
+			</article>
+		</section>
+		<footer>
+			<ul>
+				<li>@Testimeter</li>
+			</ul>
+		</footer>
+	<body>
 </html>
