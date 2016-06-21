@@ -10,7 +10,7 @@
 
     <?php
         session_start();
-        session_destroy();
+        //session_destroy();
     ?>
 
     <?php
@@ -75,7 +75,7 @@
 
 
 
-    if (!isset($_SESSION['Questions'])) {
+    if (!isset($_SESSION['Quiz'])) {
         
         $QuizID = $_GET["QUIZ_ID"];
         
@@ -96,7 +96,10 @@
                 $IsActive = $QuizRow['ISACTIVE'];
                 
                 if ($IsActive) {
-                    echo "Quizname: ".$QuizRow['QUIZNAME'].'<br />';
+                    
+                    $QuizTmp = new Quiz(); 
+                    
+                    $QuizTmp->QuizTitle = $QuizRow['QUIZNAME'];
                     
                     $Questions = array();
                     
@@ -105,8 +108,6 @@
                     
                     if ($QuestionResult && $QuestionResult->rowCount() > 0) {
                         while ($QuestionRow = $QuestionResult->fetch(PDO::FETCH_ASSOC)) {
-                            
-                            echo "Question: ".$QuestionRow['QUESTION'].'<br />';
                             
                             $QuestionTmp = new Question();
                             
@@ -122,9 +123,7 @@
 
                             if ($AnswerResult && $AnswerResult->rowCount() > 0) {
                                 while ($AnswerRow = $AnswerResult->fetch(PDO::FETCH_ASSOC)) { 
-                                    
-                                    echo "Answer: ".$AnswerRow['ANSWER'].'<br />';
-                                    
+                                                             
                                     $AnswerTmp = new Answer();
                                     $AnswerTmp->AnswerText = $AnswerRow['ANSWER'];
                                     $AnswerTmp->QuestionChecked = 0;
@@ -134,8 +133,9 @@
                             $QuestionTmp->Answers = $Answers;
                             array_push($Questions, $QuestionTmp);
                         }
+                        $QuizTmp->Questions = $Questions;
                     }
-                    $_SESSION['Questions'] = $Questions;
+                    $_SESSION['Quiz'] = $QuizTmp;
                     
                 } else {
                     echo "Das gewählte Quiz ist nicht aktiv!<br />";
@@ -150,7 +150,8 @@
 
     if (isset($_POST['next']) || isset($_POST['back'])) {
 
-        $QuestionsTmp = $_SESSION['Questions'];
+        $QuizTmp = $_SESSION['Quiz'];
+        $QuestionsTmp = $QuizTmp->Questions;
         $KeysQuestion = array_keys($QuestionsTmp);
         $QuestionTmp = $QuestionsTmp[$KeysQuestion[$_SESSION['CurrPage']]];
 
@@ -174,7 +175,7 @@
 
             //echo "### Werte ### ".sizeof($_SESSION['Questions'])." / ".($_SESSION['CurrPage']+1)."<br>";
 
-            if (sizeof($_SESSION['Questions']) > ($_SESSION['CurrPage']+1)) {
+            if (sizeof($QuestionsTmp) > ($_SESSION['CurrPage']+1)) {
                 $_SESSION['CurrPage']++;
             }
         }
@@ -190,15 +191,17 @@
     echo "<form name=\"questionform\" method=\"post\" action=".getenv('SCRIPT_NAME').">";
     ?>
 
-
-
     <?php
-    $QuestionsTmp = $_SESSION['Questions'];
+    $QuizTmp = $_SESSION['Quiz'];
+    $QuestionsTmp = $QuizTmp->Questions;
     $keys = array_keys($QuestionsTmp);
     $QuestionTmp = $QuestionsTmp[$keys[$_SESSION['CurrPage']]];
     
-    echo "<h1> Fragenkatalog Nummer eins</h1><br>";  
-    echo $QuestionTmp->QuestionText." (".($_SESSION['CurrPage']+1)."/".sizeof($_SESSION['Questions']).")";
+    echo "<h1>".$QuizTmp->QuizTitle."</h1><br>";  
+    
+    echo "Frage (".($_SESSION['CurrPage']+1)."/".sizeof($QuestionsTmp).")<br><br>";
+    
+    echo $QuestionTmp->QuestionText."<br>";
     ?>
 
         <br><br><br>	
@@ -216,7 +219,8 @@
                 </tr>
 
                 <?php
-                $QuestionsTmp = $_SESSION['Questions'];
+                $QuizTmp = $_SESSION['Quiz'];
+                $QuestionsTmp = $QuizTmp->Questions;
                 $keys = array_keys($QuestionsTmp);
                 $QuestionTmp = $QuestionsTmp[$keys[$_SESSION['CurrPage']]];
 
