@@ -149,7 +149,7 @@
                                 '<td style="padding-right: 25px">';
                             
                             if($Quiz['ISACTIVE'] == 1) {
-                                echo '<a href="../question/'.$Quiz['ID'].'">'.$Quiz['QUIZNAME'].'</a>';
+                                echo '<a href="../question/question.php?QUIZ_ID='.$Quiz['ID'].'">'.$Quiz['QUIZNAME'].'</a>';
                             } else {
                                 echo $Quiz['QUIZNAME'];
                             }
