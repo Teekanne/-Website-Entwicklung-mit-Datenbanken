@@ -10,13 +10,9 @@
     <label>Role</label>
     <select name="ROLE">
         <option value="Default">Default</option>
-        <option value="Administrator">Administrator</option>
-        <option value="User">User</option>
+               <option value="User">User</option>
+                <option value="<Administrator">Administrator</option>
     </select><br />
-    <label>FK_STATE</label><input type="text" name="FK_STATE" /><br />
-    <label>FK_DEPARTMENT</label><input type="text" name="FK_DEPARTMENT" /><br />
-    <label>FK_ROLE</label><input type="text" name="FK_ROLE" /><br />
-
     <label>&nbsp;</label><input type="submit" />
 </form>
 

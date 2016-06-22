@@ -27,10 +27,7 @@ class User extends Controller {
         $data['LASTNAME'] = $_POST['LASTNAME'];
         $data['EMAIL'] = $_POST['EMAIL'];
         $data['PASSWORD'] = md5($_POST['PASSWORD']);
-        $data['ROLE1'] = $_POST['ROLE'];
-        $data['FK_STATE'] = $_POST['FK_STATE'];
-        $data['FK_DEPARTMENT'] = $_POST['FK_DEPARTMENT'];
-        $data['FK_ROLE'] = $_POST['FK_ROLE'];
+        $data['ROLE'] = $_POST['ROLE'];
         //@TODO: Error Handling
         $this->model->create($data);
         header('location: ' . URL . 'user');
