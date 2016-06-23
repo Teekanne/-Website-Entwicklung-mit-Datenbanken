@@ -30,6 +30,7 @@ class Login_Model extends Model
                         //set key for session
 			Session::set('ROLE', $data['ROLE']);
 			Session::set('loggedIn', true);
+                        Session::set('ID', $data['ID']);
 			header('location: ../dashboard');
 		} else {
 			header('location: ../login');
