@@ -1,6 +1,6 @@
 <?php
     include("category.php");
-    include("js/javascript.js");
+    include("JS/javascript.js");
     
     function ShowSelectBoxWithCategories(){
         echo "<select name='category'>";
