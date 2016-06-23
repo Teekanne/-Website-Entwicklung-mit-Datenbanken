@@ -26,10 +26,16 @@ h2 {
 	padding:1.25em;
 	text-align:left;
 }
-
-h3 { 	
+h3	{
+	line-height:1.8em;
 	font-family:Helvetica;
+	font-weight:100;
+	color:#F3F3F3;
+	margin:0em;
+	padding:1.25em;
+	text-align:justify;
 }
+
 
 p {
 	line-height:1.8em;
@@ -39,6 +45,17 @@ p {
 	margin:0em;
 	padding:1.25em;
 	text-align:justify;
+}
+
+#registrate {
+	line-height:0em;
+	font-family:Helvetica;
+	font-weight:100;
+	font-size:0.8em;
+	color:#F3F3F3;
+	margin-left:1em;
+	padding:0.5em;
+	text-align:lef;
 }
 
 ul {
@@ -228,26 +245,42 @@ form br {
 }
 
 table {
-	margin-left:18.5em;
+	margin-left:auto;
 	margin-right:auto;
+	font-family:Helvetica;
+	font-weight:100;
+	font-size:0.9em;
+	color:#F3F3F3;
+	text-align:left;
+	
+}
+
+
+#loginTable {
+	margin-left: 21em;
+	margin-right:auto;
+}
+
+button {
+	width:5em;
 }
 
 
 /** Responsiv Area */
 @media screen and (max-width:1020px) {
-	table {
+	#loginTable {
 		margin-left:16em;
 		margin-right:auto;
 }	
 }
 @media screen and (max-width:920px) {
-	table {
+	#loginTable {
 		margin-left:14em;
 		margin-right:auto;
 }	
 }
 @media screen and (max-width:850px) {
-	table {
+	#loginTable {
 		margin-left:12em;
 		margin-right:auto;
 }	
@@ -261,7 +294,7 @@ table {
 	#main {
 		margin: 18.8em auto;
 	}
-	table {
+	#loginTable {
 		margin-left:auto;
 		margin-right:auto;
 }	
