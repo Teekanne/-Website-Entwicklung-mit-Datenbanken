@@ -76,7 +76,7 @@
                                 } 
 
                                 echo
-                                    '<table style="border:0px solid #647852; border-collapse: collapse;" border="1">'.
+                                    '<table style="border:0px solid #647852; border-collapse: collapse;" border="0">'.
                                     '<tbody>'.
                                     '<tr style="text-align: left; font-size: 75%; line-height: 0px;">'.
                                         '<td style="width:10px">&nbsp</td>'.
@@ -106,7 +106,6 @@
                                             '<td colspan="5" text-align = "left"; style="font-weight: bold; font-size: 140%; padding-top: 20px; padding-bottom: 10px; padding-right: 25px">'.
                                             '<label>'.$CategoryParent['CATNAME'].'</label>'.
                                             '</td>'.
-					    '<td>&nbsp</td>'.
                                             '</tr>';
 
                                         echo
