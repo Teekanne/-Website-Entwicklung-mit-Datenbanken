@@ -1,6 +1,6 @@
 <div class="registration">
     <form action="registration/reg" method="post">
-          <h2>Registrierung</h2></br>
+          <h2>Registrierung</h2>
 		  <table>
 			<tr>
 				<th><label></label></th>
@@ -35,6 +35,7 @@
 				<th><input type="submit" name="Registrieren" value="Registrieren"></th>
 			</tr>
         </table>
-		 <p id="registrate">* Nur HS E-Mail Adresse</p></br>
+		</br>
+		 <p id="registrate">* Nur HS E-Mail Adresse</p>
     </form>
 </div>

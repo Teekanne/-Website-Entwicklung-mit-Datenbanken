@@ -1,6 +1,6 @@
 <?php
     include("category.php");
-
+    
     function ShowSelectBoxWithCategories(){
         echo "<select name='category'>";
         foreach(Category::GetFirstLevelCategories() as $c => $category){
