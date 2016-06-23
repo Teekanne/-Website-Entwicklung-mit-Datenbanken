@@ -10,7 +10,7 @@
 		</section>
 		<header>
 			<ul>
-				<li><a href="https://www.hs-flensburg.de/"> <img src="images/HS.png"/> </a></li> 
+				<li><a href="https://www.hs-flensburg.de/"> <img src="../../images/HS.png"/> </a></li> 
 			</ul>
 			<h1>Testimeter</h1>
 		</header>
@@ -76,15 +76,16 @@
                                 } 
 
                                 echo
-                                    '<table style="border:0px solid #647852; border-collapse: collapse;" border="0">'.
+                                    '<table border="0">'.
                                     '<tbody>'.
-                                    '<tr style="text-align: center; font-size: 75%; line-height: 0px;">'.
+                                    '<tr style="text-align: left; font-size: 75%; line-height: 0px;">'.
                                         '<td style="width:10px">&nbsp</td>'.
                                         '<td style="width:25px">&nbsp</td>'.
                                         '<td style="width:25px">&nbsp</td>'.
-                                        '<td style="width:400px">&nbsp</td>'.
-                                        '<td style="width:100px">&nbsp</td>'.
-                                        '<td style="width:100px">&nbsp</td>'.
+                                        '<td style="width:500px">&nbsp</td>'.
+                                        '<td style="width:50px">&nbsp</td>'.
+					'<td style="width:10px">&nbsp</td>'.
+                                        '<td style="width:50px">&nbsp</td>'.
                                     '</tr>';
 
 
@@ -102,18 +103,20 @@
                                         echo
                                             '<tr>'.
                                             '<td>&nbsp</td>'.
-                                            '<td colspan="5" style="font-weight: bold; font-size: 150%; padding-top: 20px; padding-bottom: 10px; padding-right: 25px">'.
-                                            $CategoryParent['CATNAME'].
+                                            '<td colspan="5" text-align = "left"; style="font-weight: bold; font-size: 140%; padding-top: 20px; padding-bottom: 10px; padding-right: 25px">'.
+                                            '<label>'.$CategoryParent['CATNAME'].'</label>'.
                                             '</td>'.
+					    '<td>&nbsp</td>'.
                                             '</tr>';
 
                                         echo
-                                            '<tr style="text-align: center; font-size: 75%">'.
+                                            '<tr style="text-align: center; font-size: 100%">'.
                                             '<td>&nbsp</td>'.
                                             '<td>&nbsp</td>'.
                                             '<td>&nbsp</td>'.
                                             '<td>&nbsp</td>'.
                                             '<td>inaktiv</td>'.
+					    '<td>&nbsp</td>'.
                                             '<td>aktiv</td>'.
                                             '</tr>';
 
@@ -137,7 +140,7 @@
                                                     '<tr>'.
                                                     '<td>&nbsp</td>'.
                                                     '<td>&nbsp</td>'.
-                                                    '<td colspan="4" style="font-weight: bold; font-size: 120%; padding-top: 10px; padding-bottom: 5px;  padding-right: 25px">'.
+                                                    '<td colspan="4" style="font-weight: bold; text-align = solid; font-size: 120%; padding-top: 10px; padding-bottom: 5px;  padding-right: 20px">'.
                                                     $CategoryChild['CATNAME'].
                                                     '</td>'.
                                                     '</tr>';
@@ -184,6 +187,7 @@
 
                                                         echo
                                                         '</td>'.
+														'<td>&nbsp</td>'.
                                                         '<td style="text-align: center">';
 
                                                         if($Quiz['ISACTIVE'] == 1) {
