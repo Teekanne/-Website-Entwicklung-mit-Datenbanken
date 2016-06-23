@@ -1,5 +1,3 @@
-<?php include("header.php"); ?>
-
 <h2>Neue Umfrage erstellen</h2>
 <form action="frmSaveQuestion.php" method="post">
     <table id="questionTable">
@@ -36,5 +34,3 @@
     
     <input type="button" value="Neue Frage einfügen" onclick="addNewQuestion('questionTable', 'question1');">  <input type="submit" value="Jetzt erstellen &raquo"/>
 </form>
-
-<?php include("footer.php"); ?>
