@@ -264,8 +264,12 @@
         <input type='submit' name='next' value='nächste Frage'>
         <br>
         <br>
-        <input type='submit' name='complete' value='Quiz Abschliessen'>
+        
 
+    </form>
+
+    <form name="questionform" method="post" action="../saveresults/saveresults.php">
+        <input type='submit' name='complete' value='Quiz Abschliessen'>
     </form>
 
 </body>
