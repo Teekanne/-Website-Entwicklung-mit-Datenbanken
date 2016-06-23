@@ -1,20 +1,4 @@
-<?php
-    include("category.php");
-    
-    function ShowSelectBoxWithCategories(){
-        echo "<select name='category'>";
-        foreach(Category::GetFirstLevelCategories() as $c => $category){
-            echo "<option>" . $category->__get("catname") . "</option>";
-
-            foreach($category->GetSecondLevelCategories() as $s => $secondLevelCategory){
-                echo "<option>- " . $secondLevelCategory->__get("catname") . "</option>";
-            }
-        }        
-        
-        echo "</select>";
-    }
-?>
-
+<?php include("header.php"); ?>
 
 <h2>Neue Umfrage erstellen</h2>
 <form action="frmSaveQuestion.php" method="post">
@@ -30,14 +14,14 @@
         </tr>
         <tr>
             <th>Beschreibung</th>
-            <th><textarea name="description" maxlength="1000"></textarea></th>
+            <th><textarea name="description1" maxlength="1000"></textarea></th>
         </tr>
         <tr>
             <th>Antworten</th>
             <th> 
-                <div id="divAnswers1">
-                    <input type="text" name="answer[]" id="answer1_1" placeholder="Antwortmöglichkeit 1" /><br />
-                    <input type="text" name="answer[]" id="answer1_2" placeholder="Antwortmöglichkeit 2" onkeydown="addTextbox('divAnswers1', this);" />
+                <div class="divAnswers1">
+                    <input type="text" name="answer1_1" placeholder="Antwortmöglichkeit 1" /><br />
+                    <input type="text" name="answer1_2" placeholder="Antwortmöglichkeit 2" onkeydown="addTextbox('divAnswers1', 'answer1_2');" />
                 </div>
             </th>
         </tr>
@@ -47,8 +31,10 @@
                 <input type="radio" name="choice1" value="singlechoice" checked="checked"/><label>Single-Choice</label><br />
                 <input type="radio" name="choice1" value="multiplechoice"/><label>Multiple-Choice</label>
             </th>                            
-        </tr>            <th>Beschreibung</th>
+        </tr>
     </table>
     
     <input type="button" value="Neue Frage einfügen" onclick="addNewQuestion('questionTable', 'question1');">  <input type="submit" value="Jetzt erstellen &raquo"/>
 </form>
+
+<?php include("footer.php"); ?>
