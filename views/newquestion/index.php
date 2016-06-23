@@ -1,5 +1,3 @@
-<?php include("../header.php"); ?>
-
 <?php
     function ShowSelectBoxWithCategories(){
         echo "<select name='category'>";
@@ -52,5 +50,3 @@
     
     <input type="button" value="Neue Frage einfügen" onclick="addNewQuestion('questionTable', 'question1');">  <input type="submit" value="Jetzt erstellen &raquo"/>
 </form>
-
-<?php include("../footer.php"); ?>
