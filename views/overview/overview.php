@@ -1,3 +1,10 @@
+<?php
+    //require("../../library/Session.php");
+
+    session_start();
+    //session_destroy();
+?>
+
 <!doctype html>
 <html>
 	<head>
@@ -67,10 +74,56 @@
 
                             <?php
 
-                                $Tutor_ID = 2;
-
+                               
+                            /*
+                                class Overview extends Controller {
+                                    
+                                    function __construct() {
+                                        parent::__construct();
+                                        Session::init();
+                                        $logged = Session::get('loggedIn');
+                                        if ($logged == false){
+                                            Session::destroy();
+                                            header('location: ../login');
+                                            exit;
+                                        }
+                                    }
+                                }
+                         
+                             */
+                                
+                            
+                                /*
+                                //Session::init();
+                                
+                                //$logged = Session::get('loggedIn');
+                                
+                                
+                            
+                                $logged = $_SESSION['loggedIn'];
+                                
+                                if ($logged == false){
+                                    echo "NICHT EINGELOGGT!<br>";
+                                } else {
+                                    echo "EINGELOGGT ".$_SESSION['ID']."<br>";
+                                }
+                                */
+                            
+                                
+                                
+                                $logged = $_SESSION['loggedIn'];
+                                        if ($logged == false){
+                                            echo "NICHT EINGELOGGT!<br>";
+                                            session_destroy();
+                                            header('location: ../login');
+                                            exit;
+                                        }
+                                        
+                                $Tutor_ID = $_SESSION['ID'];
+                                    
+                                
                                 $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
-
+                                
                                 if (!$pdo) {
                                     echo "Verbindungsfehler!<br />";
                                 } 
@@ -212,7 +265,7 @@
                                 } else {
                                     echo "Leere Ergebnismenge!<br />";
                                 }
-                            ?>
+                             ?>
                         </article>
 		</section>
 		<footer>
