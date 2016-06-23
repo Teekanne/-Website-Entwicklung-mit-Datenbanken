@@ -1,3 +1,10 @@
+<?php
+    require("../../models/quiz_model.php");
+
+    session_start();
+    //session_destroy();
+?>
+
 <html>
 <!doctype html public "-//W3C//DTD HTML 4.0 //EN">
 <head>
@@ -7,65 +14,6 @@
 </head>
 
 <body style="font-family: Verdana, 'Lucida Sans Unicode', sans-serif">
-
-    <?php
-        session_start();
-        //session_destroy();
-    ?>
-
-    <?php
-    class Quiz
-    {   
-        private $QuizTitle;
-        private $Questions;
-        
-        function __get($attribute)
-        {
-            return $this->$attribute;
-        }
-
-        function __set($attribute, $value)
-        {
-            $this->$attribute = $value;
-        }
-    }	   
-    
-    class Question
-    {   		
-        private $QuestionText;
-        private $QuestionDescription;
-        private $SingleChoice;
-        private $QuestionKey;
-        
-        private $Answers;
-
-        function __get($attribute)
-        {
-            return $this->$attribute;
-        }
-
-        function __set($attribute, $value)
-        {
-            $this->$attribute = $value;
-        }
-    }
-
-    class Answer
-    {	
-        private $AnswerText;
-        private $QuestionChecked;
-
-        function __get($attribute)
-        {
-            return $this->$attribute;
-        }
-
-        function __set($attribute, $value)
-        {
-            $this->$attribute = $value;
-        }
-    }	
-    ?>
 
     <?php
 

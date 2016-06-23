@@ -1,6 +1,7 @@
 <?php
     class Quiz
     {   
+        private $QuizID;
         private $QuizTitle;
         private $Questions;
         
@@ -16,7 +17,8 @@
     }	   
     
     class Question
-    {   		
+    {   
+        private $QuestionID;
         private $QuestionText;
         private $QuestionDescription;
         private $SingleChoice;
@@ -37,6 +39,7 @@
 
     class Answer
     {	
+        private $AnswerID;
         private $AnswerText;
         private $QuestionChecked;
 
