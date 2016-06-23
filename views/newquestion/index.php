@@ -1,4 +1,20 @@
-<?php include("Categories.php"); ?>
+<?php 
+
+    include("Categories.php"); 
+
+    function ShowSelectBoxWithCategories(){
+        echo "<select name='category'>";
+        foreach(Category::GetFirstLevelCategories() as $c => $category){
+            echo "<option>" . $category->__get("catname") . "</option>";
+
+            foreach($category->GetSecondLevelCategories() as $s => $secondLevelCategory){
+                echo "<option>- " . $secondLevelCategory->__get("catname") . "</option>";
+            }
+        }        
+        
+        echo "</select>";
+    }
+?>
 
 <h2>Neue Umfrage erstellen</h2>
 <form action="frmSaveQuestion.php" method="post">
