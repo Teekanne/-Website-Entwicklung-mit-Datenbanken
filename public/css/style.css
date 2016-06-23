@@ -219,6 +219,11 @@ form label {
 	text-align: right; 
 }
 
+#role {
+	display: block;
+	text-align: center; 
+}
+
 form textarea {
 	width: 13.4em;
 }
@@ -253,6 +258,10 @@ table {
 	color:#F3F3F3;
 	text-align:left;
 	
+}
+
+#user {
+	line-height:3em;
 }
 
 
