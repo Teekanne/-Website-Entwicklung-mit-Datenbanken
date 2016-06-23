@@ -7,7 +7,9 @@ class Login_Model extends Model
 	{
 		parent::__construct();
 	}
-
+        
+      
+        
 	public function run()
 	{
 		 $sth= $this->db->prepare("SELECT ID, ROLE FROM T_TUTOR WHERE EMAIL = :login AND PASSWORD = MD5(:password)");
@@ -29,6 +31,7 @@ class Login_Model extends Model
 			Session::init();
                         //set key for session
 			Session::set('ROLE', $data['ROLE']);
+                        Session::set('ID', $data['ID']);
 			Session::set('loggedIn', true);
 			header('location: ../dashboard');
 		} else {

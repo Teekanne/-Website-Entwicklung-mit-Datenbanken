@@ -17,7 +17,13 @@ class User_Model extends Model {
         $sth->execute();
         return $sth->fetchAll();
     }
- public function reg($title, $firstname, $lastname, $email, $password, $rolereg) {
+    public function editUser($id){
+        $editsth = $this->db->prepare('SELECT ID, TITLE, FIRSTNAME, LASTNAME, EMAIL, ROLE FROM T_TUTOR WHERE ID = :id');
+        $editsth->execute(array(':id' => $id));
+        $editsth->fetchall();
+    }
+
+    public function reg($title, $firstname, $lastname, $email, $password, $rolereg) {
         $Checklength = $password;
         
         $checkEMAIL = $email;
