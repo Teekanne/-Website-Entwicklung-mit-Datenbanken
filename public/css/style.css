@@ -47,6 +47,17 @@ p {
 	text-align:justify;
 }
 
+#registrate {
+	line-height:0em;
+	font-family:Helvetica;
+	font-weight:100;
+	font-size:0.8em;
+	color:#F3F3F3;
+	margin-left:1em;
+	padding:0.5em;
+	text-align:lef;
+}
+
 ul {
 	margin:0px;
 	padding:0px;
