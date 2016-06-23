@@ -1,3 +1,5 @@
+<?php include("Categories.php"); ?>
+
 <h2>Neue Umfrage erstellen</h2>
 <form action="frmSaveQuestion.php" method="post">
     <table id="questionTable">
