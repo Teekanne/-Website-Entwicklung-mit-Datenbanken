@@ -35,6 +35,7 @@
 				<?php endif; ?>	
 				<?php if (Session::get('loggedIn') == true):?>
                                         <li><a href="<?php echo URL; ?>newquestion">Fragen erstellen</a></li>
+                                        <li><a href="<?php echo URL; ?>overview">Fragen Übersicht</a></li>
 					<li><a href="<?php echo URL; ?>account">Account</a></li>
                                         
 				<?php if (Session::get('ROLE') == 'Administrator'):?>

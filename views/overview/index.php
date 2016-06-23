@@ -1,37 +1,11 @@
 <?php
     //require("../../library/Session.php");
 
-    session_start();
+   // session_start();
     //session_destroy();
 ?>
 
-<!doctype html>
-<html>
-	<head>
-		<title>Mentimeter</title>
-		<link rel="stylesheet" type="text/css" href="../../public/css/style.css">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	</head>
-	<body>
-		<section id="menubar">
-		</section>
-		<header>
-			<ul>
-				<li><a href="https://www.hs-flensburg.de/"> <img src="../../images/HS.png"/> </a></li> 
-			</ul>
-			<h1>Testimeter</h1>
-		</header>
-		<nav class="nav">
-			<ul>
-				<li><a href="index.html" class="active">Home</a></li>
-				<li><a href="index.html">Frage erstellen</a></li>
-				<li><a href="index.html">Verwaltung</a></li>
-				<li><a href="index.html">Account</a></li>
-				<li><a href="index.html">Abmelden</a></li>
-			</ul>
-		</nav>
-		<section id="main">
-			<article>
+
                             <?php
                             class QuestionItem
                             {
@@ -51,8 +25,9 @@
                             }
                             ?>
 
-
+                            
                             <?php
+                            /*
 
                             $qItems = array();
 
@@ -63,6 +38,8 @@
                             $qItem->active = 1;
 
                             array_push($qItems, $qItem);
+                            
+                             */
                             ?>
 
 
@@ -219,7 +196,7 @@
                                                             '<td style="padding-right: 25px">';
 
                                                         if($Quiz['ISACTIVE'] == 1) {
-                                                            echo '<a href="../question/question.php?QUIZ_ID='.$Quiz['ID'].'">'.$Quiz['QUIZNAME'].'</a>';
+                                                            echo '<a href="../Mentimeter/views/question/question.php?QUIZ_ID='.$Quiz['ID'].'">'.$Quiz['QUIZNAME'].'</a>';
                                                         } else {
                                                             echo $Quiz['QUIZNAME'];
                                                         }
@@ -266,34 +243,11 @@
                                     echo "Leere Ergebnismenge!<br />";
                                 }
                              ?>
-                        </article>
-		</section>
-		<footer>
-			<ul>
-				<li>@Testimeter</li>
-			</ul>
-		</footer>
-	</body>
-</html>
 
 
 
 
 
 
-<html>
-<!doctype html public "-//W3C//DTD HTML 4.0 //EN">
-<head>
-	<title>
-		<?php print basename($_SERVER['PHP_SELF'])?>
-	</title>
-	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
-	<!--<link rel="stylesheet" href="<?php echo $_SERVER['CONTEXT_PREFIX'].'/Hochschule/templates/hebr2888.css" type="text/css">'?>-->
-</head>
-
-<body style="font-family: Verdana, 'Lucida Sans Unicode', sans-serif">
 
 
-
-</body>
-</html>
