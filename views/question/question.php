@@ -157,11 +157,12 @@
                             $keys = array_keys($QuestionsTmp);
                             $QuestionTmp = $QuestionsTmp[$keys[$_SESSION['CurrPage']]];
 
-                            echo "<h1>".$QuizTmp->QuizTitle."</h1><br>";  
+                            echo "<h2>".$QuizTmp->QuizTitle."</h2>";  
 
+                            echo "<p>";
                             echo "Frage (".($_SESSION['CurrPage']+1)."/".sizeof($QuestionsTmp).")<br><br>";
-
                             echo $QuestionTmp->QuestionText."<br>";
+                            echo "</p>";
                             ?>
 
                                 <br><br><br>	
@@ -173,7 +174,7 @@
                                             <td style="width:50px">&nbsp</td>
                                             <td style="width:100px">&nbsp</td>
                                             <td style="width:100px">&nbsp</td>
-                                            <td style="width:250px">&nbsp</td>
+                                            <td style="width:200px">&nbsp</td>
                                             <td style="width:100px">&nbsp</td>
                                             <td style="width:100px">&nbsp</td>
                                         </tr>
