@@ -21,16 +21,33 @@ class User extends Controller {
     }
 
     public function create() {
-        $data = array();
-        $data['TITLE'] = $_POST['TITLE'];
-        $data['FIRSTNAME'] = $_POST['FIRSTNAME'];
-        $data['LASTNAME'] = $_POST['LASTNAME'];
-        $data['EMAIL'] = $_POST['EMAIL'];
-        $data['PASSWORD'] = md5($_POST['PASSWORD']);
-        $data['ROLE'] = $_POST['ROLE'];
-        //@TODO: Error Handling
-        $this->model->create($data);
-        header('location: ' . URL . 'user');
+       $titel = $_POST['titel'];
+        $vorname = $_POST['vorname'];
+        $nachname = $_POST['nachname'];
+        $email = $_POST['e-mail'];
+        $emailConfirmation = $_POST['e-mailConfirmation'];
+        $password = md5($_POST['password']);
+        $passwordConfirmation = md5($_POST['passwordConfirmation']);
+        $rolereg = $_POST['ROLE'];
+        try{
+            if($email == $emailConfirmation){
+                if($password == $passwordConfirmation){
+               // echo "$password";
+              $regModel = new User_Model();
+              $regModel->reg($titel, $vorname, $nachname, $email, $password, $rolereg);
+            }else
+            {
+                
+            }
+            }
+           else
+            {
+                
+            }
+         $this->view->render('login/index');   
+        } catch (Exception $ex) {
+
+        }
     }
 
     public function edit($id) {
@@ -38,7 +55,8 @@ class User extends Controller {
     }
 
     public function delete($id) {
-        
+            $deleteUser = new User_Model();
+            $deleteUser->deleteUser($id);
     }
 
 }
