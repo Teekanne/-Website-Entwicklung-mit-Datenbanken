@@ -33,7 +33,7 @@ class Login_Model extends Model
 			Session::set('ROLE', $data['ROLE']);
                         Session::set('ID', $data['ID']);
 			Session::set('loggedIn', true);
-			header('location: ../dashboard');
+			header('location: ../user');
 		} else {
 			header('location: ../login');
 		}

@@ -21,6 +21,7 @@ class User_Model extends Model {
         $editsth = $this->db->prepare('SELECT ID, TITLE, FIRSTNAME, LASTNAME, EMAIL, ROLE FROM T_TUTOR WHERE ID = :id');
         $editsth->execute(array(':id' => $id));
         $editsth->fetchall();
+        header('location: ../editUser');
     }
 
     public function reg($title, $firstname, $lastname, $email, $password, $rolereg) {

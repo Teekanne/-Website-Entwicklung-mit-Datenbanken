@@ -34,9 +34,9 @@
 					<li><a href="<?php echo URL; ?>help">Help</a></li>
 				<?php endif; ?>	
 				<?php if (Session::get('loggedIn') == true):?>
-                                        <li><a href="<?php echo URL; ?>question">Fragen erstellen</a></li>
+                                        <li><a href="<?php echo URL; ?>newquestion">Fragen erstellen</a></li>
 					<li><a href="<?php echo URL; ?>account">Account</a></li>
-		
+                                        
 				<?php if (Session::get('ROLE') == 'Administrator'):?>
 					<li><a href="<?php echo URL; ?>user">Users</a></li>
 				<?php endif; ?>
