@@ -51,7 +51,9 @@ class User extends Controller {
     }
 
     public function edit($id) {
-        
+        $editUser = new User_Model();
+        $editUser->editUser($id);
+        exit;
     }
 
     public function delete($id) {
