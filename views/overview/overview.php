@@ -76,7 +76,7 @@
                                 } 
 
                                 echo
-                                    '<table border="0">'.
+                                    '<table style="border:0px solid #647852; border-collapse: collapse;" border="1">'.
                                     '<tbody>'.
                                     '<tr style="text-align: left; font-size: 75%; line-height: 0px;">'.
                                         '<td style="width:10px">&nbsp</td>'.
