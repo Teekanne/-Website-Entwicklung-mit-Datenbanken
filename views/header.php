@@ -31,7 +31,7 @@
 			<ul>
 				<?php if (Session::get('loggedIn') == false):?>
 					<li><a href="<?php echo URL; ?>index">Index</a></li>
-                                        <li><a href="<?php echo URL; ?>registration">Registration</a></li>
+                                        <li><a href="<?php echo URL; ?>registration">Registrierung</a></li>
 					<li><a href="<?php echo URL; ?>help">Help</a></li>
 				<?php endif; ?>	
 				<?php if (Session::get('loggedIn') == true):?>
