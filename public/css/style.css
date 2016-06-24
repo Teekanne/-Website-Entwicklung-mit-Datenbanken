@@ -228,10 +228,6 @@ form label {
 	text-align: center; 
 }
 
-form textarea {
-	width: 13.4em;
-}
-
 
 form input, form select {
 	width: 12.6em;
@@ -252,6 +248,24 @@ form input[type=submit]:hover {
 form br {
 	clear: left;
 }
+
+
+textarea {
+	margin-left: 0.72em;
+	width:13.3em;
+	max-width:13.3em;
+	min-width:13.3em;
+}
+
+
+input[type='radio'] {
+	width:auto;
+	float:center-right;
+	margin-right: 1em;
+	margin-left: 2em;
+	color: red;
+}
+
 
 table {
 	margin-left:auto;
