@@ -1,28 +1,41 @@
 <?php 
-
-    include("Categories.php"); 
-
-    function ShowSelectBoxWithCategories(){
-        echo "<select name='category'>";
-        foreach(Category::GetFirstLevelCategories() as $c => $category){
-            echo "<option>" . $category->__get("catname") . "</option>";
-
-            foreach($category->GetSecondLevelCategories() as $s => $secondLevelCategory){
-                echo "<option>- " . $secondLevelCategory->__get("catname") . "</option>";
-            }
-        }        
+    include("Classes/LoadClasses.php"); 
+    
+    if(isset($_POST["quizName"])){
+        echo "Sessions: " . var_dump($_SESSION);
+        echo '<br /><br />POST-Variablen:';
+        echo '<pre>';
+        print_r($_POST);
+        echo '</pre>';
+        /*
+        $currentCategory = Category::Load($_POST["category"]);
+        /*
+        $currentQuiz = new Quiz(
+                $_POST["quizName"], 
+                $_POST["quizDescription"],
+                $_SESSION["id"], 
+                $currentCategory->id);
         
-        echo "</select>";
+        echo "CurrentQuiz->ID: " . $currentQuiz->id;*/
     }
 ?>
 
 <h2>Neue Umfrage erstellen</h2>
-<form action="frmSaveQuestion.php" method="post">
+<form action="" method="post">
     <table id="questionTable">
         <tr>
             <th>Kategorie</th>
-            <th><?php ShowSelectBoxWithCategories(); ?></th>
+            <th><?php Category::ShowSelectBoxWithCategories(); ?></th>
         </tr>
+        <tr>
+            <th>Quiz-Name</th>
+            <th><input type="text" name="quizName" placeholder="Quiz-Name" /></th>
+        </tr>
+        <tr>
+            <th>Quiz-Beschreibung</th>
+            <th><input type="text" name="quizDescription" placeholder="Quiz-Beschreibung" /></th>
+        </tr>
+        
         <?php for($i=0;$i<20;$i++){ echo "<tr></tr>"; } ?>
         <tr>
             <th>Frage</th>
