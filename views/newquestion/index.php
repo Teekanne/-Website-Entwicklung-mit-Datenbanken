@@ -1,5 +1,5 @@
 <?php 
-    include("Classes/LoadClasses.php"); 
+    include("Categories.php"); 
     
     if(isset($_POST["quizName"])){
         echo "Sessions: " . var_dump($_SESSION);
