@@ -1,52 +1,53 @@
 <?php 
-    include("Category.php"); 
+    include("Classes/LoadClasses.php"); 
     
     if(isset($_POST["quizName"])){
-        echo "Sessions: " . var_dump($_SESSION);
+        echo "Sessions: " . nl2br(print_r($_SESSION,true));
+
         echo '<br /><br />POST-Variablen:';
         echo '<pre>';
         print_r($_POST);
         echo '</pre>';
-        /*
-        $currentCategory = Category::Load($_POST["category"]);
-        /*
-        $currentQuiz = new Quiz(
-                $_POST["quizName"], 
-                $_POST["quizDescription"],
-                $_SESSION["id"], 
-                $currentCategory->id);
         
-        echo "CurrentQuiz->ID: " . $currentQuiz->id;*/
+        $currentCategory = Category::Load($_POST["category"]);
+
+        $currentUser = Tutor::Load($_SESSION["ID"]);
+        
+        $currentQuiz = Quiz::Add("test", "test", $currentUser, $currentCategory);
+        /* Add($description, $question, $questionPos, $singleChoice, $quiz){ */
+        $currentQuestion = Question::Add("test", "test", 1, true, $currentQuiz);
+        $currentAnswer = Answer::Add(1, "XD", true, $currentQuestion);
+        echo "antwortid:" . $currentAnswer->__get("id");
     }
 ?>
 
 <h2>Neue Umfrage erstellen</h2>
 <form action="" method="post">
-    <table border= '0' id="questionTable">
+    <table id="questionTable">
         <tr>
-            <th><label>Kategorie</label></th>
+            <th>Kategorie</th>
             <th><?php Category::ShowSelectBoxWithCategories(); ?></th>
         </tr>
         <tr>
-            <th><label>Quiz-Name</label></th>
+            <th>Quiz-Name</th>
             <th><input type="text" name="quizName" placeholder="Quiz-Name" /></th>
         </tr>
         <tr>
-            <th><label>Quiz-Beschreibung</label></th>
+            <th>Quiz-Beschreibung</th>
             <th><input type="text" name="quizDescription" placeholder="Quiz-Beschreibung" /></th>
         </tr>
         
         <?php for($i=0;$i<20;$i++){ echo "<tr></tr>"; } ?>
         <tr>
-            <th><label>Frage</label></th>
+            <th>Frage</th>
             <th><input type="text" name="question1"/></th>
         </tr>
         <tr>
-            <th><label>Beschreibung</label></th>
+            <th>Beschreibung</th>
             <th><textarea name="description1" maxlength="1000"></textarea></th>
         </tr>
         <tr>
-            <th><label>Antworten</label></th>
+            <th>Antworten</th>
             <th> 
                 <div class="divAnswers1">
                     <input type="text" name="answer1_1" placeholder="Antwortmöglichkeit 1" /><br />
@@ -54,22 +55,14 @@
                 </div>
             </th>
         </tr>
-	
         <tr>
-            <th><label>Art</label></th>
+            <th>Art</th>
             <th>
-                <input type="radio" name="choice1" value="singlechoice" checked="checked"/>Single-Choice<br />
-                <input type="radio" name="choice1" value="multiplechoice"/>Multiple-Choice
+                <input type="radio" name="choice1" value="singlechoice" checked="checked">Single-Choice</input><br />
+                <input type="radio" name="choice1" value="multiplechoice">Multiple-Choice</input>
             </th>                            
         </tr>
     </table>
-    <br />
-	<table>
-		<tr>
-			<th>
-				<input type="button" value="Neue Frage einfügen" onclick="addNewQuestion('questionTable', 'question1');">  <input type="submit" value="Jetzt erstellen &raquo"/>
-			</th>
-		<tr>
-	</table>
+    
+    <input type="button" value="Neue Frage einfügen" onclick="addNewQuestion('questionTable', 'question1');">  <input type="submit" value="Jetzt erstellen &raquo"/>
 </form>
-

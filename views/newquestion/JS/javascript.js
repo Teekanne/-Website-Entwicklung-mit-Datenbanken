@@ -11,7 +11,7 @@ function addTextbox(container, currentTextbox){
         return;
     }
     
-    if(document.getElementById('answer' + currentQuestionNumber + "_" + nextTextboxNumber) != null){
+    if(document.getElementById('answer' + currentQuestionNumber + "_" + nextTextboxNumber) !== null){
         return;
     }
 
@@ -70,35 +70,31 @@ function addNewQuestion(table, currentQuestion){
     singleChoice.type = 'radio';
     singleChoice.name = "singlechoice" + currentQuestionNumber;
     singleChoice.checked = true;
-    
-    var singleChoiceLabel = document.createElement('label');
-    singleChoiceLabel.innerHTML = "Single-Choice";
+    singleChoice.innerHTML = "Single-Choice";
     
     var multipleChoice = document.createElement('input');
     multipleChoice.type = 'radio';
     multipleChoice.name = "multiplechoice" + currentQuestionNumber;
     multipleChoice.id = 'answer';
-
-    var multipleChoiceLabel = document.createElement('label');
-    multipleChoiceLabel.innerHTML = "Multiple-Choice";
-    
+    multipleChoice.innerHTML  = "Multiple-Choice";
+   
     /* Adding the dom */
     var row = myTable.insertRow(-1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
-    cell1.innerHTML = "<b>Frage</b>";
+    cell1.innerHTML = "<label>Frage</label>";
     cell2.appendChild(question);
     
     var row = myTable.insertRow(-1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
-    cell1.innerHTML = "<b>Beschreibung</b>";
+    cell1.innerHTML = "<label>Beschreibung</label>";
     cell2.appendChild(description);
     
     var row = myTable.insertRow(-1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
-    cell1.innerHTML = "<b>Antworten</b>";
+    cell1.innerHTML = "<label>Antworten</label>";
     cell2.appendChild(div);
     div.appendChild(answer1);
     div.appendChild(document.createElement('br'));;
@@ -107,12 +103,10 @@ function addNewQuestion(table, currentQuestion){
     var row = myTable.insertRow(-1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
-    cell1.innerHTML = "<b>Art</b>";
+    cell1.innerHTML = "<label>Art</label>";
     cell2.appendChild(singleChoice);
-    cell2.appendChild(singleChoiceLabel);
     cell2.appendChild(document.createElement('br'));
     cell2.appendChild(multipleChoice);
-    cell2.appendChild(multipleChoiceLabel);
 }
 
 function findLastQuestionNumber(){
