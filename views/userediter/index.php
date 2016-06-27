@@ -1,10 +1,10 @@
-<?php
 
 $title = "";
-$firstname = "";
+$firstname = $htis=
 $lastname = "";
 $email = "";
 $role = "";
+ 
 ?>
 
 <form method="post" action="<?php echo URL; ?>user/create">

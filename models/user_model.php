@@ -18,11 +18,36 @@ class User_Model extends Model {
         return $sth->fetchAll();
     }
     public function editUser($id){
+      echo $id;
         $editsth = $this->db->prepare('SELECT ID, TITLE, FIRSTNAME, LASTNAME, EMAIL, ROLE FROM T_TUTOR WHERE ID = :id');
         $editsth->execute(array(':id' => $id));
-        $editsth->fetchall();
-        header('location: ../editUser');
+            echo "user_model"; echo "</br>";
+        while ($row = $editsth->fetch(PDO::FETCH_ASSOC))
+        {
+            $idEdit = $row['ID'];
+            $titleEdit = $row['TITLE'];
+            $firstnameEdit = $row['FIRSTNAME'];
+            $lastnameEdit = $row['LASTNAME'];
+            $emailEdit = $row['EMAIL'];
+            $roleEdit = $row['ROLE'];
+            echo $idEdit;
+            echo "</br>";
+            echo $titleEdit;
+             echo "</br>";
+            echo $firstnameEdit;
+             echo "</br>";
+            echo $lastnameEdit;
+             echo "</br>";
+            echo $emailEdit;
+             echo "</br>";
+            echo $roleEdit;
+        }
+       // echo "user_model";
+        // return ($row = $editsth->fetch(PDO::FETCH_ASSOC));
+        exit;
+        
     }
+   
 
     public function reg($title, $firstname, $lastname, $email, $password, $rolereg) {
         $Checklength = $password;
