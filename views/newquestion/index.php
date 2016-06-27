@@ -52,7 +52,7 @@
     <table table border= '0'>
         <tr>
             <th><label>Kategorie</label></th>
-            <th><?php Category::ShowSelectBoxWithCategories(); ?></th>
+            <th><?php Category::ShowSelectBoxWithCategories($_SESSION["ID"]); ?></th>
         </tr>
         <tr>
             <th><label>Quiz-Name</label></th>
