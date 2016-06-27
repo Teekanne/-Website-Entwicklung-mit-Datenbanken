@@ -38,19 +38,23 @@
             $sql= "INSERT INTO T_QUESTION (DESCRIPTION, QKEY, QUESTION, QUESTION_POS, ISSINGLECHOICE, FK_QUIZ) " .
                     "VALUES (:description, :qkey, :question, :questionPos, :singleChoice, :fkQuiz)"; 
 
+            var_dump($singleChoice);
+            
             if($singleChoice){
                 $singleChoice = 1;
             }else{
                 $singleChoice = 0;
             }
             
+            var_dump($singleChoice);
+            
             $statement = $pdo->prepare($sql);
             $statement->bindParam(':description', $description, PDO::PARAM_STR); 
             $statement->bindParam(':qkey', $quiz->__get("qKey"), PDO::PARAM_STR); 
             $statement->bindParam(':question', $question, PDO::PARAM_STR); 
-            $statement->bindParam(':questionPos', $questionPos, PDO::PARAM_STR); 
-            $statement->bindParam(':singleChoice', $singleChoice, PDO::PARAM_STR); 
-            $statement->bindParam(':fkQuiz', $quiz->__get("id"), PDO::PARAM_STR); 
+            $statement->bindParam(':questionPos', $questionPos, PDO::PARAM_INT); 
+            $statement->bindParam(':singleChoice', $singleChoice, PDO::PARAM_INT); 
+            $statement->bindParam(':fkQuiz', $quiz->__get("id"), PDO::PARAM_INT); 
             $statement->execute();
             
             return new Question($pdo->lastInsertId(), $description, $quiz->__get("qKey"), $question, $questionPos, $singleChoice, $quiz->__get("id"));
