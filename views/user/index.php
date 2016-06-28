@@ -76,7 +76,6 @@
 				<li><a href="' . URL . 'user/delete/' . $value['ID'] . '">Delete</a></li></td>';
         echo '</tr>';
     }
-    //print_r($this->userList);
     ?>
 </table>
 </table>

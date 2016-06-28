@@ -9,7 +9,7 @@ class User_Model extends Model {
         $deletesth = $this->db->prepare('DELETE FROM T_TUTOR WHERE ID = :id');
         $deletesth->execute(array(':id' => $id));
          header('location: ..');
-                exit;
+        exit;
     }
 
     public function userList() {
@@ -18,36 +18,34 @@ class User_Model extends Model {
         return $sth->fetchAll();
     }
     public function editUser($id){
-                include(User_Model::class);  
+      
         $editsth = $this->db->prepare('SELECT ID, TITLE, FIRSTNAME, LASTNAME, EMAIL, ROLE FROM T_TUTOR WHERE ID = :id');
         $editsth->execute(array(':id' => $id));
         while ($row = $editsth->fetch(PDO::FETCH_ASSOC))
         {
             $idEdit = $row['ID'];
             $titleEdit = $row['TITLE'];
+            $test=$row['TITLE'];
+             Session::set('TITLEEDIT', $test);
             $firstnameEdit = $row['FIRSTNAME'];
             $lastnameEdit = $row['LASTNAME'];
             $emailEdit = $row['EMAIL'];
             $roleEdit = $row['ROLE'];
+            $view = new User();
+          $view->view();
             exit;
         }
-  
         exit;
-
-   
     }
     public function reg($title, $firstname, $lastname, $email, $password, $rolereg) {
         $Checklength = $password;
-        
         $checkEMAIL = $email;
         //Romove all illegal characters from E-Mail.
         $cleanEmail = filter_var($checkEMAIL, FILTER_SANITIZE_EMAIL);
-
         if (strlen($Checklength) >= 8) {
             //!filter_var($clanEail, FILTER_VALIDATE_EMAIL);
             $sth = $this->db->prepare("SELECT * FROM T_TUTOR WHERE EMAIL = :email");
             $sth->execute(array(':email' => $email));
-
             $count = $sth->rowCount();
             //   $sth->fetchAll();
             //$rows = $sth->fetch(P DO::FETCH_NUM);
@@ -73,8 +71,4 @@ class User_Model extends Model {
             
         }
     }
-    
-    
-   
-
 }
