@@ -10,3 +10,5 @@ class Overview extends Controller {
         $this->view->render('overview/index');
     }
 }
+
+?>
