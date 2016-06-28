@@ -8,6 +8,8 @@ class User extends Controller {
 
         $logged = Session::get('loggedIn');
         $role = Session::get('ROLE');
+        $test="test";
+        Session::set('TITLEEDIT', $test);
         if ($logged == false || $role != 'Administrator') {
             Session::destroy();
             header('location: ../login');
@@ -51,8 +53,12 @@ class User extends Controller {
     }
 
     public function editUser($id) {
-        $change = new UserEditer();
+        
+        $change = new User_Model();
         $change->editUser($id);
+    
+        $this->view->render('userediter/index'); 
+        
         exit;
         /*  
         <form method="post" action="<?php echo URL; ?>user/create">

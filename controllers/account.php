@@ -8,7 +8,7 @@ class Account extends Controller {
 
         $logged = Session::get('loggedIn');
         $role = Session::get('ROLE');
-        if ($logged == false || $role != 'Administrator') {
+        if ($logged == false || $role = 'Administrator') {
             Session::destroy();
             header('location: ../login');
             exit;

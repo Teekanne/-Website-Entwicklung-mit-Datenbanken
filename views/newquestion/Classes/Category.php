@@ -1,13 +1,10 @@
 <?php
-
     class Category {
-        /* ID CATNAME LEVEL FK_TUTOR FK_PARENT_ID*/
         private $id;
         private $catname;
         private $level;
         private $fkTutor;
         private $fkParentId;
-        private $dataBase;
         private $pdo;
         
         public function __get($key){
@@ -32,9 +29,19 @@
         }
         
         public static function Load($name) {
-            $db = new DataBase();
-            $column = $db->SelectRow("SELECT * FROM T_CATEGORY WHERE CATNAME='" . $name . "'");
-            return new Category($column["ID"], $column["CATNAME"], $column["LEVEL"], $column["FK_TUTOR"], $column["FK_PARENT_ID"]);
+            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $sql= "SELECT * FROM T_CATEGORY WHERE CATNAME=:catName"; 
+            $statement = $pdo->prepare($sql);
+            $statement->bindParam(':catName', $name, PDO::PARAM_STR); 
+            $statement->execute();
+            $result = $statement->fetchAll()[0];
+            
+            if(!$result){
+                echo "Kategorie '" . $name . "' existiert nicht.";
+                return null;
+            }
+
+            return new Category($result["ID"], $result["CATNAME"], $result["LEVEL"], $result["FK_TUTOR"], $result["FK_PARENT_ID"]);
         }
         
         /* Gibt eine Liste des generischen Typs "Category" zurück */
@@ -56,6 +63,19 @@
                 array_push($categories, new Category($category["ID"], $category["CATNAME"], $category["LEVEL"], $category["FK_TUTOR"], $category["FK_PARENT_ID"]));
             }
             return $categories;            
+        }
+        
+        public static function ShowSelectBoxWithCategories(){
+            echo "<select name='category'>";
+            foreach(Category::GetFirstLevelCategories() as $c => $category){
+                echo "<option>" . $category->__get("catname") . "</option>";
+
+                foreach($category->GetSecondLevelCategories() as $s => $secondLevelCategory){
+                    echo "<option value='" . $secondLevelCategory->__get("catname") . "'>- " . $secondLevelCategory->__get("catname") . "</option>";
+                }
+            }        
+
+            echo "</select>";
         }
     }
 ?>

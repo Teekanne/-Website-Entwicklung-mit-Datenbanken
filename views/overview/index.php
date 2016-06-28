@@ -240,7 +240,7 @@
                                         '</tbody>'.
                                         '</table>';
                                 } else {
-                                    echo "Leere Ergebnismenge!<br />";
+                                    echo "<p>Leere Ergebnismenge!</p><br />";
                                 }
                              ?>
 

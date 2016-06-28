@@ -1,11 +1,12 @@
+<?php 
 
-$title = "";
-$firstname = $htis=
-$lastname = "";
-$email = "";
-$role = "";
- 
+$firstnameEdit =Session::get('FIRSTNAMEEDIT');
+$lastnameEdit = Session::get('LASTNAMEEDIT');
+$emailEdit = Session::get('EMAILEDIT');
+$roleEdit = Session::get('ROLEEDIT');
+
 ?>
+
 
 <form method="post" action="<?php echo URL; ?>user/create">
     <h1>Einen bestehenden Benutzer beabreiten</h1></br>
@@ -21,5 +22,4 @@ $role = "";
         <option value="Administrator">Administrator</option>
     </select><br />
     <input type="submit" name="Benutzer anlegen" value="Registrieren">
-
 </form>

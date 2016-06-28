@@ -1,32 +1,24 @@
-/**
-* Adds up to eight textboxes into a div-element by the onkeydown-event.
-* @param {DIV} The div-Container which will add another textbox
-* @param {Textbox} Current textbox (id must include a number)
-*/
 function addTextbox(container, currentTextbox){
     var currentQuestionNumber = parseInt(container.replace(/^[^\d]+/, ""));
-    var nextTextboxNumber = parseInt(currentTextbox.id.split('_')[1])+1;
+    var nextTextboxNumber = parseInt(currentTextbox.split('_')[1])+1;
     
     if(isNaN(nextTextboxNumber)){
         return;
     }
     
-    if(document.getElementById('answer' + currentQuestionNumber + "_" + nextTextboxNumber) != null){
+    if(document.getElementsByName('answer' + currentQuestionNumber + "_" + nextTextboxNumber)[0] != null){
         return;
     }
 
     var input = document.createElement('input');
     input.type = 'text';
-    input.name = currentTextbox.name;
-    input.id = 'answer' + currentQuestionNumber + "_" + nextTextboxNumber;
+    input.name = 'answer' + currentQuestionNumber + "_" + nextTextboxNumber;
     input.placeholder = 'Antwortmöglichkeit ' + nextTextboxNumber;
-
+    
     if(nextTextboxNumber<8){
-        input.setAttribute("onkeydown", "addTextbox('" + container + "', this)");			
+        input.setAttribute("onkeydown", "addTextbox('" + container + "', '" + input.name + "')");			
     }
-    
-    var answers = document.getElementById(container);
-    
+    var answers = document.getElementsByClassName(container)[0];
     answers.appendChild(document.createElement("br"));
     answers.appendChild(input);
     
@@ -53,22 +45,23 @@ function addNewQuestion(table, currentQuestion){
     description.name = "description" + currentQuestionNumber;
    
     var div = document.createElement('div');
-    div.id = 'divAnswers' + currentQuestionNumber;
+    div.className = 'divAnswers' + currentQuestionNumber;
     
     var answer1 = document.createElement('input');
     answer1.type = 'text';
-    answer1.id = "answer" + currentQuestionNumber + "_1";
+    answer1.name = "answer" + currentQuestionNumber + "_1";
     answer1.placeholder = 'Antwortmöglichkeit 1';
     
     var answer2 = document.createElement('input');
     answer2.type = 'text';
-    answer2.id = "answer" + currentQuestionNumber + "_2";
+    answer2.name = "answer" + currentQuestionNumber + "_2";
     answer2.placeholder = 'Antwortmöglichkeit 2';
-    answer2.setAttribute("onkeydown", "addTextbox('divAnswers" + currentQuestionNumber + "', this)");
+    answer2.setAttribute("onkeydown", "addTextbox('" + div.className + "', '" + answer2.name + "')");
     
     var singleChoice = document.createElement('input');
     singleChoice.type = 'radio';
-    singleChoice.name = "singlechoice" + currentQuestionNumber;
+    singleChoice.name = "choice" + currentQuestionNumber;
+    singleChoice.value = 'singlechoice';
     singleChoice.checked = true;
     
     var singleChoiceLabel = document.createElement('label');
@@ -76,7 +69,8 @@ function addNewQuestion(table, currentQuestion){
     
     var multipleChoice = document.createElement('input');
     multipleChoice.type = 'radio';
-    multipleChoice.name = "multiplechoice" + currentQuestionNumber;
+    multipleChoice.name = "choice" + currentQuestionNumber;
+    multipleChoice.value = 'multiplechoice';
     multipleChoice.id = 'answer';
 
     var multipleChoiceLabel = document.createElement('label');

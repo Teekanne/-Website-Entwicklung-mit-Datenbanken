@@ -6,7 +6,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<script type="text/javascript" src="<?php echo URL; ?>public/js/jquery.js"></script>
 		<script type="text/javascript" src="<?php echo URL; ?>public/js/custom.js"></script>
-		<script type="text/javascript" src="newquestion/JS/javascript.js"></script>
 		
 		<?php
 			if (isset($this->js)) 
@@ -32,7 +31,7 @@
 			<ul>
 				<?php if (Session::get('loggedIn') == false):?>
 					<li><a href="<?php echo URL; ?>index">Index</a></li>
-                                        <li><a href="<?php echo URL; ?>registration">Registration</a></li>
+                                        <li><a href="<?php echo URL; ?>registration">Registrierung</a></li>
 					<li><a href="<?php echo URL; ?>help">Help</a></li>
 				<?php endif; ?>	
 				<?php if (Session::get('loggedIn') == true):?>

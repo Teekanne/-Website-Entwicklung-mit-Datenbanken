@@ -9,7 +9,7 @@ require 'library/View.php';
 require 'library/Database.php';
 require 'library/Session.php';
 
-require 'controllers/userediter.php';
+
 require 'config/paths.php';
 require 'config/database.php';
  //@TODO: Error Handling

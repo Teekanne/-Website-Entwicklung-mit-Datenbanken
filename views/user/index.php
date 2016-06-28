@@ -71,8 +71,9 @@
         echo '<td>' . $value['EMAIL'] . '</td>';
         echo '<td>' . $value['ROLE'] . '</td>';
         echo '<td>
-				<a href="' . URL . 'user/editUser/' . $value['ID'] . '">Edit</a> 
-				<a href="' . URL . 'user/delete/' . $value['ID'] . '">Delete</a></td>';
+                             
+				<li><a href="' . URL . 'user/editUser/' . $value['ID'] . '">Edit</a></li>
+				<li><a href="' . URL . 'user/delete/' . $value['ID'] . '">Delete</a></li></td>';
         echo '</tr>';
     }
     //print_r($this->userList);
