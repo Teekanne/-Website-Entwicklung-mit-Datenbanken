@@ -1,4 +1,7 @@
 <?php
+
+    echo "Text aus der include Datei<br>";
+    
     class Quiz
     {   
         private $QuizID;

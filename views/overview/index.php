@@ -49,8 +49,6 @@ array_push($qItems, $qItem);
 
 <br>
 
-<a href="<?php echo URL; ?>question">Question</a><br>
-
 <?php
 
 
@@ -200,6 +198,8 @@ array_push($qItems, $qItem);
 
                             if($Quiz['ISACTIVE'] == 1) {
                                 echo '<a href="../Mentimeter/views/question/question.php?QUIZ_ID='.$Quiz['ID'].'">'.$Quiz['QUIZNAME'].'</a>';
+                                echo '<br>';
+                                echo '<a href="'.URL.'question?QUIZ_ID='.$Quiz['ID'].'">Question</a><br>';
                             } else {
                                 echo $Quiz['QUIZNAME'];
                             }
