@@ -1,7 +1,7 @@
 <?php
-include ("user_model.php");
+//include ("../../../models/user_model.php");
 
-$titleEdit = Session::get('TITTLEEDIT');
+$titleEdit = Session::get('TITLEEDIT');
 $firstnameEdit =Session::get('FIRSTNAMEEDIT');
 $lastnameEdit = Session::get('LASTNAMEEDIT');
 $emailEdit = Session::get('EMAILEDIT');

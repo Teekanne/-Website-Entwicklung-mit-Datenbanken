@@ -25,12 +25,16 @@ class User_Model extends Model {
         {
             $idEdit = $row['ID'];
             $titleEdit = $row['TITLE'];
-            $test=$row['TITLE'];
-             Session::set('TITLEEDIT', $test);
+            SESSION::set('TITLEEDIT', $titleEdit);
             $firstnameEdit = $row['FIRSTNAME'];
+            SESSION::set('FIRSTNAMEEDIT', $firstnameEdit);
             $lastnameEdit = $row['LASTNAME'];
+            SESSION::set('LASTNAMEEDIT', $lastnameEdit);
             $emailEdit = $row['EMAIL'];
+            SESSION::set('EMAILEDIT', $emailEdit);
             $roleEdit = $row['ROLE'];
+            SESSION::set('ROLEEDIT', $roleEdit);
+
             $view = new User();
           $view->view();
             exit;
