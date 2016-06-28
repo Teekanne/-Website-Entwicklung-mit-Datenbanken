@@ -38,6 +38,7 @@ function addNewQuestion(table, currentQuestion){
     var question = document.createElement('input');
     question.type = 'text';
     question.name = "question" + currentQuestionNumber;
+    question.required = true;
     
     var description = document.createElement('textarea');
     description.maxlength = 1000;
@@ -51,12 +52,13 @@ function addNewQuestion(table, currentQuestion){
     answer1.type = 'text';
     answer1.name = "answer" + currentQuestionNumber + "_1";
     answer1.placeholder = 'Antwortmöglichkeit 1';
+    answer1.required = true;
     
     var answer2 = document.createElement('input');
     answer2.type = 'text';
     answer2.name = "answer" + currentQuestionNumber + "_2";
     answer2.placeholder = 'Antwortmöglichkeit 2';
-    answer2.setAttribute("onkeydown", "addTextbox('" + div.className + "', '" + answer2.name + "')");
+    answer2.required = true;
     
     var singleChoice = document.createElement('input');
     singleChoice.type = 'radio';
