@@ -69,6 +69,7 @@ function addNewQuestion(table, currentQuestion){
     
     var singleChoiceLabel = document.createElement('label');
     singleChoiceLabel.innerHTML = "Single-Choice";
+    singleChoiceLabel.className = "radioLabel";
     
     var multipleChoice = document.createElement('input');
     multipleChoice.type = 'radio';
@@ -78,6 +79,7 @@ function addNewQuestion(table, currentQuestion){
 
     var multipleChoiceLabel = document.createElement('label');
     multipleChoiceLabel.innerHTML = "Multiple-Choice";
+    multipleChoiceLabel.className = "radioLabel";
     
     /* Adding the dom */
     var row = myTable.insertRow(-1);
