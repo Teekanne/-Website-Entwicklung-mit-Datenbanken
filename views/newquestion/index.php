@@ -31,13 +31,13 @@
             }
             
             echo "<h2>Glückwunsch! Du hast ein neues Quiz erstellt!</h2>";
-            echo "<table table border='0'>";
+            echo "<form><table table border='0'>";
             echo "<tr>";
-            echo "<td class='cells'>Abfrageurl:</td>";
+            echo "<td class='cells'><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Abfrageurl</label></td>";
             $key = $currentQuiz->__get("qKey");
             echo "<td class='cells'><input type='text' value='SUB-URL??/$key'/></td>";
             echo "</tr>";
-            echo "</table>";
+            echo "</table></form>";
         }
     }
 ?>
@@ -47,7 +47,7 @@
     <table table border= '0'>
         <tr>
             <td class='cells'><label>Kategorie</label></td>
-            <td class='cells''><?php Category::ShowSelectBoxWithCategories($_SESSION["ID"]); ?></td>
+            <td class='cells'><?php Category::ShowSelectBoxWithCategories($_SESSION["ID"]); ?></td>
         </tr>
         <tr>
             <td class='cells'><label>Quiz-Name</label></td>
@@ -61,13 +61,13 @@
     
     <br /><hr><br />
     
-    <table table border='0' id="questionTable">
+    <table table border='0'>
         <tr>
             <td class='cells'><label>Frage</label></td>
             <td class='cells'><input type="text" name="question1" required/></td>
         </tr>
         <tr>
-            <td class='cells'><label>Beschreibung</label></td>
+            <td class='cells'><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Beschreibung</label></td>
             <td class='cells'><textarea name="description1" maxlength="1000"></textarea></td>
         </tr>
         <tr>
