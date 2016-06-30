@@ -224,6 +224,7 @@ form label {
 
 .radioLabel {
 	display: inline;
+        font-weight: normal;
 }
 
 #role {
@@ -279,6 +280,10 @@ table {
 	color:#F3F3F3;
 	text-align:left;
 	
+}
+
+.cells {
+    font-weight: bold;
 }
 
 #questionTable {
