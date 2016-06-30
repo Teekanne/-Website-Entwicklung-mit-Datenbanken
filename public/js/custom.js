@@ -59,6 +59,7 @@ function addNewQuestion(table, currentQuestion){
     answer2.name = "answer" + currentQuestionNumber + "_2";
     answer2.placeholder = 'Antwortmöglichkeit 2';
     answer2.required = true;
+    answer2.setAttribute("onkeydown", "addTextbox('" + div.className + "', '" + answer2.name + "')");
     
     var singleChoice = document.createElement('input');
     singleChoice.type = 'radio';
