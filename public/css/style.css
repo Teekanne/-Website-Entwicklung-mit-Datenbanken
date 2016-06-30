@@ -278,6 +278,11 @@ table {
 	
 }
 
+#questionTable {
+	margin-left:23.6em;
+	margin-right: auto;
+}
+
 #user {
 	line-height:3em;
 }
@@ -299,7 +304,13 @@ button {
 		margin-left:16em;
 		margin-right:auto;
 }	
+	#questionTable {
+		margin-left: auto;
+		margin-right:auto;
 }
+}
+
+
 @media screen and (max-width:920px) {
 	#loginTable {
 		margin-left:14em;
