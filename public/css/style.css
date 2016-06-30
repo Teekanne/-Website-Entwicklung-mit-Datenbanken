@@ -1,4 +1,3 @@
-/* Main Style */
 body {
 	background:#CCCCCC;
 	font-size: 100%;
@@ -221,6 +220,10 @@ form label {
 	padding: 0; 
 	margin: 0.6em 0 0;
 	text-align: right; 
+}
+
+.radioLabel {
+	display: inline;
 }
 
 #role {
