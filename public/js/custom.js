@@ -85,19 +85,19 @@ function addNewQuestion(table, currentQuestion){
     var row = myTable.insertRow(-1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
-    cell1.innerHTML = "<b>Frage</b>";
+    cell1.innerHTML = "<label>Frage</label>";
     cell2.appendChild(question);
     
     var row = myTable.insertRow(-1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
-    cell1.innerHTML = "<b>Beschreibung</b>";
+    cell1.innerHTML = "<label>Beschreibung</label>";
     cell2.appendChild(description);
     
     var row = myTable.insertRow(-1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
-    cell1.innerHTML = "<b>Antworten</b>";
+    cell1.innerHTML = "<label>Antworten</label>";
     cell2.appendChild(div);
     div.appendChild(answer1);
     div.appendChild(document.createElement('br'));;
@@ -106,7 +106,7 @@ function addNewQuestion(table, currentQuestion){
     var row = myTable.insertRow(-1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
-    cell1.innerHTML = "<b>Art</b>";
+    cell1.innerHTML = "<label>Art</label>";
     cell2.appendChild(singleChoice);
     cell2.appendChild(singleChoiceLabel);
     cell2.appendChild(document.createElement('br'));
