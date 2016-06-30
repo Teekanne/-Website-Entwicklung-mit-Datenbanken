@@ -33,7 +33,7 @@
             echo "<h2>Glückwunsch! Du hast ein neues Quiz erstellt!</h2>";
             echo "<form><table table border='0'>";
             echo "<tr>";
-            echo "<td class='cells'><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Abfrageurl</label></td>";
+            echo "<td class='cells'><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Abfrageurl</label></td>";
             $key = $currentQuiz->__get("qKey");
             echo "<td class='cells'><input type='text' value='SUB-URL??/$key'/></td>";
             echo "</tr>";
@@ -42,7 +42,7 @@
     }
 ?>
 
-<h2>Neue Umfrage erstellen</h2>
+<!--<h2>Neue Umfrage erstellen</h2>-->
 <form action="" method="post">
     <table table border= '0'>
         <tr>
@@ -67,7 +67,7 @@
             <td class='cells'><input type="text" name="question1" required/></td>
         </tr>
         <tr>
-            <td class='cells'><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Beschreibung</label></td>
+            <td class='cells'><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Beschreibung</label></td>
             <td class='cells'><textarea name="description1" maxlength="1000"></textarea></td>
         </tr>
         <tr>
@@ -80,7 +80,7 @@
             </td>
         </tr>
         <tr>
-            <td><label>Art</label></td>
+            <td class='cells'><label>Art</label></td>
             <td class='cells'>
                 <input type="radio" name="choice1" value="singlechoice" checked="checked" /><label class="radioLabel">Single-Choice</label><br />
                 <input type="radio" name="choice1" value="multiplechoice" /><label class="radioLabel">Multiple-Choice</label>
