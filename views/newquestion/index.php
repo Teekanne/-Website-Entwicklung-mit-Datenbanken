@@ -33,9 +33,9 @@
             echo "<h2>Glückwunsch! Du hast ein neues Quiz erstellt!</h2>";
             echo "<table table border='0'>";
             echo "<tr>";
-            echo "<td>Abfrageurl:</td>";
+            echo "<td class='cells'>Abfrageurl:</td>";
             $key = $currentQuiz->__get("qKey");
-            echo "<td><input type='text' value='SUB-URL??/$key'/></td>";
+            echo "<td class='cells'><input type='text' value='SUB-URL??/$key'/></td>";
             echo "</tr>";
             echo "</table>";
         }
@@ -46,33 +46,33 @@
 <form action="" method="post">
     <table table border= '0'>
         <tr>
-            <td><label>Kategorie</label></td>
-            <td><?php Category::ShowSelectBoxWithCategories($_SESSION["ID"]); ?></td>
+            <td class='cells'><label>Kategorie</label></td>
+            <td class='cells''><?php Category::ShowSelectBoxWithCategories($_SESSION["ID"]); ?></td>
         </tr>
         <tr>
-            <td><label>Quiz-Name</label></td>
-            <td><input type="text" name="quizName" required/></td>
+            <td class='cells'><label>Quiz-Name</label></td>
+            <td class='cells'><input type="text" name="quizName" required/></td>
         </tr>
         <tr>
-            <td><label>Quiz-Beschreibung</label></td>
-            <td><input type="text" name="quizDescription"/></td>
+            <td class='cells'><label>Quiz-Beschreibung</label></td>
+            <td class='cells'><input type="text" name="quizDescription"/></td>
         </tr>
     </table>
     
     <br /><hr><br />
     
-    <table table border= '0' id="questionTable">
+    <table table border='0' id="questionTable">
         <tr>
-            <td><label>Frage</label></td>
-            <td><input type="text" name="question1" required/></td>
+            <td class='cells'><label>Frage</label></td>
+            <td class='cells'><input type="text" name="question1" required/></td>
         </tr>
         <tr>
-            <td><label>Beschreibung</label></td>
-            <td><textarea name="description1" maxlength="1000"></textarea></td>
+            <td class='cells'><label>Beschreibung</label></td>
+            <td class='cells'><textarea name="description1" maxlength="1000"></textarea></td>
         </tr>
         <tr>
-            <td><label>Antworten</label></td>
-            <td> 
+            <td class='cells'><label>Antworten</label></td>
+            <td class='cells'> 
                 <div class="divAnswers1">
                     <input type="text" name="answer1_1" placeholder="Antwortmöglichkeit 1" required/><br />
                     <input type="text" name="answer1_2" placeholder="Antwortmöglichkeit 2" onkeydown="addTextbox('divAnswers1', 'answer1_2');" required/>
@@ -81,9 +81,9 @@
         </tr>
         <tr>
             <td><label>Art</label></td>
-            <td>
-                <input type="radio" name="choice1" value="singlechoice" checked="checked">Single-Choice</input><br />
-                <input type="radio" name="choice1" value="multiplechoice">Multiple-Choice</input>
+            <td class='cells'>
+                <input type="radio" name="choice1" value="singlechoice" checked="checked" /><label class="radioLabel">Single-Choice</label><br />
+                <input type="radio" name="choice1" value="multiplechoice" /><label class="radioLabel">Multiple-Choice</label>
             </td>                            
         </tr>
     </table>
