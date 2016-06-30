@@ -38,15 +38,11 @@
             $sql= "INSERT INTO T_QUESTION (DESCRIPTION, QKEY, QUESTION, QUESTION_POS, ISSINGLECHOICE, FK_QUIZ) " .
                     "VALUES (:description, :qkey, :question, :questionPos, :singleChoice, :fkQuiz)"; 
 
-            var_dump($singleChoice);
-            
             if($singleChoice){
                 $singleChoice = 1;
             }else{
                 $singleChoice = 0;
             }
-            
-            var_dump($singleChoice);
             
             $statement = $pdo->prepare($sql);
             $statement->bindParam(':description', $description, PDO::PARAM_STR); 
