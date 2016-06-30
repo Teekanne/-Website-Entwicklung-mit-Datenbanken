@@ -1,21 +1,11 @@
 <?php 
     include("Classes/LoadClasses.php"); 
     
-    if(isset($_GET["key"])){
-        if($_GET["key"] == "123") {
-            echo "Du hast Frage " . $_GET["key"] . " aufgerufen";
-        }else{
-            echo "Die frage ist nicht vorhanden";
-        }
-    }
-    
     if(isset($_POST["quizName"])){
 
         $currentCategory = Category::Load($_POST["category"]);
         $currentUser = Tutor::Load($_SESSION["ID"]);
         $currentQuiz = Quiz::Add($_POST["quizName"], $_POST["quizDescription"], $currentUser, $currentCategory);
-        
-        echo "Quiz gespeichert: " . var_dump($currentQuiz) . "<br />";
         
         /* Einfach mal 100 Fragen durchlaufen */
         for ($questionNumber = 1; $questionNumber <= 1000; $questionNumber++) {
@@ -38,11 +28,16 @@
                 if(empty($_POST["answer" . $questionNumber . "_" . $answerNumber])) { break; }
                 
                 $currentAnswer = Answer::Add($answerNumber, $_POST["answer" . $questionNumber . "_" . $answerNumber], true, $currentQuestion);
-                echo "Antwort gespeichert: " . var_dump($currentAnswer) . "<br />";
             }
             
-            echo "Frage gespeichert: " . var_dump($currentQuestion) . "<br />";
-            
+            echo "<h2>Glückwunsch! Du hast ein neues Quiz erstellt!</h2>";
+            echo "<table table border='0'>";
+            echo "<tr>";
+            echo "<td>Abfrageurl:</td>";
+            $key = $currentQuiz->__get("qKey");
+            echo "<td><input type='text' value='SUB-URL??/$key'/></td>";
+            echo "</tr>";
+            echo "</table>";
         }
     }
 ?>
@@ -51,16 +46,16 @@
 <form action="" method="post">
     <table table border= '0'>
         <tr>
-            <th><label>Kategorie</label></th>
-            <th><?php Category::ShowSelectBoxWithCategories($_SESSION["ID"]); ?></th>
+            <td><label>Kategorie</label></td>
+            <td><?php Category::ShowSelectBoxWithCategories($_SESSION["ID"]); ?></td>
         </tr>
         <tr>
-            <th><label>Quiz-Name</label></th>
-            <th><input type="text" name="quizName" required/></th>
+            <td><label>Quiz-Name</label></td>
+            <td><input type="text" name="quizName" required/></td>
         </tr>
         <tr>
-            <th><label>Quiz-Beschreibung</label></th>
-            <th><input type="text" name="quizDescription"/></th>
+            <td><label>Quiz-Beschreibung</label></td>
+            <td><input type="text" name="quizDescription"/></td>
         </tr>
     </table>
     
@@ -68,28 +63,28 @@
     
     <table table border= '0' id="questionTable">
         <tr>
-            <th><label>Frage</label></th>
-            <th><input type="text" name="question1" required/></th>
+            <td><label>Frage</label></td>
+            <td><input type="text" name="question1" required/></td>
         </tr>
         <tr>
-            <th><label>Beschreibung</label></th>
-            <th><textarea name="description1" maxlength="1000"></textarea></th>
+            <td><label>Beschreibung</label></td>
+            <td><textarea name="description1" maxlength="1000"></textarea></td>
         </tr>
         <tr>
-            <th><label>Antworten</label></th>
-            <th> 
+            <td><label>Antworten</label></td>
+            <td> 
                 <div class="divAnswers1">
                     <input type="text" name="answer1_1" placeholder="Antwortmöglichkeit 1" required/><br />
                     <input type="text" name="answer1_2" placeholder="Antwortmöglichkeit 2" onkeydown="addTextbox('divAnswers1', 'answer1_2');" required/>
                 </div>
-            </th>
+            </td>
         </tr>
         <tr>
-            <th><label>Art</label></th>
-            <th>
+            <td><label>Art</label></td>
+            <td>
                 <input type="radio" name="choice1" value="singlechoice" checked="checked">Single-Choice</input><br />
                 <input type="radio" name="choice1" value="multiplechoice">Multiple-Choice</input>
-            </th>                            
+            </td>                            
         </tr>
     </table>
     
