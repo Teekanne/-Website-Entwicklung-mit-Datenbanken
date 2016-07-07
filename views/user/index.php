@@ -36,7 +36,7 @@
 		</tr>
 		<tr>
 			<th><label></label></th>
-			<th><select name="ROLE">
+			<th><select style=width:13.3em; name="ROLE">
 					<option value="Default">Default</option>
 					<option value="User">User</option>
 					<option value="Administrator">Administrator</option>
