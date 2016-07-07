@@ -44,7 +44,7 @@
 
 <!--<h2>Neue Umfrage erstellen</h2>-->
 <form action="" method="post">
-    <table table border= '0'>
+    <table table id='questionTable' border= '0'>
         <tr>
             <td class='cells'><label>Kategorie</label></td>
             <td class='cells'><?php Category::ShowSelectBoxWithCategories($_SESSION["ID"]); ?></td>
