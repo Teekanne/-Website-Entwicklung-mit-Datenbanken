@@ -270,6 +270,13 @@ input[type='radio'] {
 	color: red;
 }
 
+input[type='checkbox'] {
+	width:auto;
+	float:center-right;
+	margin-right: 1em;
+	margin-left: 2em;
+	color: red;
+}
 
 table {
 	margin-left:auto;
