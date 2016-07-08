@@ -1,5 +1,10 @@
 <?php 
-    include("Classes/LoadClasses.php"); 
+    include("public/php/LoadClasses.php"); 
+    
+    echo "<h3>Test-Anzeige aus Fragen-Key 'chpo86'</h3>";
+    $myQuest = Question::Load("chpo86");
+    echo "Frage: " . $myQuest->__get("question") . "<br />";
+    $myQuest->ShowTable();
     
     if(isset($_POST["quizName"])){
 
