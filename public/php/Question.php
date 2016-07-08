@@ -60,7 +60,7 @@
         public static function Load($qkey){
             $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
             $sql= "SELECT * FROM T_QUESTION WHERE QKEY=:key"; 
-            $statement = $this->db->prepare($sql);
+            $statement = $pdo->prepare($sql);
             $statement->bindParam(':key', $qkey, PDO::PARAM_STR); 
             $statement->execute();
             $result = $statement->fetchAll()[0];
