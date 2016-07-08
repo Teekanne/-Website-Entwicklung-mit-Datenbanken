@@ -148,7 +148,7 @@
                     $percent = 0;
                 }
                 
-                echo "<td>" . $currentVotes . " %</td>";
+                echo "<td>" . $percent . " %</td>";
             }
             
             echo "</tr><tr>";
