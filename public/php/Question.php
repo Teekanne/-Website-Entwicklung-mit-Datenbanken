@@ -30,11 +30,13 @@
             $this->questionPos = $questionPos;
             $this->singleChoice = $singleChoice;
             $this->fkQuiz = $fkQuiz;
-            $this->pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $this->pdo = new PDO('mysql:host=localhost;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            //$this->pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
         }
         
         public static function Add($description, $question, $questionPos, $singleChoice, $quiz){
-            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $pdo = new PDO('mysql:host=localhost;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            //$pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
 
             $sql= "INSERT INTO T_QUESTION (DESCRIPTION, QKEY, QUESTION, QUESTION_POS, ISSINGLECHOICE, FK_QUIZ) " .
                     "VALUES (:description, :qkey, :question, :questionPos, :singleChoice, :fkQuiz)"; 
@@ -58,7 +60,8 @@
         }
         
         public static function Load($qkey){
-            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $pdo = new PDO('mysql:host=localhost;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            //$pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
             $sql= "SELECT * FROM T_QUESTION WHERE QKEY=:key"; 
             $statement = $pdo->prepare($sql);
             $statement->bindParam(':key', $qkey, PDO::PARAM_STR); 
@@ -74,9 +77,8 @@
         }
         
         public function GetAnswers(){
-            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
             $sql= "SELECT * FROM T_ANSWER WHERE FK_QUESTION=:questionId"; 
-            $statement = $pdo->prepare($sql);
+            $statement = $this->pdo->prepare($sql);
             $statement->bindParam(':questionId', $this->id, PDO::PARAM_STR); 
             $statement->execute();
             
