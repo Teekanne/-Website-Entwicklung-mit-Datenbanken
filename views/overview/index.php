@@ -221,9 +221,7 @@ array_push($qItems, $qItem);
                                 '<td style="padding-right: 25px">';
 
                             if($Quiz['ISACTIVE'] == 1) {
-                                echo '<a href="../Mentimeter/views/question/question.php?QUIZ_ID='.$Quiz['ID'].'">'.$Quiz['QUIZNAME'].'</a>';
-                                echo '<br>';
-                                echo '<a href="'.URL.'question?QUIZ_ID='.$Quiz['ID'].'">Question</a><br>';
+                                echo '<a href="'.URL.'question?QUIZ_ID='.$Quiz['ID'].'">'.$Quiz['QUIZNAME'].'</a><br>';
                             } else {
                                 echo $Quiz['QUIZNAME'];
                             }

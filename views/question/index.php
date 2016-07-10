@@ -1,17 +1,26 @@
 <?php
-    //include("../../models/quiz_model.php");
-    //require("../../models/quiz_model.php");
-
     include("models/quiz_model.php");
+?>
 
-    session_start();
+<?php  
+    
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
     //session_destroy();
+
+if (isset($_GET["QUIZ_ID"]) && isset($_SESSION['Quiz'])) {
+    
+    echo 'unset';
+    unset($_SESSION['Quiz']);
+}
+
 
 if (!isset($_SESSION['Quiz'])) {
 
     $QuizID = $_GET["QUIZ_ID"];
 
-    echo 'neu Gewähltes Quiz: '.$QuizID.' <br>';
+    //echo 'neu Gewähltes Quiz: '.$QuizID.' <br>';
 
     $pdo = new PDO('mysql:host=localhost;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
 
@@ -24,12 +33,12 @@ if (!isset($_SESSION['Quiz'])) {
 
     if ($QuizResult && $QuizResult->rowCount() > 0) {
         while ($QuizRow = $QuizResult->fetch(PDO::FETCH_ASSOC)) {
-
+            
             $IsActive = $QuizRow['ISACTIVE'];
 
             if ($IsActive) {
 
-                $QuizTmp = new Quiz(); 
+                $QuizTmp = new QuizEntity(); 
 
                 $QuizTmp->QuizTitle = $QuizRow['QUIZNAME'];
 
@@ -40,8 +49,8 @@ if (!isset($_SESSION['Quiz'])) {
 
                 if ($QuestionResult && $QuestionResult->rowCount() > 0) {
                     while ($QuestionRow = $QuestionResult->fetch(PDO::FETCH_ASSOC)) {
-
-                        $QuestionTmp = new Question();
+                        
+                        $QuestionTmp = new QuestionEntity();
 
                         $QuestionTmp->QuestionText = $QuestionRow['QUESTION'];
                         $QuestionTmp->SingleChoice = $QuestionRow['ISSINGLECHOICE'];
@@ -56,7 +65,7 @@ if (!isset($_SESSION['Quiz'])) {
                         if ($AnswerResult && $AnswerResult->rowCount() > 0) {
                             while ($AnswerRow = $AnswerResult->fetch(PDO::FETCH_ASSOC)) { 
 
-                                $AnswerTmp = new Answer();
+                                $AnswerTmp = new AnswerEntity();
                                 $AnswerTmp->AnswerText = $AnswerRow['ANSWER'];
                                 $AnswerTmp->QuestionChecked = 0;
                                 array_push($Answers, $AnswerTmp);
@@ -80,7 +89,7 @@ if (!isset($_SESSION['CurrPage'])) {
     $_SESSION['CurrPage'] = 0;
 }
 
-if (isset($_POST['next']) || isset($_POST['back'])) {
+if (isset($_GET['QUIZ_ACTION'])) {
 
     $QuizTmp = $_SESSION['Quiz'];
     $QuestionsTmp = $QuizTmp->Questions;
@@ -101,9 +110,11 @@ if (isset($_POST['next']) || isset($_POST['back'])) {
             $AnswerTmp = $AnswersTmp[$KeysAnswers[$ResultSingleTmp]];
             $AnswerTmp->QuestionChecked = 1;
         }
-    }		
-
-    if (isset($_POST['next'])) {
+    }	
+    
+    $action = $_GET['QUIZ_ACTION'];
+    
+    if ($action == 'next') {
 
         //echo "### Werte ### ".sizeof($_SESSION['Questions'])." / ".($_SESSION['CurrPage']+1)."<br>";
 
@@ -111,16 +122,12 @@ if (isset($_POST['next']) || isset($_POST['back'])) {
             $_SESSION['CurrPage']++;
         }
     }
-    if (isset($_POST['back'])) {
+    if ($action == 'back') {
         if ($_SESSION['CurrPage'] > 0) {
             $_SESSION['CurrPage']--;		
         }
     }
 }
-?>
-
-<?php
-echo "<form name=\"questionform\" method=\"post\" action=".getenv('SCRIPT_NAME').">";
 ?>
 
 <?php
@@ -191,15 +198,13 @@ echo "</p>";
     </table>
 
     <br><br><br>
-
-    <input type='submit' name='back' value='vorherige Frage'>
-    &nbsp
-    <input type='submit' name='next' value='nächste Frage'>
-    <br>
-    <br>
-
-
-</form>
+    
+    <?php
+        echo 
+        '<a href="'.URL.'question?QUIZ_ACTION=back">vorherige Frage</a>'.
+        '   ||   '.
+        '<a href="'.URL.'question?QUIZ_ACTION=next">nächste Frage</a><br><br>';
+    ?>
 
 <form name="questionform" method="post" action="../saveresults/saveresults.php">
     <input type='submit' name='complete' value='Quiz Abschliessen'>

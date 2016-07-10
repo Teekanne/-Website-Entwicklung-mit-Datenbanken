@@ -1,8 +1,5 @@
 <?php
-
-    echo "Text aus der include Datei<br>";
-    
-    class Quiz
+    class QuizEntity
     {   
         private $QuizID;
         private $QuizTitle;
@@ -17,16 +14,15 @@
         {
             $this->$attribute = $value;
         }
-    }	   
+    }	
     
-    class Question
+    class QuestionEntity
     {   
         private $QuestionID;
         private $QuestionText;
         private $QuestionDescription;
         private $SingleChoice;
         private $QuestionKey;
-        
         private $Answers;
 
         function __get($attribute)
@@ -40,7 +36,7 @@
         }
     }
 
-    class Answer
+    class AnswerEntity
     {	
         private $AnswerID;
         private $AnswerText;
