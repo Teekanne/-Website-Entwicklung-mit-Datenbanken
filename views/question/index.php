@@ -2,8 +2,6 @@
     //include("../../models/quiz_model.php");
     //require("../../models/quiz_model.php");
 
-    echo "charlie";
-
     include("models/quiz_model.php");
 
     session_start();
@@ -15,7 +13,7 @@ if (!isset($_SESSION['Quiz'])) {
 
     echo 'neu Gewähltes Quiz: '.$QuizID.' <br>';
 
-    $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+    $pdo = new PDO('mysql:host=localhost;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
 
     if (!$pdo) {
         echo "Verbindungsfehler!<br />";

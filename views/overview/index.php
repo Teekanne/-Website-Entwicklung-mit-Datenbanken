@@ -87,8 +87,6 @@ array_push($qItems, $qItem);
     }
     */
 
-
-
     $logged = $_SESSION['loggedIn'];
             if ($logged == false){
                 echo "NICHT EINGELOGGT!<br>";
@@ -100,12 +98,38 @@ array_push($qItems, $qItem);
     $Tutor_ID = $_SESSION['ID'];
 
 
-    $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+    if (!isset($_SESSION['CurrPage'])) {
+        $_SESSION['CurrPage'] = 0;
+    }
+
+
+    $pdo = new PDO('mysql:host=localhost;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
 
     if (!$pdo) {
         echo "Verbindungsfehler!<br />";
     } 
+    
+    
+    if (isset($_GET['DEACTIVATE_QUIZ_ID'])) {
+        
+        $SqlDeactivate = "UPDATE t_quiz SET ISACTIVE=0 WHERE ID=".$_GET['DEACTIVATE_QUIZ_ID'];
+        $SqlDeactivateStmnt = $pdo->prepare($SqlDeactivate);
+        $SqlDeactivateStmnt->execute();
+        //$pdo->commit();
+    } 
+    
+    if (isset($_GET['ACTIVATE_QUIZ_ID'])) {
+        
+        $SqlActivate = "UPDATE t_quiz SET ISACTIVE=1 WHERE ID=".$_GET['ACTIVATE_QUIZ_ID'];
+        $SqlActivateStmnt = $pdo->prepare($SqlActivate);
+        $SqlActivateStmnt->execute();
+        //$pdo->commit();
+    }
 
+    
+    //echo '<form style=\"margin: 0; padding:0\" name=\"questionform\" method=\"post\" action='.getenv('SCRIPT_NAME').'>';
+    
+    
     echo
         '<table style="border:0px solid #647852; border-collapse: collapse;" border="0">'.
         '<tbody>'.
@@ -209,24 +233,22 @@ array_push($qItems, $qItem);
                                 '<td style="text-align: center">';
 
                             if($Quiz['ISACTIVE'] == 0) {
-                                    echo
-                                    '<form style="margin: 0; padding:0">'.
-                                            '<button type="button" id="'.$Quiz['ID'].'">starten</button>'.
-                                    '</form>';
+                                
+                                echo '<a href="'.URL.'overview?ACTIVATE_QUIZ_ID='.$Quiz['ID'].'"><b>starten</b></a><br>'; 
+                                
                             } else {
                                     echo '&nbsp';
                             }
 
                             echo
                             '</td>'.
-                                                                                    '<td>&nbsp</td>'.
+                            '<td>&nbsp</td>'.
                             '<td style="text-align: center">';
 
                             if($Quiz['ISACTIVE'] == 1) {
-                                    echo
-                                    '<form style="margin: 0; padding:0">'.
-                                            '<button type="button" id="'.$Quiz['ID'].'">beenden</button>'.
-                                    '</form>';
+                                                                    
+                                echo '<a href="'.URL.'overview?DEACTIVATE_QUIZ_ID='.$Quiz['ID'].'"><b>beenden</b></a><br>';                               
+                                    
                             } else {
                                     echo '&nbsp';
                             }
@@ -239,9 +261,13 @@ array_push($qItems, $qItem);
                 }
             }
         }
+        
         echo
             '</tbody>'.
-            '</table>';
+            '</table>'.
+            '</p></p>';
+        
+        
     } else {
         echo "<p>Leere Ergebnismenge!</p><br />";
     }
