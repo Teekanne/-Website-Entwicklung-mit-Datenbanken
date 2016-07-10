@@ -1,5 +1,10 @@
 <?php 
-    include("Classes/LoadClasses.php"); 
+    include("public/php/LoadClasses.php"); 
+    
+    echo "<h3>Test-Anzeige aus Fragen-Key 'chpo86'</h3>";
+    $myQuest = Question::Load("chpo86");
+    echo "Frage: " . $myQuest->__get("question") . "<br />";
+    $myQuest->ShowTable();
     
     if(isset($_POST["quizName"])){
 
@@ -47,7 +52,7 @@
     <table table border= '0'>
         <tr>
             <td class='cells'><label>Kategorie</label></td>
-            <td class='cells'><?php Category::ShowSelectBoxWithCategories($_SESSION["ID"]); ?></td>
+            <td class='cells'><?php Category::ShowSelectBoxWithCategories($_SESSION["ID"], true); ?></td>
         </tr>
         <tr>
             <td class='cells'><label>Quiz-Name</label></td>
@@ -61,7 +66,7 @@
     
     <br /><hr><br />
     
-    <table table border='0'>
+    <table table id='questionTable' border='0'>
         <tr>
             <td class='cells'><label>Frage</label></td>
             <td class='cells'><input type="text" name="question1" required/></td>

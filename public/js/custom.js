@@ -1,3 +1,17 @@
+function hide(control){
+    var control = document.getElementById(control);
+
+    if(!control){
+        return;
+    }
+
+    if(control.style.visibility !== 'hidden'){
+        control.style.visibility = 'hidden';
+    }else{
+        control.style.visibility = 'visible';
+    }
+}
+
 function addTextbox(container, currentTextbox){
     var currentQuestionNumber = parseInt(container.replace(/^[^\d]+/, ""));
     var nextTextboxNumber = parseInt(currentTextbox.split('_')[1])+1;
@@ -6,7 +20,7 @@ function addTextbox(container, currentTextbox){
         return;
     }
     
-    if(document.getElementsByName('answer' + currentQuestionNumber + "_" + nextTextboxNumber)[0] != null){
+    if(document.getElementsByName('answer' + currentQuestionNumber + "_" + nextTextboxNumber)[0] !== null){
         return;
     }
 

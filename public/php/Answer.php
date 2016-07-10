@@ -26,11 +26,13 @@
             $this->answer = $answer;
             $this->iscorrect = $iscorrect;
             $this->fkQuestion = $fkQuestion;
-            $this->pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $this->pdo = new PDO('mysql:host=localhost;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            //$this->pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
         }
         
         public static function Add($answerPos, $answer, $iscorrect, $question){
-            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $pdo = new PDO('mysql:host=localhost;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            //$pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
 
             $sql= "INSERT INTO T_ANSWER (ANSWER_POS, ANSWER, ISCORRECT, FK_QUESTION) " .
                     "VALUES (:pos, :answer, :iscorrect, :fkQuestion)"; 
@@ -51,5 +53,21 @@
             return new Answer($pdo->lastInsertId(), $answerPos, $answer, $iscorrect, $question->__get("id"));
         }
         
+        public function GetVotes(){
+            //$pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $sql= "SELECT QUANTITY FROM T_VOTE_RESULT WHERE FK_ANSWER=:questionId"; 
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindParam(':questionId', $this->id, PDO::PARAM_STR); 
+            $statement->execute();
+            $result = $statement->fetchAll();
+
+            if(!$result){
+                return 0;
+            }
+            
+            return $result[0]["QUANTITY"];
+        }
+        
+
     }
 ?>

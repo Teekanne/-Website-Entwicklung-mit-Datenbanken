@@ -161,7 +161,7 @@ nav ul li a.active {
 	display:block;
 	width:96%;
 	max-width:980px;
-	margin:16em auto;
+	margin:12em auto;
 	padding:0em;
 	
 	
@@ -270,6 +270,14 @@ input[type='radio'] {
 	color: red;
 }
 
+input[type='checkbox'] {
+	width:auto;
+	float:center-right;
+	margin-right: 1em;
+	margin-left: 2em;
+	color: red;
+}
+
 
 table {
 	margin-left:auto;
@@ -287,7 +295,7 @@ table {
 }
 
 #questionTable {
-	margin-left:23.6em;
+	margin-left:auto;
 	margin-right: auto;
 }
 
@@ -337,9 +345,7 @@ button {
 		font-size:90%;
 
 	}
-	#main {
-		margin: 18.8em auto;
-	}
+	
 	#loginTable {
 		margin-left:auto;
 		margin-right:auto;
@@ -352,7 +358,7 @@ button {
 	}
 	
 		#main {
-		margin: 19.4em auto;
+		margin: 13em auto;
 	}
 	
 	
@@ -372,23 +378,27 @@ button {
 	}
 }
 
-
-	
-@media screen and (max-width:543.5px) {
+@media screen and (max-width:571px) {
 		#main {
-		margin: 22.8em auto;
+		margin: 16em auto;
 	}
+	
+
 }
 @media screen and (max-width:475px){
 
 	header ul {
 		display:none;
 	}
+	
+	
 }
 	
-@media screen and (max-width:325px) {
+@media screen and (max-width:315px) {
 		#main {
-		margin: 26em auto;
+		margin: 19em auto;
 	}
-		
 }
+
+
+		
