@@ -3,6 +3,13 @@
     
     if(isset($_GET["key"])){
         $key = $_GET["key"];
+        
+        if(isset($_GET["pos"])){
+            $key .= "&pos=" . $_GET["pos"];
+        }else{
+            $key .= "&pos=1";
+        }
+        
 	echo "<script>showVoteResults('" . $key . "');</script>";
     }
 
@@ -11,6 +18,15 @@
         $currentCategory = Category::Load($_POST["category"]);
         $currentUser = Tutor::Load($_SESSION["ID"]);
         $currentQuiz = Quiz::Add($_POST["quizName"], $_POST["quizDescription"], $currentUser, $currentCategory);
+        
+        echo "<h2>Glückwunsch! Du hast ein neues Quiz erstellt!</h2>";
+        echo "<form><table table border='0'>";
+        echo "<tr>";
+        echo "<td class='cells'><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Abfrageurl</label></td>";
+        $key = $currentQuiz->__get("qKey");
+        echo "<td class='cells'><input type='text' value='SUB-URL??/$key'/></td>";
+        echo "</tr>";
+        echo "</table></form>";
         
         /* Einfach mal 100 Fragen durchlaufen */
         for ($questionNumber = 1; $questionNumber <= 1000; $questionNumber++) {
@@ -35,14 +51,7 @@
                 $currentAnswer = Answer::Add($answerNumber, $_POST["answer" . $questionNumber . "_" . $answerNumber], true, $currentQuestion);
             }
             
-            echo "<h2>Glückwunsch! Du hast ein neues Quiz erstellt!</h2>";
-            echo "<form><table table border='0'>";
-            echo "<tr>";
-            echo "<td class='cells'><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Abfrageurl</label></td>";
-            $key = $currentQuiz->__get("qKey");
-            echo "<td class='cells'><input type='text' value='SUB-URL??/$key'/></td>";
-            echo "</tr>";
-            echo "</table></form>";
+
         }
     }else {
 ?>
@@ -93,6 +102,11 @@
         </tr>
     </table>
     
-    <input type="button" value="Neue Frage einfügen" onclick="addNewQuestion('questionTable', 'question1');">  <input type="submit" value="Jetzt erstellen &raquo"/>
+	<table>
+		<tr>
+			<td class ='cells'><input type="button" value="Neue Frage einfügen" onclick="addNewQuestion('questionTable', 'question1');"></td>
+			<td class ='cells'><input type="submit" value="Jetzt erstellen &raquo"/></td>
+		<tr>
+	</table>
 </form>
 <?php } ?>

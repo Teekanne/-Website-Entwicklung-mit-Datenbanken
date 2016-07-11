@@ -201,7 +201,7 @@ function showVoteResults(key){
                 req.onreadystatechange = function() {
                     switch (req.readyState) {
                         case 4:
-                            if (req.status != 200) {
+                            if (req.status != 200 && req.status != 0) {
                                 alert("Fehler:" + req.status);
                             } else {
                                 //alert(req.responseText);
