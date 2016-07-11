@@ -13,7 +13,7 @@ $roleEdit = Session::get('ROLEEDIT');
 
 
 <form method="post" action="<?php echo URL; ?>user/create">
-    <h2>Einen bestehenden Benutzer beabreiten</h2>
+    <h2>Einen bestehenden Benutzer bearbeiten</h2>
 	<table border = '0'>
 		<tr>
 			<th><label></label></th>
@@ -49,7 +49,7 @@ $roleEdit = Session::get('ROLEEDIT');
 		</tr>
 		<tr>
 			<th><label></label></th>
-			<th><input type="submit" name="Benutzer anlegen" value="Registrieren"></th>
+			<th><input type="submit" name="Benutzer anlegen" value="bearbeiten"></th>
 		</tr>
 	</table>
 </form>
