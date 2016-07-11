@@ -1,11 +1,11 @@
 <?php 
     include("public/php/LoadClasses.php"); 
     
-    echo "<h3>Test-Anzeige aus Fragen-Key 'chpo86'</h3>";
-    $myQuest = Question::Load("chpo86");
-    echo "Frage: " . $myQuest->__get("question") . "<br />";
-    $myQuest->ShowTable();
-    
+    if(isset($_GET["key"])){
+        $key = $_GET["key"];
+	echo "<script>showVoteResults('" . $key . "');</script>";
+    }
+
     if(isset($_POST["quizName"])){
 
         $currentCategory = Category::Load($_POST["category"]);
@@ -44,9 +44,9 @@
             echo "</tr>";
             echo "</table></form>";
         }
-    }
+    }else {
 ?>
-
+<div id="eins"></div>
 <!--<h2>Neue Umfrage erstellen</h2>-->
 <form action="" method="post">
     <table table border= '0'>
@@ -95,3 +95,4 @@
     
     <input type="button" value="Neue Frage einfügen" onclick="addNewQuestion('questionTable', 'question1');">  <input type="submit" value="Jetzt erstellen &raquo"/>
 </form>
+<?php } ?>
