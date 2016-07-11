@@ -20,7 +20,7 @@ function addTextbox(container, currentTextbox){
         return;
     }
     
-    if(document.getElementsByName('answer' + currentQuestionNumber + "_" + nextTextboxNumber)[0] !== null){
+    if(document.getElementsByName('answer' + currentQuestionNumber + "_" + nextTextboxNumber)[0] != null){
         return;
     }
 
@@ -165,4 +165,63 @@ function showPasswordBoxes(currentCheckBox, passwordLbls, currentPasswordTbx, ne
         document.getElementsByName(newPasswordTbx)[0].hidden=true;
         document.getElementsByName(newPasswordTbx)[1].hidden=true;
     }
+}
+
+function showVoteResults(key){
+        function ajaxRequest() {
+                //erstellen des requests
+                var req = null;
+
+                try {
+                    req = new XMLHttpRequest();
+                }
+                catch (ms) {
+                    try {
+                        req = new ActiveXObject("Msxml2.XMLHTTP");
+                    }
+                    catch (nonms) {
+                        try {
+                            req = new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        catch (failed) {
+                            req = null;
+                        }
+                    }
+                }
+
+                if (req == null) {
+                        alert("Error creating request object!");
+                }
+                //anfrage erstellen (GET, url ist localhost,
+                //request ist asynchron
+                var url = 'views/newquestion/results.php?key=' + key;
+                req.open("GET", url, true);
+
+                //Beim abschliessen des request wird diese Funktion ausgeführt
+                req.onreadystatechange = function() {
+                    switch (req.readyState) {
+                        case 4:
+                            if (req.status != 200) {
+                                alert("Fehler:" + req.status);
+                            } else {
+                                //alert(req.responseText);
+                                //schreibe die antwort in den div 
+                                //container mit der id content
+                                var result = '<strong>'+req.responseText+'</strong>';
+                                document.getElementById('eins').innerHTML = result;
+                            }
+                            break;
+
+                        default:
+                            return false;
+                            break;
+                    }
+                };
+
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.send(null);
+        }
+
+        //Zeitgesteuerter Aufruf von Ajax
+        setInterval(ajaxRequest, 500);
 }
