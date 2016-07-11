@@ -1,92 +1,21 @@
 <?php
-    //require("../../library/Session.php");
-
-   // session_start();
+    include_once("models/quiz_model.php");
+    include_once("config/database.php");
+    
+    
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    
     //session_destroy();
 ?>
-
-
-<?php
-class QuestionItem
-{
-        private $category;
-        private $title;
-        private $active;
-
-        function __get($attribute)
-        {
-                return $this->$attribute;
-        }
-
-        function __set($attribute, $value)
-        {
-                $this->$attribute = $value;
-        }
-}
-?>
-
-
-<?php
-/*
-
-$qItems = array();
-
-$qItem = new QuestionItem();
-
-$qItem->category = "Grundlagen der Softwareentwicklung";
-$qItem->title = "erweitern von Arrays";
-$qItem->active = 1;
-
-array_push($qItems, $qItem);
-
- */
-?>
-
 
 <h2>
     Übersicht über ihre aktuellen Umfragen
 </h2>
-
 <br>
 
 <?php
-
-
-
-/*
-    class Overview extends Controller {
-
-        function __construct() {
-            parent::__construct();
-            Session::init();
-            $logged = Session::get('loggedIn');
-            if ($logged == false){
-                Session::destroy();
-                header('location: ../login');
-                exit;
-            }
-        }
-    }
-
- */
-
-
-    /*
-    //Session::init();
-
-    //$logged = Session::get('loggedIn');
-
-
-
-    $logged = $_SESSION['loggedIn'];
-
-    if ($logged == false){
-        echo "NICHT EINGELOGGT!<br>";
-    } else {
-        echo "EINGELOGGT ".$_SESSION['ID']."<br>";
-    }
-    */
-
     $logged = $_SESSION['loggedIn'];
             if ($logged == false){
                 echo "NICHT EINGELOGGT!<br>";
@@ -102,8 +31,8 @@ array_push($qItems, $qItem);
         $_SESSION['CurrPage'] = 0;
     }
 
-
-    $pdo = new PDO('mysql:host=localhost;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+    //$pdo = new PDO('mysql:host=localhost;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+    $pdo = new Database();
 
     if (!$pdo) {
         echo "Verbindungsfehler!<br />";
