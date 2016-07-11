@@ -13,26 +13,26 @@
     $myQuestion = Question::LoadByQuiz($myQuiz, $pos);
     
     if($myQuestion){
+        echo "Quiz: " . $myQuiz->__get("name") . "<br />";
+        echo "Quiz-Beschreibung: " . $myQuiz->__get("description") . "<br />";
+        
         echo "Frage: " . $myQuestion->__get("question") . "<br />";
+        echo "Fragen-Beschreibung: " . $myQuestion->__get("description") . "<br />";
+        
         $myQuestion->ShowTable();
         
+        echo "<form method='GET'>";
+        echo "<input type='text' hidden name='key' value='". $myQuiz->__get("qKey") . "'>";
+
         if($myQuestion->__get("questionPos") > 1){
-            echo "<form method='GET' action=''>";
-            echo "<input type='text' hidden name='key' value='". $myQuiz->__get("qKey") . "'>";
-            
-            echo "<input type='text' hidden name='pos' value='". ($myQuestion->__get("questionPos")-1) . "'>";
-            echo "<input type='submit' value='Zuvorrige Frage'>";
-            echo "</form>";
+            echo "<button type='submit' name='pos' value='" . ($myQuestion->__get("questionPos")-1) . "' text='XD'>Zuvorrige Frage</button>";
         }
         
         if(!$myQuestion->IsLastQuestion()){
-            echo "<form method='GET'>";
-            echo "<input type='text' hidden name='key' value='". $myQuiz->__get("qKey") . "'>";
-            echo "<input type='text' hidden name='pos' value='". ($myQuestion->__get("questionPos")+1) . "'>";
-            
-            echo "<input type='submit' value='Nächste Frage'>";
-            echo "</form>";
+            echo "<button type='submit' name='pos' value='" . ($myQuestion->__get("questionPos")+1) . "' text='XD'>Nächste Frage</button>";
         }
+        
+        echo "</form>";
         
     }
     
