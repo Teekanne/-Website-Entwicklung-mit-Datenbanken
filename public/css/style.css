@@ -319,11 +319,11 @@ button {
 	#loginTable {
 		margin-left:16em;
 		margin-right:auto;
-}	
+	}	
 	#questionTable {
 		margin-left: auto;
 		margin-right:auto;
-}
+	}
 }
 
 
@@ -331,25 +331,36 @@ button {
 	#loginTable {
 		margin-left:14em;
 		margin-right:auto;
-}	
-}
-@media screen and (max-width:850px) {
-	#loginTable {
-		margin-left:12em;
-		margin-right:auto;
-}	
-}
-
-@media screen and (max-width:800px) {
+	}	
+	
 	body {
 		font-size:90%;
 
 	}
 	
+		nav {
+		height:auto;
+	}
+		nav lu li {
+		display:block;
+		margin:0.3em 0em 0.3em 0em;
+		
+	}
+}
+@media screen and (max-width:850px) {
+	#loginTable {
+		margin-left:12em;
+		margin-right:auto;
+	}	
+}
+
+@media screen and (max-width:800px) {
+	
+	
 	#loginTable {
 		margin-left:auto;
 		margin-right:auto;
-}	
+	}	
 }
 
 @media screen and (max-width:600px) {
@@ -368,14 +379,7 @@ button {
 		margin:auto;
 	}
 	
-		nav {
-		height:auto;
-	}
-		nav lu li {
-		display:block;
-		margin:0.3em 0em 0.3em 0em;
-		
-	}
+	
 }
 
 @media screen and (max-width:571px) {
@@ -387,12 +391,39 @@ button {
 }
 @media screen and (max-width:475px){
 
-	header ul {
+   header ul {
 		display:none;
 	}
 	
+		body {
+		font-size:75%;
+	}
+	
+	 article {
+		font-size:70%;
+	}
+	
+	textarea {
+		margin-left: 0.72em;
+		width:10.3em;
+		max-width:10.3em;
+		min-width:10.3em;
+}
+
+	form input[type=submit] {
+		width: 10.3em;
 	
 }
+
+	form input, form select {
+		width: 9.6em;
+		
+	
+}
+
+
+
+
 	
 @media screen and (max-width:315px) {
 		#main {
