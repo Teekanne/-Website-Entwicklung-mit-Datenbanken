@@ -49,7 +49,7 @@ $roleEdit = Session::get('ROLEEDIT');
 		</tr>
 		<tr>
 			<th><label></label></th>
-			<th><input type="submit" name="Benutzer anlegen" value="bearbeiten"></th>
+			<th><input type="submit" name="Benutzer anlegen" value="Bearbeiten"></th>
 		</tr>
 	</table>
 </form>
