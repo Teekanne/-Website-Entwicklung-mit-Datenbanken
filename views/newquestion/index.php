@@ -102,6 +102,11 @@
         </tr>
     </table>
     
-    <input type="button" value="Neue Frage einfügen" onclick="addNewQuestion('questionTable', 'question1');">  <input type="submit" value="Jetzt erstellen &raquo"/>
+	<table>
+		<tr>
+			<td class ='cells'><input type="button" value="Neue Frage einfügen" onclick="addNewQuestion('questionTable', 'question1');"></td>
+			<td class ='cells'><input type="submit" value="Jetzt erstellen &raquo"/></td>
+		<tr>
+	</table>
 </form>
 <?php } ?>
