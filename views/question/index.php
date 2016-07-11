@@ -1,148 +1,156 @@
 <?php
-    include("models/quiz_model.php");
-?>
-
-<?php  
+    require("models/quiz_model.php");
+    
     
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    //session_destroy();
-
-if (isset($_GET["QUIZ_ID"]) && isset($_SESSION['Quiz'])) {
     
-    echo 'unset';
-    unset($_SESSION['Quiz']);
-}
+    //session_destroy();
+?>
+
+<?php  
+    if (isset($_GET["QUIZ_ID"]) && isset($_SESSION['Quiz'])) {
+
+        unset($_SESSION['Quiz']);
+        $_SESSION['CurrPage'] = 0;
+    }
 
 
-if (!isset($_SESSION['Quiz'])) {
+    if (!isset($_SESSION['Quiz'])) {
 
-    $QuizID = $_GET["QUIZ_ID"];
+        $QuizID = $_GET["QUIZ_ID"];
 
-    //echo 'neu Gewähltes Quiz: '.$QuizID.' <br>';
+        //$pdo = new PDO('mysql:host=localhost;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+        $pdo = new PDO('mysql:host=localhost;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+        
+        if (!$pdo) {
+            echo "Verbindungsfehler!<br />";
+        } 
 
-    $pdo = new PDO('mysql:host=localhost;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+        $QuizSelect = "SELECT * FROM t_quiz WHERE ID = ".$QuizID;
+        $QuizResult = $pdo->query($QuizSelect);
 
-    if (!$pdo) {
-        echo "Verbindungsfehler!<br />";
-    } 
+        if ($QuizResult && $QuizResult->rowCount() > 0) {
+            while ($QuizRow = $QuizResult->fetch(PDO::FETCH_ASSOC)) {
 
-    $QuizSelect = "SELECT * FROM T_QUIZ WHERE ID = ".$QuizID;
-    $QuizResult = $pdo->query($QuizSelect);
+                $IsActive = $QuizRow['ISACTIVE'];
 
-    if ($QuizResult && $QuizResult->rowCount() > 0) {
-        while ($QuizRow = $QuizResult->fetch(PDO::FETCH_ASSOC)) {
-            
-            $IsActive = $QuizRow['ISACTIVE'];
+                if ($IsActive) {
 
-            if ($IsActive) {
+                    $QuizTmp = new QuizEntity(); 
 
-                $QuizTmp = new QuizEntity(); 
+                    $QuizTmp->QuizTitle = $QuizRow['QUIZNAME'];
 
-                $QuizTmp->QuizTitle = $QuizRow['QUIZNAME'];
+                    $Questions = array();
 
-                $Questions = array();
+                    $QuestionSelect = "SELECT * FROM T_QUESTION WHERE FK_QUIZ = ".$QuizID." ORDER BY QUESTION_POS";
+                    $QuestionResult = $pdo->query($QuestionSelect);
 
-                $QuestionSelect = "SELECT * FROM T_QUESTION WHERE FK_QUIZ = ".$QuizID." ORDER BY QUESTION_POS";
-                $QuestionResult = $pdo->query($QuestionSelect);
+                    if ($QuestionResult && $QuestionResult->rowCount() > 0) {
+                        while ($QuestionRow = $QuestionResult->fetch(PDO::FETCH_ASSOC)) {
 
-                if ($QuestionResult && $QuestionResult->rowCount() > 0) {
-                    while ($QuestionRow = $QuestionResult->fetch(PDO::FETCH_ASSOC)) {
-                        
-                        $QuestionTmp = new QuestionEntity();
+                            $QuestionTmp = new QuestionEntity();
 
-                        $QuestionTmp->QuestionText = $QuestionRow['QUESTION'];
-                        $QuestionTmp->SingleChoice = $QuestionRow['ISSINGLECHOICE'];
-                        $QuestionTmp->QuestionDescription = $QuestionRow['DESCRIPTION'];
-                        $QuestionTmp->QuestionKey = $QuestionRow['QKEY'];
+                            $QuestionTmp->QuestionText = $QuestionRow['QUESTION'];
+                            $QuestionTmp->SingleChoice = $QuestionRow['ISSINGLECHOICE'];
+                            $QuestionTmp->QuestionDescription = $QuestionRow['DESCRIPTION'];
+                            $QuestionTmp->QuestionKey = $QuestionRow['QKEY'];
 
-                        $AnswerSelect = "SELECT * FROM T_ANSWER WHERE FK_QUESTION = ".$QuestionRow['ID']." ORDER BY ANSWER_POS";
-                        $AnswerResult = $pdo->query($AnswerSelect);
+                            $AnswerSelect = "SELECT * FROM T_ANSWER WHERE FK_QUESTION = ".$QuestionRow['ID']." ORDER BY ANSWER_POS";
+                            $AnswerResult = $pdo->query($AnswerSelect);
 
-                        $Answers = array();
+                            $Answers = array();
 
-                        if ($AnswerResult && $AnswerResult->rowCount() > 0) {
-                            while ($AnswerRow = $AnswerResult->fetch(PDO::FETCH_ASSOC)) { 
+                            if ($AnswerResult && $AnswerResult->rowCount() > 0) {
+                                while ($AnswerRow = $AnswerResult->fetch(PDO::FETCH_ASSOC)) { 
 
-                                $AnswerTmp = new AnswerEntity();
-                                $AnswerTmp->AnswerText = $AnswerRow['ANSWER'];
-                                $AnswerTmp->QuestionChecked = 0;
-                                array_push($Answers, $AnswerTmp);
-                            }  
+                                    $AnswerTmp = new AnswerEntity();
+                                    $AnswerTmp->AnswerText = $AnswerRow['ANSWER'];
+                                    $AnswerTmp->QuestionChecked = 0;
+                                    array_push($Answers, $AnswerTmp);
+                                }  
+                            }
+                            $QuestionTmp->Answers = $Answers;
+                            array_push($Questions, $QuestionTmp);
                         }
-                        $QuestionTmp->Answers = $Answers;
-                        array_push($Questions, $QuestionTmp);
+                        $QuizTmp->Questions = $Questions;
                     }
-                    $QuizTmp->Questions = $Questions;
-                }
-                $_SESSION['Quiz'] = $QuizTmp;
+                    $_SESSION['Quiz'] = serialize($QuizTmp);
 
-            } else {
-                echo "Das gewählte Quiz ist nicht aktiv!<br />";
+                } else {
+                    echo "Das gewählte Quiz ist nicht aktiv!<br />";
+                }
+            }
+        } else {
+            echo 'Quiz existiert nicht<br>';
+        }
+    }
+
+    if (!isset($_SESSION['CurrPage'])) {
+        $_SESSION['CurrPage'] = 0;
+    }
+
+    if (isset($_POST['next']) || isset($_POST['back'])) {
+        
+        $QuizTmp = new QuizEntity();
+
+        $QuizTmp = unserialize($_SESSION['Quiz']);
+        
+        $QuestionsTmp = $QuizTmp->Questions;
+        
+        $KeysQuestion = array_keys($QuestionsTmp);
+        $QuestionTmp = $QuestionsTmp[$KeysQuestion[$_SESSION['CurrPage']]];
+
+        $AnswersTmp = $QuestionTmp->Answers;
+        $KeysAnswers = array_keys($AnswersTmp);
+
+        foreach($AnswersTmp as $AnswerTmp) {
+            $AnswerTmp->QuestionChecked = 0;
+        }
+
+        if (isset($_POST['Result'])) {
+            $ResultTmp = $_POST['Result'];
+            foreach($ResultTmp as $ResultSingleTmp)
+            {
+                $AnswerTmp = $AnswersTmp[$KeysAnswers[$ResultSingleTmp]];
+                $AnswerTmp->QuestionChecked = 1;
+            }
+        }	
+        
+        $_SESSION['Quiz'] = serialize($QuizTmp);
+
+        if (isset($_POST['next'])) {
+
+            //echo "### Werte ### ".sizeof($_SESSION['Questions'])." / ".($_SESSION['CurrPage']+1)."<br>";
+
+            if (sizeof($QuestionsTmp) > ($_SESSION['CurrPage']+1)) {
+                $_SESSION['CurrPage']++;
+            }
+        }
+        if (isset($_POST['back'])) {
+            if ($_SESSION['CurrPage'] > 0) {
+                $_SESSION['CurrPage']--;		
             }
         }
     }
-}
-
-if (!isset($_SESSION['CurrPage'])) {
-    $_SESSION['CurrPage'] = 0;
-}
-
-if (isset($_GET['QUIZ_ACTION'])) {
-
-    $QuizTmp = $_SESSION['Quiz'];
-    $QuestionsTmp = $QuizTmp->Questions;
-    $KeysQuestion = array_keys($QuestionsTmp);
-    $QuestionTmp = $QuestionsTmp[$KeysQuestion[$_SESSION['CurrPage']]];
-
-    $AnswersTmp = $QuestionTmp->Answers;
-    $KeysAnswers = array_keys($AnswersTmp);
-
-    foreach($AnswersTmp as $AnswerTmp) {
-        $AnswerTmp->QuestionChecked = 0;
-    }
-
-    if (isset($_POST['Result'])) {
-        $ResultTmp = $_POST['Result'];
-        foreach($ResultTmp as $ResultSingleTmp)
-        {
-            $AnswerTmp = $AnswersTmp[$KeysAnswers[$ResultSingleTmp]];
-            $AnswerTmp->QuestionChecked = 1;
-        }
-    }	
-    
-    $action = $_GET['QUIZ_ACTION'];
-    
-    if ($action == 'next') {
-
-        //echo "### Werte ### ".sizeof($_SESSION['Questions'])." / ".($_SESSION['CurrPage']+1)."<br>";
-
-        if (sizeof($QuestionsTmp) > ($_SESSION['CurrPage']+1)) {
-            $_SESSION['CurrPage']++;
-        }
-    }
-    if ($action == 'back') {
-        if ($_SESSION['CurrPage'] > 0) {
-            $_SESSION['CurrPage']--;		
-        }
-    }
-}
 ?>
 
-<?php
-$QuizTmp = $_SESSION['Quiz'];
-$QuestionsTmp = $QuizTmp->Questions;
-$keys = array_keys($QuestionsTmp);
-$QuestionTmp = $QuestionsTmp[$keys[$_SESSION['CurrPage']]];
+<form name="questionform" method="post" action="question">
 
-echo "<h2>".$QuizTmp->QuizTitle."</h2>";  
+    <?php
+        $QuizTmp = unserialize($_SESSION['Quiz']);
+        $QuestionsTmp = $QuizTmp->Questions;
+        $keys = array_keys($QuestionsTmp);
+        $QuestionTmp = $QuestionsTmp[$keys[$_SESSION['CurrPage']]];
 
-echo "<p>";
-echo "Frage (".($_SESSION['CurrPage']+1)."/".sizeof($QuestionsTmp).")<br><br>";
-echo $QuestionTmp->QuestionText."<br>";
-echo "</p>";
-?>
+        echo "<h2>".$QuizTmp->QuizTitle."</h2>";  
+
+        echo "<p>";
+        echo "Frage (".($_SESSION['CurrPage']+1)."/".sizeof($QuestionsTmp).")<br><br>";
+        echo $QuestionTmp->QuestionText."<br>";
+        echo "</p>";
+    ?>
 
     <br><br><br>	
 
@@ -159,54 +167,62 @@ echo "</p>";
             </tr>
 
             <?php
-            $QuizTmp = $_SESSION['Quiz'];
-            $QuestionsTmp = $QuizTmp->Questions;
-            $keys = array_keys($QuestionsTmp);
-            $QuestionTmp = $QuestionsTmp[$keys[$_SESSION['CurrPage']]];
+                $QuizTmp = unserialize($_SESSION['Quiz']);
+                $QuestionsTmp = $QuizTmp->Questions;
+                $keys = array_keys($QuestionsTmp);
+                $QuestionTmp = $QuestionsTmp[$keys[$_SESSION['CurrPage']]];
 
-            $AnswersTmp = $QuestionTmp->Answers;
+                $AnswersTmp = $QuestionTmp->Answers;
 
-            $QuestionType = "";
-            if($QuestionTmp->SingleChoice == 1) {
-                $QuestionType = "radio";
-            } else {
-                $QuestionType = "checkbox";
-            }
+                $QuestionType = "";
+                if($QuestionTmp->SingleChoice == 1) {
+                    $QuestionType = "radio";
+                } else {
+                    $QuestionType = "checkbox";
+                }
 
-            $index = 0;
-            foreach($AnswersTmp as $AnswerTmp)
-            {
+                $index = 0;
+                foreach($AnswersTmp as $AnswerTmp)
+                {
 
-                echo "<tr>";
-                    echo "<td>&nbsp</td>";
-                    echo "<td colspan=\"4\" style=\"font-size: 100%; padding-top: 0px; padding-bottom: 0px; padding-right: 25px\">";
-                            echo $AnswerTmp->AnswerText;
-                    echo "</td>";
-                    echo "<td><input type=\"".$QuestionType."\" name=\"Result[]\" id=\"Result\" value=\"".$index."\" ";
-                    if ($AnswerTmp->QuestionChecked == 1) {
-                        echo "checked='checked' ";	
-                    }
-                    echo "/></td>";
-                echo "</tr>";
+                    echo "<tr>";
+                        echo "<td>&nbsp</td>";
+                        echo "<td colspan=\"4\" style=\"font-size: 100%; padding-top: 0px; padding-bottom: 0px; padding-right: 25px\">";
+                                echo $AnswerTmp->AnswerText;
+                        echo "</td>";
+                        echo "<td><input type=\"".$QuestionType."\" name=\"Result[]\" id=\"Result\" value=\"".$index."\" ";
+                        if ($AnswerTmp->QuestionChecked == 1) {
+                            echo "checked='checked' ";	
+                        }
+                        echo "/></td>";
+                    echo "</tr>";
 
-                $index++;
-            }
-
+                    $index++;
+                }
             ?>
 
         </tbody>
     </table>
 
     <br><br><br>
-    
-    <?php
-        echo 
-        '<a href="'.URL.'question?QUIZ_ACTION=back">vorherige Frage</a>'.
-        '   ||   '.
-        '<a href="'.URL.'question?QUIZ_ACTION=next">nächste Frage</a><br><br>';
-    ?>
+
+    <input type='submit' name='back' value='vorherige Frage'>
+    &nbsp
+    <input type='submit' name='next' value='nächste Frage'>
+</form>
+
+<br>
+<br>
+
+<?php
+    /*
+    echo 
+    '<a href="'.URL.'question?QUIZ_ACTION=back">vorherige Frage</a>'.
+    ' || '.
+    '<a href="'.URL.'question?QUIZ_ACTION=next">nächste Frage</a><br><br>';
+     */
+?>
 
 <form name="questionform" method="post" action="../saveresults/saveresults.php">
     <input type='submit' name='complete' value='Quiz Abschliessen'>
 </form>
-
