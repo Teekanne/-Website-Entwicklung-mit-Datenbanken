@@ -1,6 +1,7 @@
 <h2>
     ... An einem Quiz Teilnehmen?
 </h2>
+
 <br>
 
 <p>
@@ -15,11 +16,11 @@ bitte geben Sie den vom Dozenten freigegebenen Quiz-Key ein!<br>
 
 <label id=overviewLabel>&nbsp;</label><br>
 
+<p>
 <h2>
     ... oder als Dozent Ihre Quiz verwalten?
 </h2>
 
-<p>
 <form name="loginform" method="post" action="login">
     <input type='submit' name='login' value='Einloggen!'>
 </form>

@@ -31,8 +31,9 @@
         } 
 
         $QuizSelect = "SELECT * FROM T_QUIZ WHERE QKEY = '".$QKey."'";
-        
         $QuizResult = $pdo->query($QuizSelect);
+        
+        $QuizAvailable = true;
 
         if ($QuizResult && $QuizResult->rowCount() > 0) {
             while ($QuizRow = $QuizResult->fetch(PDO::FETCH_ASSOC)) {
@@ -85,12 +86,18 @@
                     $_SESSION['Quiz'] = serialize($QuizTmp);
 
                 } else {
-                    echo "Das gewählte Quiz ist nicht aktiv!<br />";
+                    $QuizAvailable = false;
                 }
             }
         } else {
-            echo 'Quiz existiert nicht<br>';
+            $QuizAvailable = false;
         }
+    }
+    
+    if (!$QuizAvailable) 
+    {
+        header("Location: quizunavailable");
+        exit;
     }
 
     if (!isset($_SESSION['CurrPage'])) {
