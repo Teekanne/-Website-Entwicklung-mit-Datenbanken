@@ -46,15 +46,15 @@
         
         echo "<form method='GET'>";
         echo "<input type='text' hidden name='key' value='". $myQuiz->__get("qKey") . "'>";
-
+        echo "<table><tr>";
         if($myQuestion->__get("questionPos") > 1){
-            echo "<button type='submit' name='pos' value='" . ($myQuestion->__get("questionPos")-1) . "' text='XD'>← Zuvorrige Frage</button>";
+            echo "<td><button type='submit' name='pos' value='" . ($myQuestion->__get("questionPos")-1) . "'    >← Zuvorrige Frage</button></td>";
         }
         
         if(!$myQuestion->IsLastQuestion()){
-            echo "<button type='submit' name='pos' value='" . ($myQuestion->__get("questionPos")+1) . "' text='XD'>Nächste Frage →</button>";
+            echo "<td><button type='submit' name='pos' value='" . ($myQuestion->__get("questionPos")+1) . "'>Nächste Frage →</button></td>";
         }
-        
+        echo "</tr></table>";
         echo "</form>";
         
     }
