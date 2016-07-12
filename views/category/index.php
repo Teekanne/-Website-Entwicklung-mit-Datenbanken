@@ -1,5 +1,4 @@
 <?php 
-    include("public/php/LoadClasses.php"); 
     
     if(isset($_POST["createCategory"])){
         if(isset($_POST["mainCategory"])){
