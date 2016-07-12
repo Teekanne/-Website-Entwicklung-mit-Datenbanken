@@ -75,17 +75,16 @@ class User extends Controller {
                // echo "$password";
               $userModel = new User_Model();
               $userModel->updateUser($titel, $firstname, $lastname, $email,$role);
+             
             }
-            
-            
+
            else
             {
              $this->view->render('messages/emailnotequal');
              $this->view->render('user/index'); 
              exit;
             }
-         $this->view->render('messages/editsuccess');  
-         $this->view->render('user/index');  
+
          exit;
         } catch (Exception $ex) {
             

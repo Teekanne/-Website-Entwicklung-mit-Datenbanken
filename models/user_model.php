@@ -48,6 +48,8 @@ class User_Model extends Model {
             $sqlInsert = "UPDATE T_TUTOR SET TITLE='".$titel."', FIRSTNAME='".$firstname."', LASTNAME='".$lastname."', EMAIL='".$email."', ROLE='".$role."' where ID='".$ID."'";
             $preparedStatement = $this->db->prepare($sqlInsert);
             $preparedStatement->execute();
+            $message = new User();
+            $message->success();
   
     }
     public function reg($title, $firstname, $lastname, $email, $password, $rolereg) {
