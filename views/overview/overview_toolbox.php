@@ -69,8 +69,6 @@ function resetQuizResults($quizId)
 
                     $QuestionTmp->QuestionID = $QuestionRow['ID'];
                     
-                    echo "QUESTIONS__IDS: ".$QuestionTmp->QuestionID."<br>";
-                    
                     $QuestionTmp->QuestionText = $QuestionRow['QUESTION'];
                     $QuestionTmp->SingleChoice = $QuestionRow['ISSINGLECHOICE'];
                     $QuestionTmp->QuestionDescription = $QuestionRow['DESCRIPTION'];
@@ -88,41 +86,7 @@ function resetQuizResults($quizId)
                             $AnswerTmp->AnswerText = $AnswerRow['ANSWER'];
                             $AnswerTmp->QuestionChecked = 0;
 
-                            $VoteResultSelect = 
-                                "SELECT * FROM T_VOTE_RESULT WHERE ".
-                                "FK_QUESTION = ".$QuestionTmp->QuestionID." AND ".
-                                "FK_ANSWER = ".$AnswerTmp->AnswerID;
-
-                            $VoteResultResult = $pdo->query($VoteResultSelect);
-
-                            if ($VoteResultResult && $VoteResultResult->rowCount() > 0) {
-
-                                $VoteResultRow = $VoteResultResult->fetch(PDO::FETCH_ASSOC);
-
-                                $VoteQuantity = $VoteResultRow['QUANTITY'];
-                                $VoteQuantity++;
-
-                                $VoteResultUpdate = 
-                                    "UPDATE T_VOTE_RESULT SET QUANTITY=0".
-                                    " WHERE FK_QUESTION = ".$QuestionTmp->QuestionID.
-                                    " AND FK_ANSWER = ".$AnswerTmp->AnswerID;
-
-                                $VoteResultUpdateStmnt = $pdo->prepare($VoteResultUpdate);
-                                $VoteResultUpdateStmnt->execute();
-
-                            } else {                     
-
-                                $VoteResultInsert = 
-                                    "INSERT INTO T_VOTE_RESULT (FK_QUESTION, FK_ANSWER, QUEST_DATE, QUANTITY) values (".
-                                    $QuestionTmp->QuestionID.", ". 
-                                    $AnswerTmp->AnswerID.", ". 
-                                    "'".date("Y-m-d H:i:s")."', ". 
-                                    "0".
-                                    ");";                     
-
-                                $VoteResultInsertStmnt = $pdo->prepare($VoteResultInsert);
-                                $VoteResultInsertStmnt->execute();     
-                            }
+                            setQuestionResults($QuestionTmp->QuestionID, $AnswerTmp->AnswerID, 0);
                         }  
                     }     
                 }
@@ -133,14 +97,48 @@ function resetQuizResults($quizId)
     return $retVal;
 }
 
-function setQuestionResults($questionId, $answerId)
+function setQuestionResults($questionId, $answerId, $quantity)
 {
     $retVal = false;
     
     $pdo = new Database();
     
+    $VoteResultSelect = 
+        "SELECT * FROM T_VOTE_RESULT WHERE ".
+        "FK_QUESTION = ".$questionId." AND ".
+        "FK_ANSWER = ".$answerId;
+
+    $VoteResultResult = $pdo->query($VoteResultSelect);
+
+    if ($VoteResultResult && $VoteResultResult->rowCount() > 0) {
+
+        $VoteResultRow = $VoteResultResult->fetch(PDO::FETCH_ASSOC);
+
+        $VoteQuantity = $VoteResultRow['QUANTITY'];
+        $VoteQuantity++;
+
+        $VoteResultUpdate = 
+            "UPDATE T_VOTE_RESULT SET QUANTITY=".$quantity.
+            " WHERE FK_QUESTION = ".$questionId.
+            " AND FK_ANSWER = ".$answerId;
+
+        $VoteResultUpdateStmnt = $pdo->prepare($VoteResultUpdate);
+        $VoteResultUpdateStmnt->execute();
+
+    } else {                     
+
+        $VoteResultInsert = 
+            "INSERT INTO T_VOTE_RESULT (FK_QUESTION, FK_ANSWER, QUEST_DATE, QUANTITY) values (".
+            $questionId.", ". 
+            $answerId.", ". 
+            "'".date("Y-m-d H:i:s")."', ". 
+            $quantity.
+            ");";                     
+
+        $VoteResultInsertStmnt = $pdo->prepare($VoteResultInsert);
+        $VoteResultInsertStmnt->execute();     
+    }
 }
     
-
 ?>
 
