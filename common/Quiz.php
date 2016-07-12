@@ -1,6 +1,4 @@
 <?php
-/* Quiz-Key wird mit Umlauten (öäü) gespeichert. PHP-seitig nicht möglich, diese umzuwandeln (oe ae ue),
- * da die Konfiguration falsch ist */
     class Quiz {
         private $id;
         private $name;
