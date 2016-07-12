@@ -1,12 +1,10 @@
 <?php
-    class Question {
+    class Category {
         private $id;
-        private $description;
-        private $qkey;
-        private $question;
-        private $questionPos;
-        private $singleChoice;
-        private $fkQuiz;
+        private $catname;
+        private $level;
+        private $fkTutor;
+        private $fkParentId;
         private $pdo;
         
         public function __get($key){
@@ -21,170 +19,129 @@
             }
         }
 
-        public function __construct($id, $description, $qkey, $question, $questionPos, $singleChoice, $fkQuiz){
+        public function __construct($id, $catname, $level, $fkTutor, $fkParentId){
             $this->id = $id;
-            $this->description = $description;
-            $this->qkey = $qkey;
-            $this->question = $question;
-            $this->questionPos = $questionPos;
-            $this->singleChoice = $singleChoice;
-            $this->fkQuiz = $fkQuiz;
+            $this->catname = $catname;
+            $this->level = $level;
+            $this->fkTutor = $fkTutor;
+            $this->fkParentId = $fkParentId;
             $this->pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
         }
         
-        public static function Add($description, $question, $questionPos, $singleChoice, $quiz){
-            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
-
-            $sql= "INSERT INTO T_QUESTION (DESCRIPTION, QKEY, QUESTION, QUESTION_POS, ISSINGLECHOICE, FK_QUIZ) " .
-                    "VALUES (:description, :qkey, :question, :questionPos, :singleChoice, :fkQuiz)"; 
-
-            if($singleChoice){
-                $singleChoice = 1;
-            }else{
-                $singleChoice = 0;
-            }
+        public static function Add($name, $mainCategory, $fkTutor){
+            $cat = Category::Load($name);
             
-            $statement = $pdo->prepare($sql);
-            $statement->bindParam(':description', $description, PDO::PARAM_STR); 
-            $statement->bindParam(':qkey', $quiz->__get("qKey"), PDO::PARAM_STR); 
-            $statement->bindParam(':question', $question, PDO::PARAM_STR); 
-            $statement->bindParam(':questionPos', $questionPos, PDO::PARAM_INT); 
-            $statement->bindParam(':singleChoice', $singleChoice, PDO::PARAM_INT); 
-            $statement->bindParam(':fkQuiz', $quiz->__get("id"), PDO::PARAM_INT); 
-            $statement->execute();
-            
-            return new Question($pdo->lastInsertId(), $description, $quiz->__get("qKey"), $question, $questionPos, $singleChoice, $quiz->__get("id"));
-        }
-        
-        public static function LoadByQuiz($quiz, $position){
-            if(!$quiz){
+            if($cat){
+                echo $name . " existiert bereits.";
                 return;
             }
             
+            if($mainCategory){
+                $level = 2;
+                $fkParentId = $mainCategory->__get("id");
+            }else{
+                $level = 1;
+                $fkParentId = null;
+            }
+            
             $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
-            $sql= "SELECT * FROM T_QUESTION WHERE FK_QUIZ=:quiz AND QUESTION_POS=:pos"; 
+            
+            $sql= "INSERT INTO T_CATEGORY(CATNAME, LEVEL, FK_TUTOR, FK_PARENT_ID) " .
+                    "VALUES (:name, :level, :fkTutor, :fkParentId)";
             $statement = $pdo->prepare($sql);
-            $statement->bindParam(':quiz', $quiz->__get("id"), PDO::PARAM_STR); 
-            $statement->bindParam(':pos', $position, PDO::PARAM_INT); 
+            $statement->bindParam(':name', $name, PDO::PARAM_STR);
+            $statement->bindParam(':level', $level, PDO::PARAM_STR);
+            $statement->bindParam(':fkTutor', $fkTutor, PDO::PARAM_STR);
+            $statement->bindParam(':fkParentId', $fkParentId, PDO::PARAM_STR);
+            
+            $statement->execute();
+
+            return new Category($pdo->lastInsertId(), $name, $level, $fkTutor, $fkParentId);
+        }
+        
+        public static function Delete($name) {
+            $category = Category::Load($name);
+            
+            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            
+            if(!$category->__get("fkParentId")){
+                $sql= "DELETE FROM T_CATEGORY WHERE FK_PARENT_ID=:parentId"; 
+                $statement = $pdo->prepare($sql);
+                $statement->bindParam(':parentId', $category->__get("id"), PDO::PARAM_STR); 
+                $statement->execute();
+            }
+            
+            $sql= "DELETE FROM T_CATEGORY WHERE CATNAME=:catName"; 
+            $statement = $pdo->prepare($sql);
+            $statement->bindParam(':catName', $name, PDO::PARAM_STR); 
+            $statement->execute();
+        }
+        
+        public static function Load($name) {
+            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $sql= "SELECT * FROM T_CATEGORY WHERE CATNAME=:catName"; 
+            $statement = $pdo->prepare($sql);
+            $statement->bindParam(':catName', $name, PDO::PARAM_STR); 
             $statement->execute();
             $result = $statement->fetchAll();
             
             if(!$result){
-                echo "Es wurde keine Frage gefunden.";
                 return null;
-            }
-            
-            $result = $result[0];
-            return new Question($result["ID"], $result["DESCRIPTION"], $result["QKEY"], $result["QUESTION"], $result["QUESTION_POS"], $result["ISSINGLECHOICE"], $result["FK_QUIZ"]);
-        }
-        
-        public function IsLastQuestion(){
-            $sql= "SELECT * FROM T_QUESTION WHERE FK_QUIZ=:quiz AND QUESTION_POS=:pos"; 
-            $statement = $this->pdo->prepare($sql);
-            $nextPos = $this->questionPos+1;
-            $statement->bindParam(':quiz', $this->fkQuiz, PDO::PARAM_STR); 
-            $statement->bindParam(':pos', $nextPos, PDO::PARAM_INT); 
-            $statement->execute();
-            $result = $statement->fetchAll();
-            
-            if(!$result){
-                return true;
             }else{
-                return false;
+                $result = $result[0];
             }
+
+            return new Category($result["ID"], $result["CATNAME"], $result["LEVEL"], $result["FK_TUTOR"], $result["FK_PARENT_ID"]);
         }
         
-        public function GetAnswers(){
-            $sql= "SELECT * FROM T_ANSWER WHERE FK_QUESTION=:questionId"; 
-            $statement = $this->pdo->prepare($sql);
-            $statement->bindParam(':questionId', $this->id, PDO::PARAM_STR); 
+        public static function CountFirstLevelCategories(){
+            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            
+            $sql= "SELECT * FROM T_CATEGORY WHERE LEVEL=1"; 
+            $statement = $pdo->prepare($sql);
             $statement->execute();
             
-            $answers = array();
-            
-            foreach($statement->fetchAll() as $fa => $result){
-                array_push($answers, new Answer($result["ID"], $result["ANSWER_POS"], $result["ANSWER"], $result["ISCORRECT"], $result["FK_QUESTION"]));
-            }
-
-            return $answers;
+            return $statement->rowCount();
         }
         
-        public function GetMaxVotes(){
-            $answers = $this->GetAnswers();
-            
-            $maxVotes = 0;
-            
-            foreach($answers as $a => $answer){
-                $currentVotes = $answer->GetVotes();
-                
-                if($maxVotes < $currentVotes){
-                    $maxVotes = $currentVotes;
-                }
+        /* Gibt eine Liste des generischen Typs "Category" zurück */
+        private static function getFirstLevelCategories($id){
+            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $result = $pdo->query("SELECT * FROM T_CATEGORY WHERE LEVEL=1 AND FK_TUTOR=" . $id . " ORDER BY ID");
+            $categories = array();
+            foreach($result as $r => $category){
+                array_push($categories, new Category($category["ID"], $category["CATNAME"], $category["LEVEL"], $category["FK_TUTOR"], $category["FK_PARENT_ID"]));
             }
-            
-            return $maxVotes;
+            return $categories;
         }
         
-        public function ShowTable(){
-            $answers = $this->GetAnswers();
-            $maxVotes = $this->GetMaxVotes();
-            $sumVotes = 0;
+        private function getSecondLevelCategories(){
+            $result = $this->pdo->query("SELECT * FROM T_CATEGORY WHERE FK_PARENT_ID=" . $this->id);
+            $categories = array();
             
-            foreach($answers as $a => $answer){
-                $sumVotes .= $answer->GetVotes();
+            foreach($result as $r => $category){
+                array_push($categories, new Category($category["ID"], $category["CATNAME"], $category["LEVEL"], $category["FK_TUTOR"], $category["FK_PARENT_ID"]));
             }
             
-            echo "<table><tr>";
-
-            if($maxVotes==0){
-                echo "Bisher hat noch niemand abgestimmt.</tr></table>";
-                return;
-            }
-
-            /* Buttons in einer Zeile anzeigen */
-            foreach($answers as $a => $answer){
-                $currentVotes = $answer->GetVotes();
+            return $categories;            
+        }
+        
+        public static function ShowSelectBoxWithCategories($id, $secondLevel){
+            $firstOption = true;
+            echo "<select style=width:13.3em; size='5' name='category'>";
+            foreach(Category::getFirstLevelCategories($id) as $c => $category){
+                echo "<option ";
+                if($firstOption){ echo "selected"; $firstOption=false; }
+                echo ">" . $category->__get("catname") . "</option>";
                 
-                if($currentVotes != 0){
-                    $percent =  $currentVotes / $maxVotes * 100;
-                }else{
-                    $percent = 0;
+                if($secondLevel){
+                    foreach($category->getSecondLevelCategories() as $s => $secondLevelCategory){
+                        echo "<option value='" . $secondLevelCategory->__get("catname") . "'>- " . $secondLevelCategory->__get("catname") . "</option>";
+                    }
                 }
-                echo "<td valign='bottom'>";
-                echo "<input type='button' style='height:" . $percent*2 . "px;'>";
-                echo "</td>";
-            }
+            }        
 
-            echo "</tr><tr>";
-
-            /* Vote-Anzahl in einer Zeile anzeigen */
-            foreach($answers as $a => $answer){
-                echo "<td>" . $answer->GetVotes() . " Votes</td>";
-            }
-            
-            echo "</tr><tr>";
-            
-            /* Prozent in einer Zeile anzeigen */
-            foreach($answers as $a => $answer){
-                $currentVotes = $answer->GetVotes();
-                
-                if($currentVotes != 0){
-                    $percent =  round($currentVotes / $sumVotes * 100, 1);
-                }else{
-                    $percent = 0;
-                }
-                
-                echo "<td>" . $percent . " %</td>";
-            }
-            
-            echo "</tr><tr>";
-
-            /* Antwort in einer Zeile anzeigen */
-            foreach($answers as $a => $answer){
-                echo "<td>" . $answer->__get("answer") . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
-            }
-
-            echo "</tr></table>";
+            echo "</select>";
         }
     }
 ?>

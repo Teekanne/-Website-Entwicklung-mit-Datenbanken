@@ -129,7 +129,7 @@
         
         public static function ShowSelectBoxWithCategories($id, $secondLevel){
             
-            echo "<select style=width:13.3em; name='category'>";
+            echo "<select style=width:12.3em; name='category'>";
             foreach(Category::getFirstLevelCategories($id) as $c => $category){
                 echo "<option>" . $category->__get("catname") . "</option>";
                 

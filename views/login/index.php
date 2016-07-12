@@ -1,4 +1,4 @@
-
+    
 <h2>Login</h2>
 
 <form action="login/run" method="post">
@@ -12,7 +12,7 @@
 			<th><input type="password" name="password" /></th>
 		</tr>
 		<tr>
-			<th><label>Test</label></th>
+			<th><label><a href="passwordlost">Passwort vergessen</a></label></th>
 			<th><input type="submit" /></th>
 		</tr>
 	</table>

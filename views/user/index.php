@@ -36,7 +36,7 @@
 		</tr>
 		<tr>
 			<th><label></label></th>
-			<th><select style=width:13.3em; name="ROLE">
+			<th><select style=width:12.3em; name="ROLE">
 					<option value="Default">Default</option>
 					<option value="User">User</option>
 					<option value="Administrator">Administrator</option>
@@ -70,12 +70,15 @@
         echo '<td>' . $value['LASTNAME'] . '</td>';
         echo '<td>' . $value['EMAIL'] . '</td>';
         echo '<td>' . $value['ROLE'] . '</td>';
-        echo '<td>
-                             
-				<li><a href="' . URL . 'user/editUser/' . $value['ID'] . '">Edit</a></li>
+
+
+        echo '<td>     
+                                    <li><a href="' . URL . 'user/editUser/' . $value['ID'] . '">Edit</a></li>
+
 				<li><a href="' . URL . 'user/delete/' . $value['ID'] . '">Delete</a></li></td>';
         echo '</tr>';
+
     }
-    ?>
+    ?>  
 </table>
 </table>
