@@ -1,5 +1,5 @@
 <?php
-    include("../../public/php/LoadClasses.php"); 
+    include("../../common/LoadClasses.php"); 
     
     $myQuiz = Quiz::LoadByKey($_GET["key"]);
     
