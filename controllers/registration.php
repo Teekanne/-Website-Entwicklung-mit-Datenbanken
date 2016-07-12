@@ -28,18 +28,24 @@ class Registration extends Controller {
               $regModel->reg($titel, $vorname, $nachname, $email, $password, $rolereg);
             }else
             {
-                
+                $this->view->render('messages/passwordnotequal');
+                $this->view->render('registration/index'); 
+                exit;
             }
             }
            else
             {
-                
+             $this->view->render('messages/emailnotequal');
+             $this->view->render('registration/index'); 
+             exit;
             }
-         $this->view->render('login/index');   
+         $this->view->render('messages/regsuccess');  
+         $this->view->render('login/index');  
+         exit;
         } catch (Exception $ex) {
-
+            
         }
-       // $this->model->reg();
+
     }
 
 }
