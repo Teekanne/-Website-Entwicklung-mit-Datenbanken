@@ -99,6 +99,19 @@ a:active {
 	color:#FFFFFF;
 }
 
+#start {
+	color:#66FF33;
+	
+}
+
+#current {
+	font-style: oblique;
+}
+
+#close {
+	color:#FF4040;
+}
+
 /* On Top Bar*/
 #menubar {
 	display:block;
