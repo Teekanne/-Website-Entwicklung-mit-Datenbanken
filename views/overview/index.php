@@ -82,6 +82,7 @@
                 '</td>'.
                 '</tr>';
 
+            /*
             echo
                 '<tr style="text-align: center; font-size: 100%">'.
                 '<td>&nbsp</td>'.
@@ -92,6 +93,7 @@
                 '<td>&nbsp</td>'.
                 '<td>aktiv</td>'.
                 '</tr>';
+             */
 
 
             $CategoryParentID = $CategoryParent['ID'];
