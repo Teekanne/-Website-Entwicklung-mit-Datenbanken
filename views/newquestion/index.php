@@ -10,7 +10,7 @@
         echo "<tr>";
         echo "<td class='cells'><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Abfrageurl</label></td>";
         $key = $currentQuiz->__get("qKey");
-        echo "<td class='cells'><input type='text' value='" . URL . "result?key=" . $key . "'/></td>";
+        echo "<td class='cells'><input type='text' value='" . URL . "result?key=" . $key . "' onclick='this.select();'/></td>";
         echo "</tr>";
         echo "</table></form>";
         
