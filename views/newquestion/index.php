@@ -27,6 +27,7 @@
                 $singleChoice = false;
             }
             
+            if(strlen($_POST["question" . $questionNumber]) < 2){return;}
             $currentQuestion = Question::Add($_POST["description" . $questionNumber], $_POST["question" . $questionNumber], $questionNumber, $singleChoice, $currentQuiz);
             
             for($answerNumber = 1; $answerNumber < 11; $answerNumber++){
