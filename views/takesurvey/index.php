@@ -32,8 +32,6 @@
 
         $QuizSelect = "SELECT * FROM T_QUIZ WHERE QKEY = '".$QKey."'";
         
-        echo $QuizSelect.'<br>';
-        
         $QuizResult = $pdo->query($QuizSelect);
 
         if ($QuizResult && $QuizResult->rowCount() > 0) {
