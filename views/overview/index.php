@@ -78,7 +78,7 @@
                 '<tr>'.
                 '<td>&nbsp</td>'.
                 '<td colspan="5" text-align = "left"; style="font-weight: bold; font-size: 140%; padding-top: 20px; padding-bottom: 10px; padding-right: 25px">'.
-                '<label>'.$CategoryParent['CATNAME'].'</label>'.
+                '<label>&bull;&nbsp;&nbsp;'.$CategoryParent['CATNAME'].'</label>'.
                 '</td>'.
                 '</tr>';
 
@@ -116,6 +116,7 @@
                         '<td>&nbsp</td>'.
                         '<td>&nbsp</td>'.
                         '<td colspan="4" style="font-weight: bold; text-align = solid; font-size: 120%; padding-top: 10px; padding-bottom: 5px;  padding-right: 20px">'.
+                        '&bull;&nbsp;&nbsp;'.
                         $CategoryChild['CATNAME'].
                         '</td>'.
                         '</tr>';
@@ -142,10 +143,10 @@
                                 '<td style="padding-right: 25px">';
 
                             if($Quiz['ISACTIVE'] == 1) {
-                                echo '<a href="'.URL.'newquestion?key='.$Quiz['QKEY'].'">'.$Quiz['QUIZNAME'].' tutor</a><br>';
-                                echo '<a href="'.URL.'takesurvey">'.$Quiz['QUIZNAME'].' mentee</a>';
+                                echo '<a href="'.URL.'newquestion?key='.$Quiz['QKEY'].'"> <b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'].' (Q-Key: '.$Quiz['QKEY'].')</a><br>';
+                                //echo '<a href="'.URL.'takesurvey">'.$Quiz['QUIZNAME'].' mentee</a>';
                             } else {
-                                echo $Quiz['QUIZNAME'];
+                                echo '<b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'];
                             }
 
                             echo
