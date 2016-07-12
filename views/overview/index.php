@@ -142,7 +142,8 @@
                                 '<td style="padding-right: 25px">';
 
                             if($Quiz['ISACTIVE'] == 1) {
-                                echo '<a href="'.URL.'question?QUIZ_ID='.$Quiz['ID'].'">'.$Quiz['QUIZNAME'].'</a><br>';
+                                echo '<a href="'.URL.'newquestion?key='.$Quiz['QKEY'].'">'.$Quiz['QUIZNAME'].' tutor</a><br>';
+                                echo '<a href="'.URL.'takesurvey">'.$Quiz['QUIZNAME'].' mentee</a>';
                             } else {
                                 echo $Quiz['QUIZNAME'];
                             }
