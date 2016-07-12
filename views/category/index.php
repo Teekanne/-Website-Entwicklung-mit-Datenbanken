@@ -23,7 +23,7 @@
 
 <h3>Kategorie entfernen</h3>
 <form method="POST" action="">
-        <table table border='0'>
+        <table border='0'>
         <tr>
             <td class='cells'>
                 <?php Category::ShowSelectBoxWithCategories($_SESSION["ID"], true, true); ?>
@@ -38,7 +38,7 @@
 
 <h3>Kategorien hinzufügen</h3>
 <form method="POST" action="">
-        <table table border='0'>
+        <table border='0'>
         <tr>
             <td class='cells'>
                 <input type="text" name="createCategory" placeholder="Neue Wunschkategorie" />
