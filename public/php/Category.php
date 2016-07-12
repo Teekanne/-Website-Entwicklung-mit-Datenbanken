@@ -116,7 +116,6 @@
         }
         
         private function getSecondLevelCategories(){
-            //$pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
             $result = $this->pdo->query("SELECT * FROM T_CATEGORY WHERE FK_PARENT_ID=" . $this->id);
             $categories = array();
             
@@ -127,11 +126,16 @@
             return $categories;            
         }
         
-        public static function ShowSelectBoxWithCategories($id, $secondLevel){
+        public static function ShowSelectBoxWithCategories($id, $secondLevel, $width){
+            $firstOption = true;
+            echo "<select style=width:13.3em; name='category' ";
+            if($width) { echo "size='5'"; }
+            echo ">";
             
-            echo "<select style=width:12.3em; name='category'>";
             foreach(Category::getFirstLevelCategories($id) as $c => $category){
-                echo "<option>" . $category->__get("catname") . "</option>";
+                echo "<option ";
+                if($firstOption){ echo "selected"; $firstOption=false; }
+                echo ">" . $category->__get("catname") . "</option>";
                 
                 if($secondLevel){
                     foreach($category->getSecondLevelCategories() as $s => $secondLevelCategory){
