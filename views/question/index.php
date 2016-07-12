@@ -1,4 +1,5 @@
 <?php
+    // QUESTION
     include_once("models/quiz_model.php");
     include_once("config/database.php");
     
@@ -21,9 +22,6 @@
     if (!isset($_SESSION['Quiz'])) {
 
         $QuizID = $_GET["QUIZ_ID"];
-
-        //$pdo = new PDO('mysql:host=localhost;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
-        //$pdo = new PDO('mysql:host=localhost;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
         
         $pdo = new Database();
         
