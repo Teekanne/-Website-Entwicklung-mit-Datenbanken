@@ -44,7 +44,7 @@
 		</tr>
 		<tr>
 			<th><label></label></th>
-			<th><input type="submit" name="Benutzer anlegen" value="Registrieren"></th>
+			<th><input id="change" type="submit" name="Benutzer anlegen" value="Registrieren"></th>
 		</tr>
 	</table>
 </form>
