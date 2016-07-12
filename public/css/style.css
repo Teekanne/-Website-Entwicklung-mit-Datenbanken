@@ -5,6 +5,11 @@ body {
 	padding:0em;
 }
 
+#imgAjax{
+    width: 64px;
+    height: 64px;
+}
+
 h1 {
 	font-size:2em;
 	line-height:3.8em;
