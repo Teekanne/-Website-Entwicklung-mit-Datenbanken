@@ -195,7 +195,7 @@ function showPasswordBoxes(currentCheckBox, passwordLbls, currentPasswordTbx, ne
 /**
  * Ajax-function to show the vote-results depending on a time
  * @param {div-container} divContainer which takes the ajax-answer
- * @param {get-parameters} quiz-key and question-position
+ * @param {get-parameters} key and question-position
  * @param {integer} intervall for ajax-requests in ms
  */
 function showVoteResults(divContainer, key, intervall){
