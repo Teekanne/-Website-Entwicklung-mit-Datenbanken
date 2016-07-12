@@ -38,7 +38,7 @@ function addTextbox(container, currentTextbox){
     input.name = 'answer' + currentQuestionNumber + "_" + nextTextboxNumber;
     input.placeholder = 'Antwortmöglichkeit ' + nextTextboxNumber;
     
-    if(nextTextboxNumber<8){
+    if(nextTextboxNumber<10){
         input.setAttribute("onkeydown", "addTextbox('" + container + "', '" + input.name + "')");			
     }
     var answers = document.getElementsByClassName(container)[0];
