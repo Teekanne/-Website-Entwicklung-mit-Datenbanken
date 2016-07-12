@@ -78,7 +78,7 @@
                 '<tr>'.
                 '<td>&nbsp</td>'.
                 '<td colspan="5" text-align = "left"; style="font-weight: bold; font-size: 140%; padding-top: 20px; padding-bottom: 10px; padding-right: 25px">'.
-                '<label>&bull;&nbsp;&nbsp;'.$CategoryParent['CATNAME'].'</label>'.
+                '<label id=overviewLabel>&bull;&nbsp;&nbsp;'.$CategoryParent['CATNAME'].'</label>'.
                 '</td>'.
                 '</tr>';
 
