@@ -5,11 +5,6 @@ body {
 	padding:0em;
 }
 
-#imgAjax{
-    width: 64px;
-    height: 64px;
-}
-
 h1 {
 	font-size:2em;
 	line-height:3.8em;
@@ -82,6 +77,11 @@ img {
 	width:90%;
 	height:auto;
 	max-width:100%
+}
+
+#imgAjax{
+    width: 64em;
+    height: 64em;
 }
 a {
 	text-decoration: none;
@@ -239,13 +239,13 @@ form label {
 
 
 form input, form select {
-	width: 12.6em;
+	width: 11.6em;
 	margin: 5px 0 0 10px;
 	border: 1px solid gray;
 	padding: 0.3em;
 }
 form input[type=submit] {
-	width: 13.3em;
+	width: 12.3em;
 	
 }
 
@@ -261,9 +261,9 @@ form br {
 
 textarea {
 	margin-left: 0.72em;
-	width:13.3em;
-	max-width:13.3em;
-	min-width:13.3em;
+	width:12.3em;
+	max-width:12.3em;
+	min-width:12.3em;
 }
 
 
@@ -408,21 +408,6 @@ button {
 		font-size:70%;
 	}
 	
-	textarea {
-		margin-left: 0.72em;
-		width:10.3em;
-		max-width:10.3em;
-		min-width:10.3em;
-}
-
-	form input[type=submit] {
-		width: 10.3em;
-	
-}
-
-	form input, form select {
-		width: 9.6em;
-		
 	
 }
 
@@ -438,4 +423,3 @@ button {
 
 
 		
-}
