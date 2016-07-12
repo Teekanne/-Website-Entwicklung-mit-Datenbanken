@@ -27,7 +27,7 @@
             $this->id = $id;
             $this->name = $name;
             $this->description = $description;
-            $this->isactive = true;
+            $this->isactive = $isactive;
             $this->fkTutor = $fkTutor;
             $this->fkCategory = $fkCategory;
             $this->qKey = $qKey;
