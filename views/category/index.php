@@ -47,12 +47,12 @@
         </tr>
         <tr>
             <td>
-                <input type="checkbox" name="mainCategory" onclick="hide('categories');" checked/><label class="radioLabel">Als Unterkategorie anlegen</label>
-            </td>
-            <td>
-                <div id="categories">
+                <div id="categories" style='visibility:hidden'>
                     <?php Category::ShowSelectBoxWithCategories($_SESSION["ID"], false, true); ?>
                 <div>
+            </td>
+            <td>
+                <input type="checkbox" name="mainCategory" onclick="hide('categories');"/><label class="radioLabel">Als Unterkategorie anlegen</label>
             </td>
         </tr>
         </table>
