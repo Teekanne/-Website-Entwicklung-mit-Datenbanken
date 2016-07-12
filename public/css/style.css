@@ -265,6 +265,10 @@ label:active {
     font-weight: normal;
 }
 
+#cbSub {
+	margin-left:1em;
+}
+
 #overviewLabel {
 	text-align: justify;
 	border-bottom:0.1em inset #FFFF00;
@@ -339,6 +343,10 @@ input[type='checkbox'] {
 	color: red;
 }
 
+#categorySub {
+	float:left;
+	
+}
 
 table {
 	margin-left:auto;
