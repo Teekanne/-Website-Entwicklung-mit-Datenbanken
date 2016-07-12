@@ -125,18 +125,29 @@
             return $maxVotes;
         }
         
+        public function CountVotes(){
+            $sql = "SELECT SUM(QUANTITY) AS 'QUANTITY' FROM T_VOTE_RESULT WHERE FK_QUESTION = :questionId";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindParam(':questionId', $this->id, PDO::PARAM_STR); 
+            $statement->execute();
+            $result = $statement->fetchAll();
+            
+            if(!$result){
+                return 0;
+            }
+            
+            return $result[0]["QUANTITY"];
+        }
+        
         public function ShowTable(){
             $answers = $this->GetAnswers();
             $maxVotes = $this->GetMaxVotes();
-            $sumVotes = 0;
-            
-            foreach($answers as $a => $answer){
-                $sumVotes .= $answer->GetVotes();
-            }
+
+            $sumVotes = $this->CountVotes();
             
             echo "<table><tr>";
 
-            if($maxVotes==0){
+            if($maxVotes==0 || $sumVotes==0){
                 echo "Bisher hat noch niemand abgestimmt.</tr></table>";
                 return;
             }
@@ -169,7 +180,8 @@
                 $currentVotes = $answer->GetVotes();
                 
                 if($currentVotes != 0){
-                    $percent =  round($currentVotes / $sumVotes * 100, 1);
+                    $percent =  round($currentVotes / $sumVotes * 100,1);
+                    //$percent =  round($currentVotes / $sumVotes * 100, 1);
                 }else{
                     $percent = 0;
                 }
