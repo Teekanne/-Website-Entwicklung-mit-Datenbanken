@@ -49,7 +49,7 @@
 	</table>
 </form>
 
-<hr />
+<label id=overviewLabel>&nbsp;</label><br>
 
 <table border='0'>
 	<tr id="user">
