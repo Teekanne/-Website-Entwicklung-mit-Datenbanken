@@ -37,16 +37,24 @@ class Account extends Controller {
               $regModel->changeEdit($titel, $vorname, $nachname, $email, $password, $rolereg);
             }else
             {
-                
+                $this->view->render('messages/acceditpwfail');
+                $this->view->render('account/index'); 
+                exit;
             }
             }
            else
             {
-                
+                $this->view->render('messages/acceditemailfail');
+                $this->view->render('account/index'); 
+                exit;
             }
         // $this->view->render('account/index');   
         } catch (Exception $ex) {
 
         }
+    }
+    public function success(){
+          $this->view->render('messages/acceditsuccess');
+          $this->view->render('account/index'); 
     }
 }

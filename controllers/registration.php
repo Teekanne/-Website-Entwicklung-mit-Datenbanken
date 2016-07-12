@@ -47,5 +47,5 @@ class Registration extends Controller {
         }
 
     }
-
+   
 }

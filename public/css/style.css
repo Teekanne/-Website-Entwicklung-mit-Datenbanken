@@ -239,13 +239,13 @@ form label {
 
 
 form input, form select {
-	width: 11.6em;
+	width: 12.6em;
 	margin: 5px 0 0 10px;
 	border: 1px solid gray;
 	padding: 0.3em;
 }
 form input[type=submit] {
-	width: 12.3em;
+	width: 13.3em;
 	
 }
 
@@ -255,7 +255,7 @@ form input[type=submit]:hover {
 }
 
 form input[type=button] {
-	width: 12.3em;
+	width: 13.3em;
 	
 }
 
@@ -270,10 +270,10 @@ form br {
 
 
 textarea {
-	margin-left: 0.72em;
-	width:12.3em;
-	max-width:12.3em;
-	min-width:12.3em;
+	margin-left: 0.75em;
+	width:13.3em;
+	max-width:13.3em;
+	min-width:13.3em;
 }
 
 
@@ -436,10 +436,10 @@ button {
 	}
 	
 	textarea {
-		margin-left: 1.30em;
-		width:14.7em;
-		max-width:14.7em;
-		min-width:14.7em;
+		margin-left: 1.33em;
+		width:15.7em;
+		max-width:15.7em;
+		min-width:15.7em;
 		font-size:120%;
 }
 	

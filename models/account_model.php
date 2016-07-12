@@ -30,6 +30,12 @@ class Account_Model extends Model {
         exit;
     }
     public function changeEdit($titel, $vorname, $nachname, $email, $password, $rolereg) {
-       //
+       $ID = Session::get('ID');
+        $sqlInsert = "UPDATE T_TUTOR SET TITLE='".$titel."', FIRSTNAME='".$vorname."', LASTNAME='".$nachname."', EMAIL='".$email."', PASSWORD='".$password."' where ID='".$ID."'";
+            $preparedStatement = $this->db->prepare($sqlInsert);
+            $preparedStatement->execute();
+            $message = new Account();
+            $message->success();
+                  
     }
 }
