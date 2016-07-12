@@ -1,44 +1,52 @@
 <?php
-
 class Account extends Controller {
 
-    public function __construct() {
-        parent::__construct();
-        Session::init();
+	function __construct() {
+		parent::__construct();
+		Session::init();
+		$logged = Session::get('loggedIn');
+		if ($logged == false) {
+			Session::destroy();
+			header('location: ../login');
+			exit;
+		}
+	}
+	
+	function index() 
+	{	$id = Session::get('ID');
+                $change = new Account_Model();
+                $change->editUser($id);
+		$this->view->render('account/index');
+	}
+         public function view(){
+        $this->view->render('account/index'); 
+    }
+        public function editAccount() {
+        $titel = $_POST['titel'];
+        $vorname = $_POST['vorname'];
+        $nachname = $_POST['nachname'];
+        $email = $_POST['e-mail'];
+        $emailConfirmation = $_POST['e-mailConfirmation'];
+        $password = md5($_POST['password']);
+        $passwordConfirmation = md5($_POST['passwordConfirmation']);
+        $rolereg = Session::get('ROLE');
+        try{
+            if($email == $emailConfirmation){
+                if($password == $passwordConfirmation){
+              $regModel = new Account_Model();
+              $regModel->changeEdit($titel, $vorname, $nachname, $email, $password, $rolereg);
+            }else
+            {
+                
+            }
+            }
+           else
+            {
+                
+            }
+        // $this->view->render('account/index');   
+        } catch (Exception $ex) {
 
-        $logged = Session::get('loggedIn');
-        $role = Session::get('ROLE');
-        if ($logged == false || $role = 'Administrator') {
-            Session::destroy();
-            header('location: ../login');
-            exit;
         }
     }
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-function changePW(){
-if (isset($_POST['change']))
-    {
- 
-        if (changePassword($_POST['username'], $_POST['oldpassword'], $_POST['password'],
-            $_POST['password2']))
-        {
-            echo "Your password has been changed ! <br /> <a href='./index.php'>Return to homepage</a>";
- 
-        } else
-        {
-            echo "Password change failed! Please try again.";
-            show_changepassword_form();
-        }
- 
-    } else
-    {
-        show_changepassword_form();
-    }
- 
- }
 }
