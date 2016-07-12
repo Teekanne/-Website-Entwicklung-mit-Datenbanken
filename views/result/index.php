@@ -1,6 +1,4 @@
 <?php 
-    include("public/php/LoadClasses.php"); 
-    
     if(isset($_GET["key"])){
         $key = $_GET["key"];
         
