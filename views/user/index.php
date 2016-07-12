@@ -51,31 +51,31 @@
 
 <hr />
 
-<table>
+<table border='0'>
 	<tr id="user">
-		<th><label>ID</label></th>
-		<th><label>Titel</label></th>
-		<th><label>Vorname</label></th>
-		<th><label>Nachname</label></th>
-		<th><label>E-Mail</label></th>
-		<th><label>Rolle</label></th>
-		<th><label>Bearbeiten/Löschen</label></th>
+		<th><label id="userLabel">ID</label></th>
+		<th><label id="userLabel">&nbsp;&nbsp;Titel</label></th>
+		<th><label id="userLabel">&nbsp;&nbsp;Vorname</label></th>
+		<th><label id="userLabel">&nbsp;&nbsp;Nachname</label></th>
+		<th><label id="userLabel">&nbsp;&nbsp;E-Mail</label></th>
+		<th><label id="userLabel">&nbsp;&nbsp;Rolle</label></th>
+		<th><label id="userLabel">&nbsp;&nbsp;Bearbeiten/Löschen</label></th>
 	</tr>
     <?php
     foreach ($this->userList as $key => $value) {
         echo '<tr>';
-        echo '<td>' . $value['ID'] . '</td>';
-        echo '<td>' . $value['TITLE'] . '</td>';
-        echo '<td>' . $value['FIRSTNAME'] . '</td>';
-        echo '<td>' . $value['LASTNAME'] . '</td>';
-        echo '<td>' . $value['EMAIL'] . '</td>';
-        echo '<td>' . $value['ROLE'] . '</td>';
+        echo '<td>&nbsp;&nbsp;' . $value['ID'] . '</td>';
+        echo '<td>&nbsp;&nbsp;' . $value['TITLE'] . '</td>';
+        echo '<td>&nbsp;&nbsp;' . $value['FIRSTNAME'] . '</td>';
+        echo '<td>&nbsp;&nbsp;' . $value['LASTNAME'] . '</td>';
+        echo '<td>&nbsp;&nbsp;' . $value['EMAIL'] . '</td>';
+        echo '<td>&nbsp;&nbsp;' . $value['ROLE'] . '</td>';
 
 
         echo '<td>     
-                                    <li><a href="' . URL . 'user/editUser/' . $value['ID'] . '">Edit</a></li>
+                                  <label id="userLabel"><li><a href="' . URL . 'user/editUser/' . $value['ID'] . '">Edit&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
 
-				<li><a href="' . URL . 'user/delete/' . $value['ID'] . '">Delete</a></li></td>';
+				<li><a href="' . URL . 'user/delete/' . $value['ID'] . '">Delete</a></li></label></td>';
         echo '</tr>';
 
     }
