@@ -38,7 +38,7 @@ function addTextbox(container, currentTextbox){
     input.name = 'answer' + currentQuestionNumber + "_" + nextTextboxNumber;
     input.placeholder = 'Antwortmöglichkeit ' + nextTextboxNumber;
     
-    if(nextTextboxNumber<8){
+    if(nextTextboxNumber<10){
         input.setAttribute("onkeydown", "addTextbox('" + container + "', '" + input.name + "')");			
     }
     var answers = document.getElementsByClassName(container)[0];
@@ -66,7 +66,7 @@ function addNewQuestion(table, currentQuestion){
     var question = document.createElement('input');
     question.type = 'text';
     question.name = "question" + currentQuestionNumber;
-    question.required = true;
+   // question.required = true;
     
     var description = document.createElement('textarea');
     description.maxlength = 1000;
@@ -80,13 +80,13 @@ function addNewQuestion(table, currentQuestion){
     answer1.type = 'text';
     answer1.name = "answer" + currentQuestionNumber + "_1";
     answer1.placeholder = 'Antwortmöglichkeit 1';
-    answer1.required = true;
+   // answer1.required = true;
     
     var answer2 = document.createElement('input');
     answer2.type = 'text';
     answer2.name = "answer" + currentQuestionNumber + "_2";
     answer2.placeholder = 'Antwortmöglichkeit 2';
-    answer2.required = true;
+   // answer2.required = true;
     answer2.setAttribute("onkeydown", "addTextbox('" + div.className + "', '" + answer2.name + "')");
     
     var singleChoice = document.createElement('input');
@@ -225,7 +225,7 @@ function showVoteResults(divContainer, key, intervall){
                 }
                 
                 //creating an asynchron request
-                var url = 'views/newquestion/results.php?key=' + key;
+                var url = 'views/result?key=' + key;
                 req.open("GET", url, true);
 
                 //function for terminating the request
