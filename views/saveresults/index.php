@@ -1,4 +1,5 @@
 <?php
+    // SAVE_RESULTS
     include_once("models/quiz_model.php");
     include_once("config/database.php");
     
@@ -41,7 +42,7 @@
                 if ($AnswerTmp->QuestionChecked) {
                     
                     $VoteResultSelect = 
-                        "SELECT * FROM t_vote_result WHERE ".
+                        "SELECT * FROM T_VOTE_RESULT WHERE ".
                         "FK_QUESTION = ".$QuestionIdTmp." AND ".
                         "FK_ANSWER = ".$AnswerIdTmp;
 
@@ -55,7 +56,7 @@
                         $VoteQuantity++;
                         
                         $VoteResultUpdate = 
-                            "UPDATE t_vote_result SET QUANTITY=".$VoteQuantity.
+                            "UPDATE T_VOTE_RESULT SET QUANTITY=".$VoteQuantity.
                             " WHERE FK_QUESTION = ".$QuestionTmp->QuestionID.
                             " AND FK_ANSWER = ".$AnswerTmp->AnswerID;
                         
@@ -65,7 +66,7 @@
                     } else {                     
                         
                         $VoteResultInsert = 
-                            "INSERT INTO t_vote_result (FK_QUESTION, FK_ANSWER, QUEST_DATE, QUANTITY) values (".
+                            "INSERT INTO T_VOTE_RESULT (FK_QUESTION, FK_ANSWER, QUEST_DATE, QUANTITY) values (".
                             $QuestionTmp->QuestionID.", ". 
                             $AnswerTmp->AnswerID.", ". 
                             "'".date("Y-m-d H:i:s")."', ". 

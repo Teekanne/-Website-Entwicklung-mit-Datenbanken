@@ -24,7 +24,7 @@
         <table table border='0'>
         <tr>
             <td class='cells'>
-                <?php Category::ShowSelectBoxWithCategories($_SESSION["ID"], true); ?>
+                <?php Category::ShowSelectBoxWithCategories($_SESSION["ID"], true, true); ?>
             </td>
             <td class='cells'>
                 <input type="submit" name="deleteCategory" value="Entfernen" onClick="return confirm('Möchtest du die Kategorie wirklich mit allen anhängten Quizes entfernen?')"/>
@@ -47,12 +47,12 @@
         </tr>
         <tr>
             <td>
-                <input type="checkbox" name="mainCategory" onclick="hide('categories');" checked/><label class="radioLabel">Als Unterkategorie anlegen</label>
+                <div id="categories" style='visibility:hidden'>
+                    <?php Category::ShowSelectBoxWithCategories($_SESSION["ID"], false, true); ?>
+                <div>
             </td>
             <td>
-                <div id="categories">
-                    <?php Category::ShowSelectBoxWithCategories($_SESSION["ID"], false); ?>
-                <div>
+                <input type="checkbox" name="mainCategory" onclick="hide('categories');"/><label class="radioLabel">Als Unterkategorie anlegen</label>
             </td>
         </tr>
         </table>

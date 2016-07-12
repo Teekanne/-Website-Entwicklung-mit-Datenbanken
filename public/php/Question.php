@@ -102,7 +102,7 @@
             
             $answers = array();
             
-            foreach($statement->fetchAll() as $fa => $result){
+            foreach($statement->fetchAll() as $result){
                 array_push($answers, new Answer($result["ID"], $result["ANSWER_POS"], $result["ANSWER"], $result["ISCORRECT"], $result["FK_QUESTION"]));
             }
 
@@ -114,7 +114,7 @@
             
             $maxVotes = 0;
             
-            foreach($answers as $a => $answer){
+            foreach($answers as $answer){
                 $currentVotes = $answer->GetVotes();
                 
                 if($maxVotes < $currentVotes){
@@ -125,24 +125,35 @@
             return $maxVotes;
         }
         
+        public function CountVotes(){
+            $sql = "SELECT SUM(QUANTITY) AS 'QUANTITY' FROM T_VOTE_RESULT WHERE FK_QUESTION = :questionId";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindParam(':questionId', $this->id, PDO::PARAM_STR); 
+            $statement->execute();
+            $result = $statement->fetchAll();
+            
+            if(!$result){
+                return 0;
+            }
+            
+            return $result[0]["QUANTITY"];
+        }
+        
         public function ShowTable(){
             $answers = $this->GetAnswers();
             $maxVotes = $this->GetMaxVotes();
-            $sumVotes = 0;
-            
-            foreach($answers as $a => $answer){
-                $sumVotes .= $answer->GetVotes();
-            }
+
+            $sumVotes = $this->CountVotes();
             
             echo "<table><tr>";
 
-            if($maxVotes==0){
+            if($maxVotes==0 || $sumVotes==0){
                 echo "Bisher hat noch niemand abgestimmt.</tr></table>";
                 return;
             }
 
             /* Buttons in einer Zeile anzeigen */
-            foreach($answers as $a => $answer){
+            foreach($answers as $answer){
                 $currentVotes = $answer->GetVotes();
                 
                 if($currentVotes != 0){
@@ -158,18 +169,19 @@
             echo "</tr><tr>";
 
             /* Vote-Anzahl in einer Zeile anzeigen */
-            foreach($answers as $a => $answer){
+            foreach($answers as $answer){
                 echo "<td>" . $answer->GetVotes() . " Votes</td>";
             }
             
             echo "</tr><tr>";
             
             /* Prozent in einer Zeile anzeigen */
-            foreach($answers as $a => $answer){
+            foreach($answers as $answer){
                 $currentVotes = $answer->GetVotes();
                 
                 if($currentVotes != 0){
-                    $percent =  round($currentVotes / $sumVotes * 100, 1);
+                    $percent =  round($currentVotes / $sumVotes * 100,1);
+                    //$percent =  round($currentVotes / $sumVotes * 100, 1);
                 }else{
                     $percent = 0;
                 }
@@ -180,7 +192,7 @@
             echo "</tr><tr>";
 
             /* Antwort in einer Zeile anzeigen */
-            foreach($answers as $a => $answer){
+            foreach($answers as $answer){
                 echo "<td>" . $answer->__get("answer") . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
             }
 

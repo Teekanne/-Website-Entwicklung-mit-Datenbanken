@@ -50,18 +50,20 @@
                 
                 $currentAnswer = Answer::Add($answerNumber, $_POST["answer" . $questionNumber . "_" . $answerNumber], true, $currentQuestion);
             }
-            
-
         }
     }else {
+        if(isset($_GET["key"])){ 
+            echo  "<div id='eins'><img id='imgAjax' src='images/3.gif'></div>"; 
+        }
 ?>
-<div id="eins"></div>
+
+
 <!--<h2>Neue Umfrage erstellen</h2>-->
 <form action="" method="post">
     <table table border= '0'>
         <tr>
             <td class='cells'><label>Kategorie</label></td>
-            <td class='cells'><?php Category::ShowSelectBoxWithCategories($_SESSION["ID"], true); ?></td>
+            <td class='cells'><?php Category::ShowSelectBoxWithCategories($_SESSION["ID"], true, false); ?></td>
         </tr>
         <tr>
             <td class='cells'><label>Quiz-Name</label></td>

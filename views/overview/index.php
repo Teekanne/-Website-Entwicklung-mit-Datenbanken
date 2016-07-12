@@ -1,6 +1,8 @@
 <?php
+    // OVERVIEW
     include_once("models/quiz_model.php");
     include_once("config/database.php");
+    include_once("overview_toolbox.php");
     
     
     if (session_status() == PHP_SESSION_NONE) {
@@ -15,23 +17,25 @@
 </h2>
 <br>
 
+<br>
+
 <?php
     $logged = $_SESSION['loggedIn'];
-            if ($logged == false){
-                echo "NICHT EINGELOGGT!<br>";
-                session_destroy();
-                header('location: ../login');
-                exit;
-            }
+    if ($logged == false){
+        echo "NICHT EINGELOGGT!<br>";
+        session_destroy();
+        header('location: ../login');
+        exit;
+    }
 
+    
     $Tutor_ID = $_SESSION['ID'];
-
 
     if (!isset($_SESSION['CurrPage'])) {
         $_SESSION['CurrPage'] = 0;
     }
 
-    //$pdo = new PDO('mysql:host=localhost;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+    
     $pdo = new Database();
 
     if (!$pdo) {
@@ -40,24 +44,12 @@
     
     
     if (isset($_GET['DEACTIVATE_QUIZ_ID'])) {
-        
-        $SqlDeactivate = "UPDATE t_quiz SET ISACTIVE=0 WHERE ID=".$_GET['DEACTIVATE_QUIZ_ID'];
-        $SqlDeactivateStmnt = $pdo->prepare($SqlDeactivate);
-        $SqlDeactivateStmnt->execute();
-        //$pdo->commit();
+        deactivateQuiz($_GET['DEACTIVATE_QUIZ_ID']);
     } 
     
     if (isset($_GET['ACTIVATE_QUIZ_ID'])) {
-        
-        $SqlActivate = "UPDATE t_quiz SET ISACTIVE=1 WHERE ID=".$_GET['ACTIVATE_QUIZ_ID'];
-        $SqlActivateStmnt = $pdo->prepare($SqlActivate);
-        $SqlActivateStmnt->execute();
-        //$pdo->commit();
+        activateQuiz($_GET['ACTIVATE_QUIZ_ID']);
     }
-
-    
-    //echo '<form style=\"margin: 0; padding:0\" name=\"questionform\" method=\"post\" action='.getenv('SCRIPT_NAME').'>';
-    
     
     echo
         '<table style="border:0px solid #647852; border-collapse: collapse;" border="0">'.
@@ -71,8 +63,6 @@
             '<td style="width:10px">&nbsp</td>'.
             '<td style="width:50px">&nbsp</td>'.
         '</tr>';
-
-
 
     $CategoryParentSelect = 
         "SELECT * FROM T_CATEGORY ".
