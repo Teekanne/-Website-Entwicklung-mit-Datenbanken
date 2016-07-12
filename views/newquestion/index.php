@@ -50,12 +50,14 @@
                 
                 $currentAnswer = Answer::Add($answerNumber, $_POST["answer" . $questionNumber . "_" . $answerNumber], true, $currentQuestion);
             }
-            
-
         }
     }else {
+        if(isset($_GET["key"])){ 
+            echo  "<div id='eins'><img id='imgAjax' src='images/3.gif'></div>"; 
+        }
 ?>
-<div id="eins"></div>
+
+
 <!--<h2>Neue Umfrage erstellen</h2>-->
 <form action="" method="post">
     <table table border= '0'>
