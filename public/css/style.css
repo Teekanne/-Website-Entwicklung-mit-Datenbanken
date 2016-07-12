@@ -285,9 +285,11 @@ form input, form select {
 	margin: 5px 0 0 10px;
 	border: 1px solid gray;
 	padding: 0.3em;
+	border-radius:5px;
 }
 form input[type=submit] {
 	width: 13.3em;
+	border-radius:5px;
 	
 }
 
@@ -298,6 +300,7 @@ form input[type=submit]:hover {
 
 form input[type=button] {
 	width: 13.3em;
+	border-radius:5px;
 	
 }
 
@@ -316,6 +319,7 @@ textarea {
 	width:13.3em;
 	max-width:13.3em;
 	min-width:13.3em;
+	border-radius:5px;
 }
 
 
