@@ -60,7 +60,7 @@
     
     <br /><hr><br />
     
-    <table table id='questionTable' border='0'>
+    <table id='questionTable' border='0'>
         <tr>
             <td class='cells'><label>Frage</label></td>
             <td class='cells'><input type="text" name="question1" required/></td>
