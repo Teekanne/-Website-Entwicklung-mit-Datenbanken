@@ -58,9 +58,9 @@
             <td class='cells'><input type="text" name="quizDescription"/></td>
         </tr>
     </table>
-    
-    <br /><hr><br />
-    
+</form>
+    <label id=overviewLabel>&nbsp;</label><br>
+<form action="" method="post">	
     <table id='questionTable' border='0'>
         <tr>
             <td class='cells'><label>Frage</label></td>
