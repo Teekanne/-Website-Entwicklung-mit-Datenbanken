@@ -41,7 +41,7 @@ $roleEdit = Session::get('ROLEEDIT');
 		</tr>
 		<tr>
 			<th><label></label></th>
-			<th><select style=width:12.3em; name="ROLE" value="<?php echo $roleEdit ?>">
+			<th><select style=width:13.3em; name="ROLE" value="<?php echo $roleEdit ?>">
 				<option value="Default">Default</option>
 				<option value="User">User</option>
 				<option value="Administrator">Administrator</option>

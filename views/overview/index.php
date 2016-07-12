@@ -2,7 +2,7 @@
     // OVERVIEW
     include_once("models/quiz_model.php");
     include_once("config/database.php");
-    include_once("overview_toolbox.php");
+    include_once("common/voting_toolbox.php");
     
     
     if (session_status() == PHP_SESSION_NONE) {

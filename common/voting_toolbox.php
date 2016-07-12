@@ -86,7 +86,7 @@ function resetQuizResults($quizId)
                             $AnswerTmp->AnswerText = $AnswerRow['ANSWER'];
                             $AnswerTmp->QuestionChecked = 0;
 
-                            setQuestionResults($QuestionTmp->QuestionID, $AnswerTmp->AnswerID, 0);
+                            setQuestionResults($QuestionTmp->QuestionID, $AnswerTmp->AnswerID, false, true);
                         }  
                     }     
                 }
@@ -97,7 +97,7 @@ function resetQuizResults($quizId)
     return $retVal;
 }
 
-function setQuestionResults($questionId, $answerId, $quantity)
+function setQuestionResults($questionId, $answerId, $increment, $reset)
 {
     $retVal = false;
     
@@ -114,25 +114,37 @@ function setQuestionResults($questionId, $answerId, $quantity)
 
         $VoteResultRow = $VoteResultResult->fetch(PDO::FETCH_ASSOC);
 
-        $VoteQuantity = $VoteResultRow['QUANTITY'];
-        $VoteQuantity++;
+        if ($increment) {
+            $VoteQuantity = $VoteResultRow['QUANTITY'];
+            $VoteQuantity++;
+        }
+        if ($reset) {
+            $VoteQuantity = 0;
+        }
 
         $VoteResultUpdate = 
-            "UPDATE T_VOTE_RESULT SET QUANTITY=".$quantity.
+            "UPDATE T_VOTE_RESULT SET QUANTITY=".$VoteQuantity.
             " WHERE FK_QUESTION = ".$questionId.
             " AND FK_ANSWER = ".$answerId;
 
         $VoteResultUpdateStmnt = $pdo->prepare($VoteResultUpdate);
         $VoteResultUpdateStmnt->execute();
 
-    } else {                     
+    } else {     
+        
+        if ($increment) {
+            $VoteQuantity = 1;
+        }
+        if ($reset) {
+            $VoteQuantity = 0;
+        }
 
         $VoteResultInsert = 
             "INSERT INTO T_VOTE_RESULT (FK_QUESTION, FK_ANSWER, QUEST_DATE, QUANTITY) values (".
             $questionId.", ". 
             $answerId.", ". 
             "'".date("Y-m-d H:i:s")."', ". 
-            $quantity.
+            $VoteQuantity.
             ");";                     
 
         $VoteResultInsertStmnt = $pdo->prepare($VoteResultInsert);
