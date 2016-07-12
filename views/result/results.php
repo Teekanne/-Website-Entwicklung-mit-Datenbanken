@@ -18,6 +18,11 @@
         echo "<td>" . $myQuiz->__get("name") . "</td>";
         echo "</tr>";
         
+        echo "<tr>";
+        echo "<td>Quiz:</td>";
+        echo "<td>" . $myQuiz->__get("qKey") . "</td>";
+        echo "</tr>";
+        
         if(strlen($myQuiz->__get("description"))>1){
             echo "<tr>";
             echo "<td>Quiz-Beschreibung: </td>";
