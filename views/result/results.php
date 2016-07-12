@@ -1,5 +1,5 @@
 <?php
-    include("../../public/php/LoadClasses.php"); 
+    include("../../common/LoadClasses.php"); 
     
     $myQuiz = Quiz::LoadByKey($_GET["key"]);
     
@@ -9,7 +9,6 @@
     }else{
         $pos = 1;
     }
-
     $myQuestion = Question::LoadByQuiz($myQuiz, $pos);
     
     if($myQuestion){
@@ -19,11 +18,15 @@
         echo "<td>" . $myQuiz->__get("name") . "</td>";
         echo "</tr>";
         
+        echo "<tr>";
+        echo "<td>Quiz-Key:</td>";
+        echo "<td>" . $myQuiz->__get("qKey") . "</td>";
+        echo "</tr>";
+        
         if(strlen($myQuiz->__get("description"))>1){
             echo "<tr>";
             echo "<td>Quiz-Beschreibung: </td>";
             echo "<td>" . $myQuiz->__get("description") . "</td>";
-
             echo "</tr>";
         }
         
@@ -36,7 +39,6 @@
             echo "<tr>";
             echo "<td>Fragen-Beschreibung</td>";
             echo "<td>" . $myQuestion->__get("description") . "</td>";
-
             echo "</tr>";
         }
         

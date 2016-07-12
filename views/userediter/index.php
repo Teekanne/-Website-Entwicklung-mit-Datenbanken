@@ -12,20 +12,20 @@ $roleEdit = Session::get('ROLEEDIT');
 ?>
 
 
-<form method="post" action="<?php echo URL; ?>user/create">
+<form method="post" action="<?php echo URL; ?>user/updateUser">
     <h2>Einen bestehenden Benutzer bearbeiten</h2>
 	<table border = '0'>
 		<tr>
 			<th><label></label></th>
-			<th><input name="titel" type="text" value="<?php echo $titleEdit ?>" placeholder="Titel"></th>
+			<th><input name="titelUser" type="text" value="<?php echo $titleEdit ?>" placeholder="Titel"></th>
 		</tr>
 		<tr>
 			<th><label></label></th>
-			<th><input name="vorname" type="text" value="<?php echo $firstnameEdit ?>" pattern=".{0}|.{2,20}" required title="Ihr Name muss mindestens zwei maximal 20 Zeichen lang sein"  placeholder="Vorname"></th>
+			<th><input name="firstnameUser" type="text" value="<?php echo $firstnameEdit ?>" pattern=".{0}|.{2,20}" required title="Ihr Name muss mindestens zwei maximal 20 Zeichen lang sein"  placeholder="Vorname"></th>
 		</tr>
 		<tr>
 			<th><label></label></th>
-			<th><input name="nachname" type="text" value="<?php echo $lastnameEdit ?>" pattern=".{0}|.{2,20}" required title="Ihr Nachname muss mindestestens zwei maximal 20 Zeichen lang sein" placeholder="Nachname"></th>
+			<th><input name="lastnameUser" type="text" value="<?php echo $lastnameEdit ?>" pattern=".{0}|.{2,20}" required title="Ihr Nachname muss mindestestens zwei maximal 20 Zeichen lang sein" placeholder="Nachname"></th>
 		</tr>
 		<tr>
 			<th><label></label></th>
@@ -41,7 +41,7 @@ $roleEdit = Session::get('ROLEEDIT');
 		</tr>
 		<tr>
 			<th><label></label></th>
-			<th><select style=width:13.3em; name="ROLE" value="<?php echo $roleEdit ?>">
+			<th><select style=width:13.3em; name="ROLEUSER" value="<?php echo $roleEdit ?>">
 				<option value="Default">Default</option>
 				<option value="User">User</option>
 				<option value="Administrator">Administrator</option>

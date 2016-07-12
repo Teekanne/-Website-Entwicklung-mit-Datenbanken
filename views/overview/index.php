@@ -78,7 +78,7 @@
                 '<tr>'.
                 '<td>&nbsp</td>'.
                 '<td colspan="5" text-align = "left"; style="font-weight: bold; font-size: 140%; padding-top: 20px; padding-bottom: 10px; padding-right: 25px">'.
-                '<label>&bull;&nbsp;&nbsp;'.$CategoryParent['CATNAME'].'</label>'.
+                '<label id=overviewLabel>&bull;&nbsp;&nbsp;'.$CategoryParent['CATNAME'].'</label>'.
                 '</td>'.
                 '</tr>';
 
@@ -143,7 +143,7 @@
                                 '<td style="padding-right: 25px">';
 
                             if($Quiz['ISACTIVE'] == 1) {
-                                echo '<a href="'.URL.'result?key='.$Quiz['QKEY'].'"> <b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'].' (Q-Key: '.$Quiz['QKEY'].')</a><br>';
+                                echo '<a id="current" href="'.URL.'result?key='.$Quiz['QKEY'].'"> <b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'].' (Q-Key: '.$Quiz['QKEY'].')</a><br>';
                                 //echo '<a href="'.URL.'takesurvey">'.$Quiz['QUIZNAME'].' mentee</a>';
                             } else {
                                 echo '<b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'];
@@ -155,7 +155,7 @@
 
                             if($Quiz['ISACTIVE'] == 0) {
                                 
-                                echo '<a href="'.URL.'overview?ACTIVATE_QUIZ_ID='.$Quiz['ID'].'"><b>starten</b></a><br>'; 
+                                echo '<a id="start" href="'.URL.'overview?ACTIVATE_QUIZ_ID='.$Quiz['ID'].'"><b>starten</b></a><br>'; 
                                 
                             } else {
                                     echo '&nbsp';
@@ -168,7 +168,7 @@
 
                             if($Quiz['ISACTIVE'] == 1) {
                                                                     
-                                echo '<a href="'.URL.'overview?DEACTIVATE_QUIZ_ID='.$Quiz['ID'].'"><b>beenden</b></a><br>';                               
+                                echo '<a id="close" href="'.URL.'overview?DEACTIVATE_QUIZ_ID='.$Quiz['ID'].'"><b>beenden</b></a><br>';                               
                                     
                             } else {
                                     echo '&nbsp';

@@ -1,6 +1,4 @@
 <?php 
-    include("public/php/LoadClasses.php"); 
-    
     if(isset($_POST["quizName"])){
 
         $currentCategory = Category::Load($_POST["category"]);
@@ -12,7 +10,7 @@
         echo "<tr>";
         echo "<td class='cells'><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Abfrageurl</label></td>";
         $key = $currentQuiz->__get("qKey");
-        echo "<td class='cells'><input type='text' value='SUB-URL??/$key'/></td>";
+        echo "<td class='cells'><input type='text' value='" . URL . "result?key=" . $key . "' onclick='this.select();'/></td>";
         echo "</tr>";
         echo "</table></form>";
         
@@ -29,6 +27,7 @@
                 $singleChoice = false;
             }
             
+            if(strlen($_POST["question" . $questionNumber]) < 2){return;}
             $currentQuestion = Question::Add($_POST["description" . $questionNumber], $_POST["question" . $questionNumber], $questionNumber, $singleChoice, $currentQuiz);
             
             for($answerNumber = 1; $answerNumber < 11; $answerNumber++){
@@ -62,7 +61,7 @@
     
     <br /><hr><br />
     
-    <table table id='questionTable' border='0'>
+    <table id='questionTable' border='0'>
         <tr>
             <td class='cells'><label>Frage</label></td>
             <td class='cells'><input type="text" name="question1" required/></td>

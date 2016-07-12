@@ -38,7 +38,7 @@ function addTextbox(container, currentTextbox){
     input.name = 'answer' + currentQuestionNumber + "_" + nextTextboxNumber;
     input.placeholder = 'Antwortmöglichkeit ' + nextTextboxNumber;
     
-    if(nextTextboxNumber<8){
+    if(nextTextboxNumber<10){
         input.setAttribute("onkeydown", "addTextbox('" + container + "', '" + input.name + "')");			
     }
     var answers = document.getElementsByClassName(container)[0];
@@ -225,7 +225,7 @@ function showVoteResults(divContainer, key, intervall){
                 }
                 
                 //creating an asynchron request
-                var url = 'views/newquestion/results.php?key=' + key;
+                var url = 'views/result/results.php?key=' + key;
                 req.open("GET", url, true);
 
                 //function for terminating the request

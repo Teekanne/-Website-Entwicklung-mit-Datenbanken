@@ -32,7 +32,7 @@
 			</tr>
 			<tr>
 				<th><label></label></th>
-				<th><input type="submit" name="Registrieren" value="Registrieren"></th>
+				<th><input id="change"  type="submit" name="Registrieren" value="Registrieren"></th>
 			</tr>
         </table>
 		</br>

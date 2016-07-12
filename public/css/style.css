@@ -87,6 +87,31 @@ a {
 	text-decoration: none;
 }
 
+a:visited {
+	color:#FFFFFF;
+}
+
+a:link {
+	color:#FFFFFF;
+}
+
+a:active {
+	color:#FFFFFF;
+}
+
+#start {
+	color:#66FF33;
+	
+}
+
+#current {
+	font-style: oblique;
+}
+
+#close {
+	color:#FF4040;
+}
+
 /* On Top Bar*/
 #menubar {
 	display:block;
@@ -220,16 +245,33 @@ form {
 	
 }
 
-form label { 
+
+label { 
 	display: block;
 	padding: 0; 
 	margin: 0.6em 0 0;
 	text-align: right; 
 }
 
+label:active {
+	color:#8B8989;
+}
+
+#userLabel {
+	text-align: center;
+}
 .radioLabel {
 	display: inline;
     font-weight: normal;
+}
+
+#overviewLabel {
+	text-align: justify;
+	border-bottom:0.1em inset #FFFF00;
+	border-radius: 20px;
+	
+	
+	
 }
 
 #role {

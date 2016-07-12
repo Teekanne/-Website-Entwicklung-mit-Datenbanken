@@ -1,5 +1,4 @@
 <?php
-/* Bisher wird nicht abgespeichert, ob eine Antwort korrekt ist */
     class Answer {
         private $id;
         private $answerPos;
@@ -52,7 +51,6 @@
         }
         
         public function GetVotes(){
-            //$pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
             $sql= "SELECT QUANTITY FROM T_VOTE_RESULT WHERE FK_ANSWER=:questionId"; 
             $statement = $this->pdo->prepare($sql);
             $statement->bindParam(':questionId', $this->id, PDO::PARAM_STR); 
@@ -65,7 +63,5 @@
             
             return $result[0]["QUANTITY"];
         }
-        
-
     }
 ?>

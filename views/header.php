@@ -8,6 +8,8 @@
 		<script type="text/javascript" src="<?php echo URL; ?>public/js/custom.js"></script>
 		
 		<?php
+		    	include("common/LoadClasses.php");
+		    	
 			if (isset($this->js)) 
 			{
 				foreach ($this->js as $js)

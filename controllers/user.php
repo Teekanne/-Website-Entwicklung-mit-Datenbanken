@@ -61,6 +61,39 @@ class User extends Controller {
         $editUser = new User_Model();  
         $editUser->editUser($id);
     }
+    public function updateUser() {
+        $titel = $_POST['titelUser'];
+        $firstname = $_POST['firstnameUser'];
+        $lastname = $_POST['lastnameUser'];
+        $email = $_POST['e-mail'];
+        $emailConfirmation = $_POST['e-mailConfirmation'];
+
+        $role = $_POST['ROLEUSER'];
+        try{
+            if($email == $emailConfirmation){
+                
+               // echo "$password";
+              $userModel = new User_Model();
+              $userModel->updateUser($titel, $firstname, $lastname, $email,$role);
+             
+            }
+
+           else
+            {
+             $this->view->render('messages/emailnotequal');
+             $this->view->render('user/index'); 
+             exit;
+            }
+
+         exit;
+        } catch (Exception $ex) {
+            
+        }
+    }
+    public function success() {
+        $this->view->render('messages/editsuccess');  
+        
+    }
 
     public function delete($id) {
             $deleteUser = new User_Model();
