@@ -55,6 +55,7 @@
 
                             $QuestionTmp = new QuestionEntity();
 
+                            $QuestionTmp->QuestionID = $QuestionRow['ID'];
                             $QuestionTmp->QuestionText = $QuestionRow['QUESTION'];
                             $QuestionTmp->SingleChoice = $QuestionRow['ISSINGLECHOICE'];
                             $QuestionTmp->QuestionDescription = $QuestionRow['DESCRIPTION'];
@@ -69,6 +70,7 @@
                                 while ($AnswerRow = $AnswerResult->fetch(PDO::FETCH_ASSOC)) { 
 
                                     $AnswerTmp = new AnswerEntity();
+                                    $AnswerTmp->AnswerID = $AnswerRow['ID'];
                                     $AnswerTmp->AnswerText = $AnswerRow['ANSWER'];
                                     $AnswerTmp->QuestionChecked = 0;
                                     array_push($Answers, $AnswerTmp);
@@ -226,6 +228,6 @@
      */
 ?>
 
-<form name="questionform" method="post" action="../saveresults/saveresults.php">
+<form name="questionform" method="post" action="saveresults">
     <input type='submit' name='complete' value='Quiz Abschliessen'>
 </form>
