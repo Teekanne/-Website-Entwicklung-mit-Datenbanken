@@ -9,7 +9,6 @@
     }else{
         $pos = 1;
     }
-
     $myQuestion = Question::LoadByQuiz($myQuiz, $pos);
     
     if($myQuestion){
@@ -23,7 +22,6 @@
             echo "<tr>";
             echo "<td>Quiz-Beschreibung: </td>";
             echo "<td>" . $myQuiz->__get("description") . "</td>";
-
             echo "</tr>";
         }
         
@@ -36,7 +34,6 @@
             echo "<tr>";
             echo "<td>Fragen-Beschreibung</td>";
             echo "<td>" . $myQuestion->__get("description") . "</td>";
-
             echo "</tr>";
         }
         
