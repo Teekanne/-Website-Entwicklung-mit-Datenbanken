@@ -31,8 +31,10 @@
             echo "Verbindungsfehler!<br />";
         } 
 
-        $QuizSelect = "SELECT * FROM t_quiz WHERE ID = ".$QuizID;
+        $QuizSelect = "SELECT * FROM T_QUIZ WHERE ID = ".$QuizID;
         $QuizResult = $pdo->query($QuizSelect);
+        
+        echo $QuizSelect."<br>";
 
         if ($QuizResult && $QuizResult->rowCount() > 0) {
             while ($QuizRow = $QuizResult->fetch(PDO::FETCH_ASSOC)) {
