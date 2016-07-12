@@ -6,7 +6,7 @@
 <p>
 bitte geben Sie den vom Dozenten freigegebenen Quiz-Key ein!<br><br> 
 
-<form name="questionform" method="post" action="question">
+<form name="questionform" method="post" action="takesurvey">
     Frage-Key: 
     <input type='text' name='inputkey'>
     <input type='submit' name='start' value='Quiz Starten!'>
