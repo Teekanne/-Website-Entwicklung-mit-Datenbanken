@@ -143,7 +143,7 @@
                                 '<td style="padding-right: 25px">';
 
                             if($Quiz['ISACTIVE'] == 1) {
-                                echo '<a href="'.URL.'newquestion?key='.$Quiz['QKEY'].'"> <b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'].' (Q-Key: '.$Quiz['QKEY'].')</a><br>';
+                                echo '<a href="'.URL.'result?key='.$Quiz['QKEY'].'"> <b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'].' (Q-Key: '.$Quiz['QKEY'].')</a><br>';
                                 //echo '<a href="'.URL.'takesurvey">'.$Quiz['QUIZNAME'].' mentee</a>';
                             } else {
                                 echo '<b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'];
