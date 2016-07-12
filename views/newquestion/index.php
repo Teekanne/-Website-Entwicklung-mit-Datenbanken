@@ -1,6 +1,4 @@
 <?php 
-    include("public/php/LoadClasses.php"); 
-    
     if(isset($_POST["quizName"])){
 
         $currentCategory = Category::Load($_POST["category"]);
