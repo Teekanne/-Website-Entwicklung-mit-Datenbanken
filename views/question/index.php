@@ -20,8 +20,9 @@
 
 
     if (!isset($_SESSION['Quiz'])) {
-
-        $QuizID = $_POST["inputkey"];
+        
+        $QuizID = 0;
+        $QKey = $_POST["inputkey"];
         
         $pdo = new Database();
         
@@ -29,12 +30,13 @@
             echo "Verbindungsfehler!<br />";
         } 
 
-        $QuizSelect = "SELECT * FROM T_QUIZ WHERE ID = ".$QuizID;
+        $QuizSelect = "SELECT * FROM T_QUIZ WHERE QKEY = ".$QKey;
         $QuizResult = $pdo->query($QuizSelect);
 
         if ($QuizResult && $QuizResult->rowCount() > 0) {
             while ($QuizRow = $QuizResult->fetch(PDO::FETCH_ASSOC)) {
-
+                
+                $QuizID = $QuizRow['ID'];
                 $IsActive = $QuizRow['ISACTIVE'];
 
                 if ($IsActive) {

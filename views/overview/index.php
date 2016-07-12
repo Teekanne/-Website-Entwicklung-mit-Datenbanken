@@ -190,7 +190,7 @@
         
         
     } else {
-        echo "<p>Leere Ergebnismenge!</p><br />";
+        echo "<p>Keine Umfragen angelegt!</p><br />";
     }
  ?>
 
