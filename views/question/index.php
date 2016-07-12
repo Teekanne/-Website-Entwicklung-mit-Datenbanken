@@ -12,7 +12,7 @@
 ?>
 
 <?php  
-    if (isset($_GET["QUIZ_ID"]) && isset($_SESSION['Quiz'])) {
+    if (isset($_POST["inputkey"]) && isset($_SESSION['Quiz'])) {
 
         unset($_SESSION['Quiz']);
         $_SESSION['CurrPage'] = 0;
@@ -21,7 +21,7 @@
 
     if (!isset($_SESSION['Quiz'])) {
 
-        $QuizID = $_GET["QUIZ_ID"];
+        $QuizID = $_POST["inputkey"];
         
         $pdo = new Database();
         
@@ -31,8 +31,6 @@
 
         $QuizSelect = "SELECT * FROM T_QUIZ WHERE ID = ".$QuizID;
         $QuizResult = $pdo->query($QuizSelect);
-        
-        echo $QuizSelect."<br>";
 
         if ($QuizResult && $QuizResult->rowCount() > 0) {
             while ($QuizRow = $QuizResult->fetch(PDO::FETCH_ASSOC)) {

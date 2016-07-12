@@ -7,7 +7,10 @@
         }else {
             $mainCategory = null;
         }
-        Category::Add($_POST["createCategory"], $mainCategory, $_SESSION["ID"]);
+        
+        if(strlen($_POST["createCategory"])>2){
+            Category::Add($_POST["createCategory"], $mainCategory, $_SESSION["ID"]);
+        }
     }elseif(isset($_POST["deleteCategory"])){
         if(Category::CountFirstLevelCategories() == 1){
             echo "Kategorie konnte nicht entfernt werden. Eine Haupt-Kategorie muss mindestens bestehend bleiben.";

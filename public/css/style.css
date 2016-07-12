@@ -441,7 +441,11 @@ button {
 		max-width:15.7em;
 		min-width:15.7em;
 		font-size:120%;
-}
+	}
+
+	#change	{
+		width: 13.3em;
+	}
 	
 	
 }
