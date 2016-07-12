@@ -52,5 +52,7 @@
             $this->$attribute = $value;
         }
     }	
+    
+    //echo "include Test <br>";
 ?>
 
