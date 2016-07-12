@@ -19,7 +19,7 @@
         echo "</tr>";
         
         echo "<tr>";
-        echo "<td>Quiz:</td>";
+        echo "<td>Quiz-Key:</td>";
         echo "<td>" . $myQuiz->__get("qKey") . "</td>";
         echo "</tr>";
         
