@@ -29,7 +29,7 @@
                 <?php Category::ShowSelectBoxWithCategories($_SESSION["ID"], true, true); ?>
             </td>
             <td class='cells'>
-                <input type="submit" name="deleteCategory" value="Entfernen" onClick="return confirm('Möchtest du die Kategorie wirklich mit allen anhängten Quizes entfernen?')"/>
+                &nbsp;&nbsp;&nbsp;&nbsp;<input id="categorySub" type="submit" name="deleteCategory" value="Entfernen" onClick="return confirm('Möchtest du die Kategorie wirklich mit allen anhängten Quizes entfernen?')"/>
             </td>
         </tr>
         </table>
@@ -44,7 +44,7 @@
                 <input type="text" name="createCategory" placeholder="Neue Wunschkategorie" />
             </td>
             <td class='cells'>
-                <input type="submit" value="Hinzufügen"/>
+                <input id="categorySub" type="submit" value="Hinzufügen"/>
             </td>
         </tr>
         <tr>
@@ -54,7 +54,7 @@
                 <div>
             </td>
             <td>
-                <input type="checkbox" name="mainCategory" onclick="hide('categories');"/><label class="radioLabel">Als Unterkategorie anlegen</label>
+                <input id="cbSub" type="checkbox" name="mainCategory" onclick="hide('categories');"/><label class="radioLabel">Als Unterkategorie</label>
             </td>
         </tr>
         </table>
