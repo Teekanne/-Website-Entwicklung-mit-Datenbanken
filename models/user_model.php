@@ -24,6 +24,7 @@ class User_Model extends Model {
         while ($row = $editsth->fetch(PDO::FETCH_ASSOC))
         {
             $idEdit = $row['ID'];
+            SESSION::set('EDITID', $idEdit);
             $titleEdit = $row['TITLE'];
             SESSION::set('TITLEEDIT', $titleEdit);
             $firstnameEdit = $row['FIRSTNAME'];
@@ -36,10 +37,18 @@ class User_Model extends Model {
             SESSION::set('ROLEEDIT', $roleEdit);
 
             $view = new User();
-          $view->view();
+            $view->view();
             exit;
         }
         exit;
+    }
+    public function updateUser($titel, $firstname, $lastname, $email, $role) {
+    
+            $ID = SESSION::get('EDITID');
+            $sqlInsert = "UPDATE T_TUTOR SET TITLE='".$titel."', FIRSTNAME='".$firstname."', LASTNAME='".$lastname."', EMAIL='".$email."', ROLE='".$role."' where ID='".$ID."'";
+            $preparedStatement = $this->db->prepare($sqlInsert);
+            $preparedStatement->execute();
+  
     }
     public function reg($title, $firstname, $lastname, $email, $password, $rolereg) {
         $Checklength = $password;
@@ -47,24 +56,15 @@ class User_Model extends Model {
         //Romove all illegal characters from E-Mail.
         $cleanEmail = filter_var($checkEMAIL, FILTER_SANITIZE_EMAIL);
         if (strlen($Checklength) >= 8) {
-            //!filter_var($clanEail, FILTER_VALIDATE_EMAIL);
+
             $sth = $this->db->prepare("SELECT * FROM T_TUTOR WHERE EMAIL = :email");
             $sth->execute(array(':email' => $email));
             $count = $sth->rowCount();
-            //   $sth->fetchAll();
-            //$rows = $sth->fetch(P DO::FETCH_NUM);
-            //$this->view->render('login/index');
-            // $count = $sth->fetchColumn(); 
-            //  $rows = $sth->rowCount();
-            //$count = $sth->fetchColumn(); 
-            //$count =  mysql_num_rows(sth);
-            //  $rows = $sth->fetchAll();
-            //$num_rows = count($rows);
-            //  if ($sth->fetch(PDO::FETCH_NUM) == 0){
+
             if ($count == 0) {
                 $regStatement = $this->db->prepare("INSERT INTO T_TUTOR(TITLE, FIRSTNAME, LASTNAME, EMAIL, PASSWORD, ROLE)VALUES(:title, :firstname, :lastname, :email, :password, :role)");
                 $regStatement->execute(array("title" => "$title", "firstname" => "$firstname", "lastname" => "$lastname", "email" => "$email", "password" => "$password", "role" => $rolereg));
-                //  $this->regmail($title, $firstname, $lastname, $email, $password);
+
                 header('location: ../user');
                 exit;
             } else {
