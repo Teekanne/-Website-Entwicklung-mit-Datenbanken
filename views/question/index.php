@@ -96,7 +96,11 @@
         $_SESSION['CurrPage'] = 0;
     }
 
-    if (isset($_POST['next']) || isset($_POST['back'])) {
+    if (
+        isset($_POST['next']) || 
+        isset($_POST['back']) || 
+        isset($_POST['complete'])
+    ) {
         
         $QuizTmp = new QuizEntity();
 
@@ -137,6 +141,10 @@
             if ($_SESSION['CurrPage'] > 0) {
                 $_SESSION['CurrPage']--;		
             }
+        }
+        if (isset($_POST['complete'])) {
+            header("Location: saveresults");
+            exit;
         }
     }
 ?>
@@ -214,20 +222,8 @@
     <input type='submit' name='back' value='vorherige Frage'>
     &nbsp
     <input type='submit' name='next' value='nächste Frage'>
-</form>
-
-<br>
-<br>
-
-<?php
-    /*
-    echo 
-    '<a href="'.URL.'question?QUIZ_ACTION=back">vorherige Frage</a>'.
-    ' || '.
-    '<a href="'.URL.'question?QUIZ_ACTION=next">nächste Frage</a><br><br>';
-     */
-?>
-
-<form name="questionform" method="post" action="saveresults">
+    <br><br>
     <input type='submit' name='complete' value='Quiz Abschliessen'>
 </form>
+
+<br>
