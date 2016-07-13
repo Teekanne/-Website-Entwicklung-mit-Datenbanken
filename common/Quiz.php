@@ -22,6 +22,7 @@
         }
         
         public function __construct($id, $name, $description, $isactive, $fkTutor, $fkCategory, $qKey){
+            parent::__construct();
             $this->id = $id;
             $this->name = $name;
             $this->description = $description;
@@ -29,7 +30,7 @@
             $this->fkTutor = $fkTutor;
             $this->fkCategory = $fkCategory;
             $this->qKey = $qKey;
-            $this->pdo = new DataBase();
+            $this->pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
         }
         
         public static function LoadByKey($qkey){
@@ -51,7 +52,7 @@
         }
         
         public static function Add($name, $description, $tutor, $category){
-            $pdo = new DataBase();
+            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
             $sql= "INSERT INTO T_QUIZ (QUIZNAME, DESCRIPTION, ISACTIVE, FK_TUTOR, FK_CATEGORY) " .
                     "VALUES (:name, :description, :isactive, :fktutor, :fkcategory)"; 
 
@@ -68,7 +69,7 @@
         }
         
         private static function addKey($tutor, $quizId){
-            $pdo = new DataBase();
+            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
 
             $sql= "UPDATE T_QUIZ SET QKEY=:qkey WHERE ID=:id"; 
             

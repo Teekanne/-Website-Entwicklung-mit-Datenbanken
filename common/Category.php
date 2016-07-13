@@ -25,7 +25,7 @@
             $this->level = $level;
             $this->fkTutor = $fkTutor;
             $this->fkParentId = $fkParentId;
-            $this->pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $this->pdo = new DataBase();
         }
         
         public static function Add($name, $mainCategory, $fkTutor){

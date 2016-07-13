@@ -29,11 +29,11 @@
             $this->questionPos = $questionPos;
             $this->singleChoice = $singleChoice;
             $this->fkQuiz = $fkQuiz;
-            $this->pdo = new DataBase();
+            $this->pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
         }
         
         public static function Add($description, $question, $questionPos, $singleChoice, $quiz){
-            $pdo = new DataBase();
+            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
 
             $sql= "INSERT INTO T_QUESTION (DESCRIPTION, QKEY, QUESTION, QUESTION_POS, ISSINGLECHOICE, FK_QUIZ) " .
                     "VALUES (:description, :qkey, :question, :questionPos, :singleChoice, :fkQuiz)"; 
@@ -61,7 +61,7 @@
                 return;
             }
             
-            $pdo = new DataBase();
+            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
             $sql= "SELECT * FROM T_QUESTION WHERE FK_QUIZ=:quiz AND QUESTION_POS=:pos"; 
             $statement = $pdo->prepare($sql);
             $statement->bindParam(':quiz', $quiz->__get("id"), PDO::PARAM_STR); 
