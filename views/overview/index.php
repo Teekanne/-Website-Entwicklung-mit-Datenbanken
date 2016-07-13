@@ -111,14 +111,16 @@
             if ($QuizResult && $QuizResult->rowCount() > 0) {
                 while ($Quiz = $QuizResult->fetch(PDO::FETCH_ASSOC)) {
 
-                    echo 
-                        $Quiz['ID'].', '.
-                        $Quiz['QUIZNAME'].', '.
-                        $Quiz['DESCRIPTION'].', '.
-                        $Quiz['ISACTIVE'].', '.
-                        $Quiz['FK_TUTOR'].', '.
-                        $Quiz['QKEY'].', '.
-                        $Quiz['FK_CATEGORY'].'<br>';
+                    $IsQuizActive = $Quiz['ISACTIVE'];
+                    
+                    echo
+                        'ID: '.$Quiz['ID'].', '.
+                        'QUIZNAME: '.$Quiz['QUIZNAME'].', '.
+                        'DESCRIPTION: '.$Quiz['DESCRIPTION'].', '.
+                        'ACTIVE: '.$IsQuizActive.', '.
+                        'FK_TUTOR: '.$Quiz['FK_TUTOR'].', '.
+                        'QKEY: '.$Quiz['QKEY'].', '.
+                        'FK_CATEGORY: '.$Quiz['FK_CATEGORY'].'<br>';
 
                     echo
                         '<tr>'.
@@ -127,7 +129,7 @@
                         '<td>&nbsp</td>'.
                         '<td style="padding-right: 25px">';
 
-                    if($Quiz['ISACTIVE'] == 1) {                             
+                    if($IsQuizActive == 1) {                             
                         echo '<a id="current" href="'.URL.'result?key='.$Quiz['QKEY'].'"> <b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'].' (Q-Key: '.$Quiz['QKEY'].')</a><br>';
                     } else {
                         echo '<b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'];
@@ -137,7 +139,7 @@
                         '</td>'.
                         '<td style="text-align: center">';
 
-                    if($Quiz['ISACTIVE'] == 0) {
+                    if($IsQuizActive == 0) {
 
                         echo 
                             '<a id="start" href="'.URL.
@@ -153,7 +155,7 @@
                         '<td>&nbsp</td>'.
                         '<td style="text-align: center">';
 
-                    if($Quiz['ISACTIVE'] == 1) {
+                    if($IsQuizActive == 1) {
 
                         echo 
                             '<a id="close" href="'.URL.
@@ -215,14 +217,16 @@
                     if ($QuizResult && $QuizResult->rowCount() > 0) {
                         while ($Quiz = $QuizResult->fetch(PDO::FETCH_ASSOC)) {
                             
+                            $IsQuizActive = $Quiz['ISACTIVE'];
+                            
                             echo 
-                                $Quiz['ID'].', '.
-                                $Quiz['QUIZNAME'].', '.
-                                $Quiz['DESCRIPTION'].', '.
-                                $Quiz['ISACTIVE'].', '.
-                                $Quiz['FK_TUTOR'].', '.
-                                $Quiz['QKEY'].', '.
-                                $Quiz['FK_CATEGORY'].'<br>';
+                                'ID: '.$Quiz['ID'].', '.
+                                'QUIZNAME: '.$Quiz['QUIZNAME'].', '.
+                                'DESCRIPTION: '.$Quiz['DESCRIPTION'].', '.
+                                'ACTIVE: '.$IsQuizActive.', '.
+                                'FK_TUTOR: '.$Quiz['FK_TUTOR'].', '.
+                                'QKEY: '.$Quiz['QKEY'].', '.
+                                'FK_CATEGORY: '.$Quiz['FK_CATEGORY'].'<br>';
 
                             echo
                                 '<tr>'.
@@ -231,7 +235,7 @@
                                 '<td>&nbsp</td>'.
                                 '<td style="padding-right: 25px">';
 
-                            if($Quiz['ISACTIVE'] == 1) {                             
+                            if($IsQuizActive == 1) {                             
                                 echo '<a id="current" href="'.URL.'result?key='.$Quiz['QKEY'].'"> <b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'].' (Q-Key: '.$Quiz['QKEY'].')</a><br>';
                             } else {
                                 echo '<b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'];
@@ -241,7 +245,7 @@
                                 '</td>'.
                                 '<td style="text-align: center">';
 
-                            if($Quiz['ISACTIVE'] == 0) {
+                            if($IsQuizActive == 0) {
                                 
                                 echo 
                                     '<a id="start" href="'.URL.
@@ -257,7 +261,7 @@
                                 '<td>&nbsp</td>'.
                                 '<td style="text-align: center">';
 
-                            if($Quiz['ISACTIVE'] == 1) {
+                            if($IsQuizActive == 1) {
                                                                     
                                 echo 
                                     '<a id="close" href="'.URL.
