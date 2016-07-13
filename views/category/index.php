@@ -33,9 +33,11 @@
             </td>
         </tr>
         </table>
+		
+		
 </form>
 
-
+<label id=overviewLabel>&nbsp;</label><br>
 <h3>Kategorien hinzufügen</h3>
 <form method="POST" action="">
         <table border='0'>
