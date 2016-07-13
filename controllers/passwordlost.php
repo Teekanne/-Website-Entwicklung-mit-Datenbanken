@@ -13,6 +13,9 @@ class Passwordlost extends Controller {
     }
 
     function generateKey() {
+       // $sendit = new Senderemail();
+       // $emailTo ="";
+        //$sendit->sendkeymail($emailTo);
         $pass = "";
         $login = $_POST['login'];
         // $chars - String aller erlaubten Zahlen
