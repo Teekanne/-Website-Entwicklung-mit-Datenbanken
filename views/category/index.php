@@ -1,5 +1,4 @@
 <?php 
-    include("public/php/LoadClasses.php"); 
     
     if(isset($_POST["createCategory"])){
         if(isset($_POST["mainCategory"])){
@@ -24,28 +23,30 @@
 
 <h3>Kategorie entfernen</h3>
 <form method="POST" action="">
-        <table table border='0'>
+        <table border='0'>
         <tr>
             <td class='cells'>
                 <?php Category::ShowSelectBoxWithCategories($_SESSION["ID"], true, true); ?>
             </td>
             <td class='cells'>
-                <input type="submit" name="deleteCategory" value="Entfernen" onClick="return confirm('Möchtest du die Kategorie wirklich mit allen anhängten Quizes entfernen?')"/>
+                &nbsp;&nbsp;&nbsp;&nbsp;<input id="categorySub" type="submit" name="deleteCategory" value="Entfernen" onClick="return confirm('Möchtest du die Kategorie wirklich mit allen anhängten Quizes entfernen?')"/>
             </td>
         </tr>
         </table>
+		
+		
 </form>
 
-
+<label id=overviewLabel>&nbsp;</label><br>
 <h3>Kategorien hinzufügen</h3>
 <form method="POST" action="">
-        <table table border='0'>
+        <table border='0'>
         <tr>
             <td class='cells'>
                 <input type="text" name="createCategory" placeholder="Neue Wunschkategorie" />
             </td>
             <td class='cells'>
-                <input type="submit" value="Hinzufügen"/>
+                <input id="categorySub" type="submit" value="Hinzufügen"/>
             </td>
         </tr>
         <tr>
@@ -55,7 +56,7 @@
                 <div>
             </td>
             <td>
-                <input type="checkbox" name="mainCategory" onclick="hide('categories');"/><label class="radioLabel">Als Unterkategorie anlegen</label>
+                <input id="cbSub" type="checkbox" name="mainCategory" onclick="hide('categories');"/><label class="radioLabel">Als Unterkategorie</label>
             </td>
         </tr>
         </table>

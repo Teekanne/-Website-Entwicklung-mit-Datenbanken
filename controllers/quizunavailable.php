@@ -1,15 +1,14 @@
 <?php
 
-class Question extends Controller {
+class Quizunavailable extends Controller {
 
     function __construct() {
         parent::__construct();
     }
 
     function index() {
-        $this->view->render('question/index');
+        $this->view->render('quizunavailable/index');
     }
 }
 
 ?>
-

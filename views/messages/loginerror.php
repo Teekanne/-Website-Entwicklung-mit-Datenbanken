@@ -1,3 +1,3 @@
 <?php
-echo "Passwort oder Login falsch.";
+echo "<font color='#FFFF00'>Passwort oder Login falsch.</font>";
 

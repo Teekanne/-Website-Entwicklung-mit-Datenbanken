@@ -13,7 +13,7 @@
 		</tr>
 		<tr>
 			<th><label><a href="passwordlost">Passwort vergessen</a></label></th>
-			<th><input type="submit" /></th>
+			<th><input id="change"  type="submit" /></th>
 		</tr>
 	</table>
 </form>

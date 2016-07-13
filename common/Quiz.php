@@ -1,6 +1,4 @@
 <?php
-/* Quiz-Key wird mit Umlauten (öäü) gespeichert. PHP-seitig nicht möglich, diese umzuwandeln (oe ae ue),
- * da die Konfiguration falsch ist */
     class Quiz {
         private $id;
         private $name;
@@ -65,7 +63,6 @@
             $statement->bindParam(':fktutor', $tutor->__get("id"), PDO::PARAM_STR); 
             $statement->bindParam(':fkcategory', $category->__get("id"), PDO::PARAM_STR); 
             $statement->execute();
-            
             $qkey = self::addKey($tutor, $pdo->lastInsertId());
             return new Quiz($pdo->lastInsertId(), $name, $description, $isactive, $tutor->__get("id"), $category->__get("id"), $qkey);
         }
@@ -74,16 +71,25 @@
             $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
 
             $sql= "UPDATE T_QUIZ SET QKEY=:qkey WHERE ID=:id"; 
-            $qkey = 
-                    substr($tutor->__get("firstname"), 0, 2) .
-                    substr($tutor->__get("lastname"), 0, 2) .
-                    $quizId;
+            
+            
+            $replacePairs = array(
+                'ä' => 'ae',
+                'ö' => 'oe',
+                'ü' => 'ue',
+                'ß' => 'ss'
+            );
+            
+            $key = substr(strtr($tutor->__get("firstname"), $replacePairs),0,2)
+                    . substr(strtr($tutor->__get("lastname"), $replacePairs),0,2)
+                    . $quizId;
             
             $statement = $pdo->prepare($sql);
             $statement->bindParam(':qkey', $qkey, PDO::PARAM_STR); 
             $statement->bindParam(':id', $quizId, PDO::PARAM_STR); 
             $statement->execute();
-            return strtolower($qkey);
+            
+            return strtolower($key);
         }
     }
 ?>

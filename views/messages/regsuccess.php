@@ -1,3 +1,3 @@
 <?php
 
-echo "Sie haben sich erfolgreich registriert.";
+echo "<font color='#FFFF00'>Sie haben sich erfolgreich registriert.</font>";

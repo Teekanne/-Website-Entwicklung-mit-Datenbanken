@@ -225,7 +225,7 @@ function showVoteResults(divContainer, key, intervall){
                 }
                 
                 //creating an asynchron request
-                var url = 'views/result?key=' + key;
+                var url = 'views/result/results.php?key=' + key;
                 req.open("GET", url, true);
 
                 //function for terminating the request

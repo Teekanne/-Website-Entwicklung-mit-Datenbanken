@@ -1,3 +1,3 @@
 <?php
 
-echo "Sie haben ihre Daten erfolgreich bearbeitet.";
+echo "<font color='#FFFF00'>Sie haben ihre Daten erfolgreich bearbeitet.</font>";

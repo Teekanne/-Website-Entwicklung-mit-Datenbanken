@@ -31,7 +31,7 @@ class Login_Model extends Model
 			Session::set('ROLE', $data['ROLE']);
 			Session::set('loggedIn', true);
                         Session::set('ID', $data['ID']);
-			header('location: ../dashboard');
+			header('location: ../overview');
 		} else {
 			$message = new Login();
                         $message->messagePW();

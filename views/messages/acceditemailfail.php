@@ -1,3 +1,3 @@
 <?php
 
-echo "Ihre eingegebene E-Mail Adresse sind nicht identisch.";
+echo "<font color='#FFFF00'>Ihre eingegebene E-Mail Adresse sind nicht identisch.</font>";

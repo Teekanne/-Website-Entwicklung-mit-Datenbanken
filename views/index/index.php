@@ -1,5 +1,29 @@
-<h2>this is the main page</h2>
-<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-<p>Quiz</p> 
-<input name="key" type="text"  placeholder="Schlüssel">
-<input type="submit" name="quizKey" value="starten">
+<h2>
+    ... An einem Quiz Teilnehmen?
+</h2>
+<br>
+
+<p>
+bitte geben Sie den vom Dozenten freigegebenen Quiz-Key ein!<br> 
+
+<form name="surveyform" method="post" action="takesurvey">
+    Frage-Key: 
+    <input type='text' name='inputkey'>
+    <input type='submit' name='start' value='Quiz Starten!'>
+</form>
+</p>
+
+<label id=overviewLabel>&nbsp;</label><br>
+
+<h2>
+    ... oder als Dozent Ihre Quiz verwalten?
+</h2>
+
+<p>
+<form name="loginform" method="post" action="login">
+    <input type='submit' name='login' value='Einloggen!'>
+</form>
+</p>
+
+<br>
+<br>
