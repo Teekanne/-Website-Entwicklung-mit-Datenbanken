@@ -32,7 +32,7 @@
             $cat = Category::Load($name);
             
             if($cat){
-                echo $name . " existiert bereits.";
+                echo "<p>" . $name . " existiert bereits.</p>";
                 return;
             }
             
