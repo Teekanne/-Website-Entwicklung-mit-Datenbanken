@@ -19,6 +19,9 @@
         }
     }
     
+    if(!isset($_SESSION["ID"])){
+        echo "<h3>Ausgeloggt</h3>Du bist nicht eingeloggt. :-(";
+    }else {
 ?>
 
 <h3>Kategorie entfernen</h3>
@@ -61,3 +64,5 @@
         </tr>
         </table>
 </form>
+
+<?php } ?>
