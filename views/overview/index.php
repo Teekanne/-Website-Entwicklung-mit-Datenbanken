@@ -3,6 +3,7 @@
     include_once("models/quiz_model.php");
     include_once("config/database.php");
     include_once("common/voting_toolbox.php");
+    include_once("common/overview_toolbox.php");
     
     
     if (session_status() == PHP_SESSION_NONE) {
@@ -82,105 +83,9 @@
                 '</td>'.
                 '</tr>';
 
-            /*
-            echo
-                '<tr style="text-align: center; font-size: 100%">'.
-                '<td>&nbsp</td>'.
-                '<td>&nbsp</td>'.
-                '<td>&nbsp</td>'.
-                '<td>&nbsp</td>'.
-                '<td>inaktiv</td>'.
-                '<td>&nbsp</td>'.
-                '<td>aktiv</td>'.
-                '</tr>';
-             */
-
-
             $CategoryParentID = $CategoryParent['ID'];
-            
-            
-            $QuizSelect = 
-                "SELECT * FROM T_QUIZ ".
-                "WHERE ".
-                "FK_TUTOR = ".$Tutor_ID." AND ".
-                "FK_CATEGORY = ".$CategoryParentID." ".
-                "ORDER BY ID";
-
-            $QuizResult = $pdo->query($QuizSelect);
-
-            if ($QuizResult && $QuizResult->rowCount() > 0) {
-                while ($Quiz = $QuizResult->fetch(PDO::FETCH_ASSOC)) {
-
-                    $IsQuizActive = $Quiz['ISACTIVE'];
-                    
-                    /*
-                    echo
-                        'ID: '.$Quiz['ID'].', '.
-                        'QUIZNAME: '.$Quiz['QUIZNAME'].', '.
-                        'DESCRIPTION: '.$Quiz['DESCRIPTION'].', '.
-                        'ACTIVE: '.$IsQuizActive.', '.
-                        'FK_TUTOR: '.$Quiz['FK_TUTOR'].', '.
-                        'QKEY: '.$Quiz['QKEY'].', '.
-                        'FK_CATEGORY: '.$Quiz['FK_CATEGORY'].'<br>';
-                     */
-
-                    echo
-                        '<tr>'.
-                        '<td>&nbsp</td>'.
-                        '<td>&nbsp</td>'.
-                        '<td>&nbsp</td>'.
-                        '<td style="padding-right: 25px">';
-
-                    if($IsQuizActive == 1) {                             
-                        echo '<a id="current" href="'.URL.'result?key='.$Quiz['QKEY'].'"> <b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'].' (Q-Key: '.$Quiz['QKEY'].')</a><br>';
-                    } else {
-                        echo '<b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'];
-                    }
-
-                    echo
-                        '</td>'.
-                        '<td style="text-align: center">';
-
-                    if($IsQuizActive == 0) {
-
-                        echo 
-                            '<a id="start" href="'.URL.
-                            'overview?ACTIVATE_QUIZ_ID='.$Quiz['ID'].
-                            '"><b>starten</b></a><br>'; 
-
-                    } else {
-                        echo '&nbsp';
-                    }
-
-                    echo
-                        '</td>'.
-                        '<td>&nbsp</td>'.
-                        '<td style="text-align: center">';
-
-                    if($IsQuizActive == 1) {
-
-                        echo 
-                            '<a id="close" href="'.URL.
-                            'overview?DEACTIVATE_QUIZ_ID='.
-                            $Quiz['ID'].'"><b>beenden</b></a><br>';                               
-
-                    } else {
-                        echo '&nbsp';
-                    }
-
-                    echo
-                        '</td>'.
-                        '</tr>';
-                }
-            }
-            
-            
-            
-            
-            
-            
-            
-            
+              
+            generateQuizOverview($Tutor_ID, $CategoryParentID);
 
             $CategoryChildSelect = 
                 "SELECT * FROM T_CATEGORY ".
@@ -207,80 +112,7 @@
 
                     $CategoryChildID = $CategoryChild['ID'];
 
-                    $QuizSelect = 
-                        "SELECT * FROM T_QUIZ ".
-                        "WHERE ".
-                        "FK_TUTOR = ".$Tutor_ID." AND ".
-                        "FK_CATEGORY = ".$CategoryChildID." ".
-                        "ORDER BY ID";
-
-                    $QuizResult = $pdo->query($QuizSelect);
-
-                    if ($QuizResult && $QuizResult->rowCount() > 0) {
-                        while ($Quiz = $QuizResult->fetch(PDO::FETCH_ASSOC)) {
-                            
-                            $IsQuizActive = $Quiz['ISACTIVE'];
-                            
-                            /*
-                            echo 
-                                'ID: '.$Quiz['ID'].', '.
-                                'QUIZNAME: '.$Quiz['QUIZNAME'].', '.
-                                'DESCRIPTION: '.$Quiz['DESCRIPTION'].', '.
-                                'ACTIVE: '.$IsQuizActive.', '.
-                                'FK_TUTOR: '.$Quiz['FK_TUTOR'].', '.
-                                'QKEY: '.$Quiz['QKEY'].', '.
-                                'FK_CATEGORY: '.$Quiz['FK_CATEGORY'].'<br>'; 
-                             */
-
-                            echo
-                                '<tr>'.
-                                '<td>&nbsp</td>'.
-                                '<td>&nbsp</td>'.
-                                '<td>&nbsp</td>'.
-                                '<td style="padding-right: 25px">';
-
-                            if($IsQuizActive == 1) {                             
-                                echo '<a id="current" href="'.URL.'result?key='.$Quiz['QKEY'].'"> <b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'].' (Q-Key: '.$Quiz['QKEY'].')</a><br>';
-                            } else {
-                                echo '<b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'];
-                            }
-
-                            echo
-                                '</td>'.
-                                '<td style="text-align: center">';
-
-                            if($IsQuizActive == 0) {
-                                
-                                echo 
-                                    '<a id="start" href="'.URL.
-                                    'overview?ACTIVATE_QUIZ_ID='.$Quiz['ID'].
-                                    '"><b>starten</b></a><br>'; 
-                                
-                            } else {
-                                echo '&nbsp';
-                            }
-
-                            echo
-                                '</td>'.
-                                '<td>&nbsp</td>'.
-                                '<td style="text-align: center">';
-
-                            if($IsQuizActive == 1) {
-                                                                    
-                                echo 
-                                    '<a id="close" href="'.URL.
-                                    'overview?DEACTIVATE_QUIZ_ID='.
-                                    $Quiz['ID'].'"><b>beenden</b></a><br>';                               
-                                    
-                            } else {
-                                echo '&nbsp';
-                            }
-
-                            echo
-                                '</td>'.
-                                '</tr>';
-                        }
-                    }
+                    generateQuizOverview($Tutor_ID, $CategoryChildID);
                 }
             }
         }
