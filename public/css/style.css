@@ -200,6 +200,8 @@ nav ul li a.active {
 	max-width:980px;
 	margin:12em auto;
 	padding:0em;
+	margin-bottom:2em;
+	
 	
 	
 }
@@ -213,6 +215,7 @@ nav ul li a.active {
 	text-align:center;
 	border-bottom:0.1em solid #FFFF00;
 	border-radius:5px;
+	min-height:450px;
 }
 
 footer {
@@ -372,7 +375,7 @@ input[type='checkbox'] {
 }
 
 #resultBtn {
-	background:#eecc33;
+	background:linear-gradient(to bottom,#FFFF00, #FF9900);
 	border:0.1em solid #FFFFFF;
 	box-shadow: 0 0 2px 2px #FFF;
 	width:4em;
