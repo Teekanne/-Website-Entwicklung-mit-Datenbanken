@@ -1,6 +1,5 @@
 <?php 
     if(isset($_POST["quizName"])){
-        echo "Is da";
         $currentCategory = Category::Load($_POST["category"]);
         $currentUser = Tutor::Load($_SESSION["ID"]);
         $currentQuiz = Quiz::Add($_POST["quizName"], $_POST["quizDescription"], $currentUser, $currentCategory);
