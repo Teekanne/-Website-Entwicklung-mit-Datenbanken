@@ -12,10 +12,10 @@
         }
     }elseif(isset($_POST["deleteCategory"])){
         if(Category::CountFirstLevelCategories() == 1){
-            echo "Kategorie konnte nicht entfernt werden. Eine Haupt-Kategorie muss mindestens bestehend bleiben.";
+            echo "<p>Kategorie konnte nicht entfernt werden. Eine Haupt-Kategorie muss mindestens bestehend bleiben.</p>";
         }else{
             Category::Delete($_POST["category"]);
-            echo "Die Kategorie " . $_POST["category"] . " wurde entfernt.";
+            echo "<p>Die Kategorie " . $_POST["category"] . " wurde entfernt.</p>";
         }
     }
     
