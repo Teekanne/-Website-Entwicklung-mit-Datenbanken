@@ -1,3 +1,3 @@
 <?php
 
-echo "<font color='#FFFF00'>Ihre Passwort eingaben sind nicht identisch.</font>";
+echo "<label id='messageLabel'></br>Ihre Passwort eingaben sind nicht identisch.</label>";
