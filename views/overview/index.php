@@ -14,7 +14,7 @@
 ?>
 
 <h2>
-    Übersicht über ihre aktuellen Umfragen
+    Übersicht über Ihre aktuellen Umfragen
 </h2>
 <br>
 
