@@ -1,3 +1,3 @@
 <?php
 
-echo "<font color='#FFFF00'>Sie haben die Benuter erfolgreich bearbeitet.</font>";
+echo "<label id='messageLabel'></br>Sie haben die Benutzer erfolgreich bearbeitet.</label>";
