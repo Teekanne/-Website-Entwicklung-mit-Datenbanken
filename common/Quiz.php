@@ -41,7 +41,7 @@
             $result = $statement->fetchAll();
             
             if(!$result){
-                echo "Quiz mit Key '" . $qkey . "' existiert nicht.";
+                echo "<p>Quiz mit Key '" . $qkey . "' existiert nicht.</p>";
                 return null;
             }
             
