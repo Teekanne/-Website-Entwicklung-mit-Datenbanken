@@ -113,6 +113,7 @@
 
                     $IsQuizActive = $Quiz['ISACTIVE'];
                     
+                    /*
                     echo
                         'ID: '.$Quiz['ID'].', '.
                         'QUIZNAME: '.$Quiz['QUIZNAME'].', '.
@@ -121,6 +122,7 @@
                         'FK_TUTOR: '.$Quiz['FK_TUTOR'].', '.
                         'QKEY: '.$Quiz['QKEY'].', '.
                         'FK_CATEGORY: '.$Quiz['FK_CATEGORY'].'<br>';
+                     */
 
                     echo
                         '<tr>'.
@@ -219,6 +221,7 @@
                             
                             $IsQuizActive = $Quiz['ISACTIVE'];
                             
+                            /*
                             echo 
                                 'ID: '.$Quiz['ID'].', '.
                                 'QUIZNAME: '.$Quiz['QUIZNAME'].', '.
@@ -226,7 +229,8 @@
                                 'ACTIVE: '.$IsQuizActive.', '.
                                 'FK_TUTOR: '.$Quiz['FK_TUTOR'].', '.
                                 'QKEY: '.$Quiz['QKEY'].', '.
-                                'FK_CATEGORY: '.$Quiz['FK_CATEGORY'].'<br>';
+                                'FK_CATEGORY: '.$Quiz['FK_CATEGORY'].'<br>'; 
+                             */
 
                             echo
                                 '<tr>'.
