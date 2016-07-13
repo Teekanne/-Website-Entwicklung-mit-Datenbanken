@@ -1,3 +1,3 @@
 <?php
 
-echo "<font color='#FFFF00'>Eine Nachricht mit dem Resetkey wurde an ihre E-Mail Adresse geschickt.</font>";
+echo "<label id='messageLabel'></br>Eine Nachricht mit dem Resetkey wurde an ihre E-Mail Adresse geschickt.</label>";
