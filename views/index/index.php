@@ -1,10 +1,10 @@
-<h1>
-    Willkommen bei Testimeter! Wollen Sie ...
-</h1>
-
 <h2>
-    ... An einem Quiz Teilnehmen?
+    Willkommen bei Testimeter! Wollen Sie ...
 </h2>
+
+<h3>
+    ... An einem Quiz Teilnehmen?
+</h3>
 <br>
 
 <p>
@@ -19,9 +19,9 @@ bitte geben Sie den vom Dozenten freigegebenen Quiz-Key ein!<br>
 
 <label id=overviewLabel>&nbsp;</label><br>
 
-<h2>
+<h3>
     ... Oder als Dozent Ihre Quiz verwalten?
-</h2>
+</h3>
 
 <p>
 <form name="loginform" method="post" action="login">
