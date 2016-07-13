@@ -6,7 +6,7 @@ $deletelastname = Session::get('DELETELASTNAME');
 $deleteemail = Session::get('DELETEEMAIL');
 $deleterole = Session::get('DELETEROLE');
 
-echo "<font color='#FFFF00'>Wollen Sie den User mit der ID:".$deleteid."(".$deletetitle." ".$deletefirstname." ".$deletelastname." ".$deleteemail.") mit der Rolle:".$deleterole." wirklich löschen?</font>";
+echo "<label id='messageLabel'></br>Wollen Sie den User mit der ID:".$deleteid."(".$deletetitle." ".$deletefirstname." ".$deletelastname." ".$deleteemail.")</br> mit der Rolle:".$deleterole." wirklich löschen?</label>";
 ?>
 </br>
 </br>
