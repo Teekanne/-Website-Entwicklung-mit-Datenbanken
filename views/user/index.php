@@ -75,7 +75,7 @@
         echo '<td>     
                                   <label id="userLabel"><li><a href="' . URL . 'user/editUser/' . $value['ID'] . '">Edit&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
 
-				<li><a href="' . URL . 'user/delete/' . $value['ID'] . '">Delete</a></li></label></td>';
+				<li><a href="' . URL . 'user/renderDelete/' . $value['ID'] . '">Delete</a></li></label></td>';
         echo '</tr>';
 
     }

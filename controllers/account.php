@@ -55,6 +55,6 @@ class Account extends Controller {
     }
     public function success(){
           $this->view->render('messages/acceditsuccess');
-          $this->view->render('account/index'); 
+         
     }
 }
