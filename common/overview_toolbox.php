@@ -1,6 +1,11 @@
 <?php
 include_once("config/database.php");
 
+// Generates the Main Part of the table for Quiz overview.
+// It is a separate function, because it has to be used from two aspects...
+// 1 - Parent Categories
+// 2 - Child Categories
+// The Shell of the table is already existing
 function generateQuizOverview($TutorId, $CategoryId)
 {
     $pdo = new Database();

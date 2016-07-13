@@ -1,5 +1,7 @@
 <?php
     // TAKE SURVEY
+    // Fetching, displaying and browsing Questions to a Quiz
+
     include_once("models/quiz_model.php");
     include_once("config/database.php");
     
@@ -12,15 +14,22 @@
 ?>
 
 <?php  
+    // Reset the navigation of the quiz
+    // If a Quiz is restarted (inputkey given and Quiz already in Session),
+    // Quiz is reloaded and navigation is put to first question.
     if (isset($_POST["inputkey"]) && isset($_SESSION['Quiz'])) {
-
+        
         unset($_SESSION['Quiz']);
         $_SESSION['CurrPage'] = 0;
     }
     
+    // to check if Quiz is existing and started
     $QuizAvailable = true;
+    // to check if a Quiz is already completed.
     $QuizFirstTime = 0;
 
+    // If there is no Quiz object in the Session,
+    // it will be loaded from the database
     if (!isset($_SESSION['Quiz'])) {
         
         $QuizID = 0;
@@ -36,6 +45,8 @@
         
         $QuizResult = $pdo->query($QuizSelect);
 
+        // Iteration of Quiz Database-Structure...
+        // Saving to Object --> Session
         if ($QuizResult && $QuizResult->rowCount() > 0) {
             while ($QuizRow = $QuizResult->fetch(PDO::FETCH_ASSOC)) {
                 
@@ -64,6 +75,8 @@
                             $QuestionTmp->QuestionDescription = $QuestionRow['DESCRIPTION'];
                             $QuestionTmp->QuestionKey = $QuestionRow['QKEY'];
 
+                            // Check if Quiz already completed (Session-Based)
+                            // e.g. "completedHeBr105" --> HeBr105 completed
                             if (isset($_SESSION['completed'.$QuestionTmp->QuestionKey])) {
                                 $QuizAvailable = false;
                                 $QuizFirstTime = 1;
@@ -80,6 +93,8 @@
                                     $AnswerTmp = new AnswerEntity();
                                     $AnswerTmp->AnswerID = $AnswerRow['ID'];
                                     $AnswerTmp->AnswerText = $AnswerRow['ANSWER'];
+                                    // This field is not DB-Based.
+                                    // This will be used to determine if the answer is chosen.
                                     $AnswerTmp->QuestionChecked = 0;
                                     array_push($Answers, $AnswerTmp);
                                 }  
@@ -89,35 +104,43 @@
                         }
                         $QuizTmp->Questions = $Questions;
                     }
+                    // Quiz is saved to session
                     $_SESSION['Quiz'] = serialize($QuizTmp);
 
                 } else {
+                    // Quiz is there, but inactive
                     $QuizAvailable = false;
                 }
             }
         } else {
+            // No Quiz found
             $QuizAvailable = false;
         }
     }
     
+    // If Quiz is not available --> Redirect to custom Error-Page
     if (!$QuizAvailable) 
     {
         header("Location: quizunavailable?FIRSTTIME=".$QuizFirstTime);
         exit;
     }
 
+    // If there is no Navigation (Question No)
+    // It will be set to first Page
     if (!isset($_SESSION['CurrPage'])) {
         $_SESSION['CurrPage'] = 0;
     }
 
+    // Handling of the Navigation Actions 
     if (
         isset($_POST['next']) || 
         isset($_POST['back']) || 
         isset($_POST['complete'])
     ) {
-        
+        // initialize als Object Type
         $QuizTmp = new QuizEntity();
 
+        // Get Quiz Object from Session
         $QuizTmp = unserialize($_SESSION['Quiz']);
         
         $QuestionsTmp = $QuizTmp->Questions;
@@ -128,10 +151,12 @@
         $AnswersTmp = $QuestionTmp->Answers;
         $KeysAnswers = array_keys($AnswersTmp);
 
+        // Delete previous checked Answers
         foreach($AnswersTmp as $AnswerTmp) {
             $AnswerTmp->QuestionChecked = 0;
         }
 
+        // Set new checked Answers
         if (isset($_POST['Result'])) {
             $ResultTmp = $_POST['Result'];
             foreach($ResultTmp as $ResultSingleTmp)
@@ -141,36 +166,43 @@
             }
         }	
         
+        // Save Quiz Object to Session
         $_SESSION['Quiz'] = serialize($QuizTmp);
 
         if (isset($_POST['next'])) {
-
-            //echo "### Werte ### ".sizeof($_SESSION['Questions'])." / ".($_SESSION['CurrPage']+1)."<br>";
-
+            // Navigate to next Question
             if (sizeof($QuestionsTmp) > ($_SESSION['CurrPage']+1)) {
                 $_SESSION['CurrPage']++;
             }
         }
         if (isset($_POST['back'])) {
+            // Navigate to previous Question
             if ($_SESSION['CurrPage'] > 0) {
                 $_SESSION['CurrPage']--;		
             }
         }
         if (isset($_POST['complete'])) {
+            // Complete answering Quiz
+            // relocate to completion Page
             header("Location: saveresults");
             exit;
         }
     }
 ?>
 
+<?php
+    // Actual Display of current Question 
+?>
 <form name="questionform" method="post" action="takesurvey">
 
     <?php
+        // Fetch Question Data from Session
         $QuizTmp = unserialize($_SESSION['Quiz']);
         $QuestionsTmp = $QuizTmp->Questions;
         $keys = array_keys($QuestionsTmp);
         $QuestionTmp = $QuestionsTmp[$keys[$_SESSION['CurrPage']]];
 
+        // Start of Display
         echo "<h2>".$QuizTmp->QuizTitle."</h2>";  
 
         echo "<p>";
@@ -194,6 +226,7 @@
             </tr>
 
             <?php
+                // Fetch Question Data from Session
                 $QuizTmp = unserialize($_SESSION['Quiz']);
                 $QuestionsTmp = $QuizTmp->Questions;
                 $keys = array_keys($QuestionsTmp);
@@ -211,7 +244,9 @@
                 $index = 0;
                 foreach($AnswersTmp as $AnswerTmp)
                 {
-
+                    // Display Question in Table
+                    // If in Navigation, there are already checked Answers
+                    // These values are remembered here
                     echo "<tr>";
                         echo "<td>&nbsp</td>";
                         echo "<td colspan=\"4\" style=\"font-size: 100%; padding-top: 0px; padding-bottom: 0px; padding-right: 25px\">";
