@@ -8,7 +8,7 @@
 		<script type="text/javascript" src="<?php echo URL; ?>public/js/custom.js"></script>
 		
 		<?php
-		    	include("common/LoadClasses.php");
+			include("common/LoadClasses.php");
 		    	
 			if (isset($this->js)) 
 			{
@@ -16,10 +16,35 @@
 				{
 					echo '<script type="text/javascript" src="'.URL.'views/'.$js.'"></script>';
 				}
-			}
-		?>
-        <?php
-				header("Content-Type: text/html; charset=utf-8");
+				
+                        }
+                        
+                        function getCurrentUrl(){
+                                $currentUrl = $_SERVER['REQUEST_URI'];
+                                if(strpos($currentUrl, "/")!== false){
+                                        $splittedUrl = explode("/", $currentUrl);
+                                        $currentUrl = $splittedUrl[count($splittedUrl)-1];
+                                }
+                                
+                                if(strpos($currentUrl, "?")!== false){
+                                        $splittedUrl = explode("?", $currentUrl);
+                                        $currentUrl = $splittedUrl[0];
+                                }
+                                
+                                return $currentUrl;
+                        }
+
+                        function setUrl($subUrl, $text){
+                                $currentUrl = getCurrentUrl();
+                                $active = "";
+                                if($currentUrl == $subUrl){
+                                        $active = " class='active' ";
+                                }
+                                
+                                echo "<li><a href='" . URL . $subUrl . "'" . $active . ">" . $text . "</a></li>";
+                        }
+
+                        header("Content-Type: text/html; charset=utf-8");
 		?>
 	</head>
 	<body>
@@ -35,25 +60,25 @@
 		<nav class="nav">
 			<ul>
 				<?php if (Session::get('loggedIn') == false):?>
+				
 					<li><a href="<?php echo URL; ?>index">Index</a></li>
                                         <li><a href="<?php echo URL; ?>registration">Registrierung</a></li>
 					<li><a href="<?php echo URL; ?>help">Hilfe</a></li>
 				<?php endif; ?>	
 				<?php if (Session::get('loggedIn') == true):?>
-                                        <li><a href="<?php echo URL; ?>newquestion">Fragen erstellen</a></li>
-                                        <li><a href="<?php echo URL; ?>overview">Fragen-Übersicht</a></li>
-                                        <li><a href="<?php echo URL; ?>categoryEdit">Kategorienverwaltung</a></li>
-					<li><a href="<?php echo URL; ?>account">Account</a></li>
+                                        <?php setUrl("newquestion", "Fragen erstellen"); ?>
+                                        <?php setUrl("overview", "Fragen-Übersicht"); ?>
+                                        <?php setUrl("categoryEdit", "Kategorienverwaltung"); ?>
+                                        <?php setUrl("account", "Account"); ?>
                                         
 				<?php if (Session::get('ROLE') == 'Administrator'):?>
-					<li><a href="<?php echo URL; ?>user">Benutzer</a></li>
+                                    <?php setUrl("user", "Benutzer"); ?>
 				<?php endif; ?>
-		
-					<li><a href="<?php echo URL; ?>dashboard/logout">Logout</a></li>	
+                                    <?php setUrl("dashboard/logout", "Logout"); ?>	
 				<?php else: ?>
 					<li><a href="<?php echo URL; ?>login">Login</a></li>
 				<?php endif; ?>
 			</ul>
 		</nav>
 		<section id="main">
-<article>
+                    <article>
