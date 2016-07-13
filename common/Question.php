@@ -70,7 +70,7 @@
             $result = $statement->fetchAll();
             
             if(!$result){
-                echo "<label>Es wurde keine Frage gefunden.</label>";
+                echo "<p>Es wurde keine Frage gefunden.</p>";
                 return null;
             }
             
@@ -148,7 +148,7 @@
             echo "<table border='0'><tr>";
 
             if($maxVotes==0 || $sumVotes==0){
-                echo "<label>Bisher hat noch niemand abgestimmt.</label></tr></table>";
+                echo "<p>Bisher hat noch niemand abgestimmt.</p></tr></table>";
                 return;
             }
 
@@ -156,13 +156,11 @@
             foreach($answers as $answer){
                 $currentVotes = $answer->GetVotes();
                 
-                if($currentVotes != 0){
-                    $percent =  $currentVotes / $maxVotes * 100;
-                }else{
-                    $percent = 0;
-                }
                 echo "<td valign='bottom'>&nbsp;&nbsp;";
-                echo "<input id='resultBtn' type='button' style='height:" . $percent*2 . "px;'>";
+                if($currentVotes != 0){
+                    echo "<input id='resultBtn' type='button' style='height:" . $currentVotes / $maxVotes * 100*2 . "px;'>";
+                }
+
                 echo "</td>";
             }
 
