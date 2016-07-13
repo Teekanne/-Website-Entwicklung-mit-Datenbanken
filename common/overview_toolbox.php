@@ -19,17 +19,6 @@ function generateQuizOverview($TutorId, $CategoryId)
 
             $IsQuizActive = $Quiz['ISACTIVE'];
 
-            /*
-            echo
-                'ID: '.$Quiz['ID'].', '.
-                'QUIZNAME: '.$Quiz['QUIZNAME'].', '.
-                'DESCRIPTION: '.$Quiz['DESCRIPTION'].', '.
-                'ACTIVE: '.$IsQuizActive.', '.
-                'FK_TUTOR: '.$Quiz['FK_TUTOR'].', '.
-                'QKEY: '.$Quiz['QKEY'].', '.
-                'FK_CATEGORY: '.$Quiz['FK_CATEGORY'].'<br>';
-             */
-
             echo
                 '<tr>'.
                 '<td>&nbsp</td>'.
@@ -37,9 +26,14 @@ function generateQuizOverview($TutorId, $CategoryId)
                 '<td>&nbsp</td>'.
                 '<td style="padding-right: 25px">';
 
-            if($IsQuizActive == 1) {                             
+            // Quiz-Name / Quiz-Key
+            if($IsQuizActive == 1) {  
+                // When a Quiz is active...
+                // ... display link to results (Quiz-Name) and Quiz-Key
                 echo '<a id="current" href="'.URL.'result?key='.$Quiz['QKEY'].'"> <b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'].' (Q-Key: '.$Quiz['QKEY'].')</a><br>';
             } else {
+                // When a Quiz is inactive...
+                // ... display only Quiz-Name
                 echo '<b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'];
             }
 
@@ -47,42 +41,35 @@ function generateQuizOverview($TutorId, $CategoryId)
                 '</td>'.
                 '<td style="text-align: center">';
 
-            if($IsQuizActive == 0) {
-
-                echo 
-                    '<td style="text-align: center">'.
-                    '<a id="start" href="'.URL.
-                    'overview?ACTIVATE_QUIZ_ID='.$Quiz['ID'].
-                    '"><b>starten</b></a>'.
-                    '</td>';   
-            } else {
-                
+            // ACTIVATE / DEACTIVATE Quiz
+            if($IsQuizActive == 1) {
+                // When a Quiz is active...
+                // ... display link to deactivate
                 echo 
                     '<td style="text-align: center">'.
                     '<a id="close" href="'.URL.
                     'overview?DEACTIVATE_QUIZ_ID='.
                     $Quiz['ID'].'"><b>beenden</b></a>'.
-                    '</td>';    
-                
+                    '</td>';   
+            } else {
+                // When a Quiz is inactive...
+                // ... display link to activate
+                 echo 
+                    '<td style="text-align: center">'.
+                    '<a id="start" href="'.URL.
+                    'overview?ACTIVATE_QUIZ_ID='.$Quiz['ID'].
+                    '"><b>starten</b></a>'.
+                    '</td>';      
             }
 
+            // DELETE Quiz
             echo
-                    '<td style="text-align: center">'.
-                    '<a href="'.URL.
-                    'overview?DELETE_QUIZ_ID='.
-                    $Quiz['ID'].'"><b>löschen</b></a>'.
-                    '</td>'.
-                    '</tr>'; 
-            
-            /*
-                 '</td>'.
-                '<td>&nbsp</td>'.
                 '<td style="text-align: center">'.
-                'löschen'.
+                '<a href="'.URL.
+                'overview?DELETE_QUIZ_ID='.
+                $Quiz['ID'].'"><b>löschen</b></a>'.
                 '</td>'.
-                '</tr>';
-             
-             */
+                '</tr>'; 
         }
     } 
 }

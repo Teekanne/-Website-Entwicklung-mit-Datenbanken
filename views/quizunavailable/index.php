@@ -38,6 +38,3 @@
         <input type='submit' name='login' value='Zurück!'>
     </form>
 </p>
-
-<br>
-
