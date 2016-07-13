@@ -215,7 +215,6 @@ nav ul li a.active {
 	text-align:center;
 	border-bottom:0.1em solid #FFFF00;
 	border-radius:5px;
-	min-height:510px;
 }
 
 footer {
@@ -464,6 +463,7 @@ button {
 		margin:0.3em 0em 0.3em 0em;
 		
 	}
+
 }
 @media screen and (max-width:850px) {
 	#loginTable {
@@ -483,6 +483,7 @@ button {
 		margin-left:auto;
 		margin-right:auto;
 	}	
+
 }
 
 @media screen and (max-width:600px) {
@@ -549,11 +550,11 @@ button {
 		width: 13.3em;
 	}
 	
-	
 }
 
 @media screen and (max-width:370px) {
 		#main {
 		margin: 19em auto;
 	}
+	
 }

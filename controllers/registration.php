@@ -20,7 +20,13 @@ class Registration extends Controller {
         $password = md5($_POST['password']);
         $passwordConfirmation = md5($_POST['passwordConfirmation']);
         $rolereg = 'Default';
-        try{
+        try{$checkEMAIL = $email;
+        //Romove all illegal characters from E-Mail.
+        $cleanEmail = filter_var($checkEMAIL, FILTER_SANITIZE_EMAIL);
+
+        if ((preg_match("/^[a-zA-Z0-9_.+-]+@fh-flensburg.de+$/", $cleanEmail) || preg_match("/^[a-zA-Z0-9_.+-]+@hs-flensburg.de+$/", $cleanEmail) )&& strlen($Checklength) >= 8){
+       
+        
             if($email == $emailConfirmation){
                 if($password == $passwordConfirmation){
                // echo "$password";
@@ -41,7 +47,11 @@ class Registration extends Controller {
             }
          $this->view->render('messages/regsuccess');  
          $this->view->render('login/index');  
-         exit;
+        exit;}
+        else{
+          $this->view->render('messages/noemail');  
+          exit;
+        }
         } catch (Exception $ex) {
             
         }

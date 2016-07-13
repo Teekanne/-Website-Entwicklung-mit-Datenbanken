@@ -12,6 +12,7 @@ require 'library/Session.php';
 
 require 'config/paths.php';
 require 'config/database.php';
+
  //@TODO: Error Handling
 $app = new Bootstrap();
 
