@@ -77,9 +77,15 @@
 
                             // Check if Quiz already completed (Session-Based)
                             // e.g. "completedHeBr105" --> HeBr105 completed
-                            if (isset($_SESSION['completed'.$QuestionTmp->QuestionKey])) {
-                                $QuizAvailable = false;
-                                $QuizFirstTime = 1;
+                            if (isset($_SESSION['completed'.$QuestionTmp->QuestionKey])) {                               
+                                if (isset($_SESSION['ROLE']) && $_SESSION['ROLE'] == "Administrator") {
+                                    // The limited access to the Quiz doesn't affect Admins ... 
+                                    // echo "Debug: AdminView<br>";
+                                } else {
+                                    // ... Everybody else has one vote!
+                                    $QuizAvailable = false;
+                                    $QuizFirstTime = 1; 
+                                }
                             }
                             
                             $AnswerSelect = "SELECT * FROM T_ANSWER WHERE FK_QUESTION = ".$QuestionRow['ID']." ORDER BY ANSWER_POS";
