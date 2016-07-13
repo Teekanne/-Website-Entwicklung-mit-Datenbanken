@@ -13,6 +13,7 @@ h1 {
 	color:#8B8989;
 	margin:0em;
 	text-align:center;
+	
 }
 
 h2 {
@@ -329,6 +330,11 @@ form input[type=button] {
 	
 }
 
+button {
+	width: 13.3em;
+	border-radius:5px;
+}
+
 form input[type=button]:hover {
 	cursor: pointer;
 	background: silver;
@@ -364,6 +370,14 @@ input[type='checkbox'] {
 	color: red;
 }
 
+#resultBtn {
+	background:#eecc33;
+	border:0.1em solid #FFFFFF;
+	box-shadow: 0 0 2px 2px #FFF;
+	width:4em;
+	margin-bottom:0em;
+	
+}
 #categorySub {
 	float:left;
 	
