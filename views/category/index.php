@@ -20,7 +20,7 @@
     }
     
     if(!isset($_SESSION["ID"])){
-        echo "<h3>Ausgeloggt</h3><label>Du bist nicht eingeloggt. :-(</label>";
+        echo "<h3>Ausgeloggt</h3><p>Du bist nicht eingeloggt. :-(</label></p>";
     }else {
 ?>
 
