@@ -50,26 +50,39 @@ function generateQuizOverview($TutorId, $CategoryId)
             if($IsQuizActive == 0) {
 
                 echo 
+                    '<td style="text-align: center">'.
                     '<a id="start" href="'.URL.
                     'overview?ACTIVATE_QUIZ_ID='.$Quiz['ID'].
-                    '"><b>starten</b></a><br>'; 
-
+                    '"><b>starten</b></a>'.
+                    '</td>';   
             } else {
                 
                 echo 
+                    '<td style="text-align: center">'.
                     '<a id="close" href="'.URL.
                     'overview?DEACTIVATE_QUIZ_ID='.
-                    $Quiz['ID'].'"><b>beenden</b></a><br>';   
+                    $Quiz['ID'].'"><b>beenden</b></a>'.
+                    '</td>';    
                 
             }
 
             echo
-                '</td>'.
+                    '<td style="text-align: center">'.
+                    '<a href="'.URL.
+                    'overview?DELETE_QUIZ_ID='.
+                    $Quiz['ID'].'"><b>löschen</b></a>'.
+                    '</td>'.
+                    '</tr>'; 
+            
+            /*
+                 '</td>'.
                 '<td>&nbsp</td>'.
                 '<td style="text-align: center">'.
                 'löschen'.
                 '</td>'.
                 '</tr>';
+             
+             */
         }
     } 
 }
