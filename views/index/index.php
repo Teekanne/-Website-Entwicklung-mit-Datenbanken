@@ -1,3 +1,7 @@
+<h1>
+    Willkommen bei Testimeter! Wollen Sie ...
+</h1>
+
 <h2>
     ... An einem Quiz Teilnehmen?
 </h2>
@@ -7,7 +11,7 @@
 bitte geben Sie den vom Dozenten freigegebenen Quiz-Key ein!<br> 
 
 <form name="surveyform" method="post" action="takesurvey">
-    Frage-Key: 
+    Quiz-Key: 
     <input type='text' name='inputkey'>
     <input type='submit' name='start' value='Quiz Starten!'>
 </form>
@@ -16,7 +20,7 @@ bitte geben Sie den vom Dozenten freigegebenen Quiz-Key ein!<br>
 <label id=overviewLabel>&nbsp;</label><br>
 
 <h2>
-    ... oder als Dozent Ihre Quiz verwalten?
+    ... Oder als Dozent Ihre Quiz verwalten?
 </h2>
 
 <p>
