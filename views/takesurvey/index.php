@@ -17,7 +17,8 @@
         unset($_SESSION['Quiz']);
         $_SESSION['CurrPage'] = 0;
     }
-
+    
+    $QuizAvailable = true;
 
     if (!isset($_SESSION['Quiz'])) {
         
@@ -32,8 +33,6 @@
 
         $QuizSelect = "SELECT * FROM T_QUIZ WHERE QKEY = '".$QKey."'";
         $QuizResult = $pdo->query($QuizSelect);
-        
-        $QuizAvailable = true;
 
         if ($QuizResult && $QuizResult->rowCount() > 0) {
             while ($QuizRow = $QuizResult->fetch(PDO::FETCH_ASSOC)) {
