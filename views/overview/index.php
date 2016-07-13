@@ -52,6 +52,10 @@
         activateQuiz($_GET['ACTIVATE_QUIZ_ID']);
     }
     
+    if (isset($_GET['DELETE_QUIZ_ID'])) {
+        deleteQuiz($_GET['DELETE_QUIZ_ID']);
+    }
+    
     echo
         '<table style="border:0px solid #647852; border-collapse: collapse;" border="0">'.
         '<tbody>'.
@@ -60,9 +64,9 @@
             '<td style="width:25px">&nbsp</td>'.
             '<td style="width:25px">&nbsp</td>'.
             '<td style="width:500px">&nbsp</td>'.
-            '<td style="width:50px">&nbsp</td>'.
-            '<td style="width:10px">&nbsp</td>'.
-            '<td style="width:50px">&nbsp</td>'.
+            '<td style="width:1px">&nbsp</td>'.
+            '<td style="width:75px">&nbsp</td>'.
+            '<td style="width:75px">&nbsp</td>'.
         '</tr>';
 
     $CategoryParentSelect = 

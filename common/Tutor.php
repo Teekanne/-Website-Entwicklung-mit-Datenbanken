@@ -43,7 +43,7 @@
             $result = $statement->fetchAll()[0];
             
             if(!$result){
-                echo "<p>User mit ID " . $id . " existiert nicht.</p>";
+                echo "<label id='commentLabel'><h3>User mit ID " . $id . " existiert nicht.</h3></label></p>";
                 return null;
             }
 

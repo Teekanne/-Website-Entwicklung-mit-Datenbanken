@@ -38,6 +38,7 @@
                 if ($AnswerTmp->QuestionChecked) {
                     
                     setQuestionResults($QuestionTmp->QuestionID, $AnswerTmp->AnswerID, true, false);
+                    $_SESSION['completed'.$QuestionTmp->QuestionKey] = true;
                 }
             }
         }
