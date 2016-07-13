@@ -1,3 +1,3 @@
 <?php
 
-echo "<font color='#FFFF00'>Account gelöscht.</font>";
+echo "<label id='messageLabel'></br>Account gelöscht.</label>";
