@@ -22,7 +22,6 @@
         }
         
         public function __construct($id, $name, $description, $isactive, $fkTutor, $fkCategory, $qKey){
-            parent::__construct();
             $this->id = $id;
             $this->name = $name;
             $this->description = $description;
@@ -34,7 +33,7 @@
         }
         
         public static function LoadByKey($qkey){
-            $pdo = new DataBase();
+            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
             $sql= "SELECT * FROM T_QUIZ WHERE QKEY=:key"; 
             $statement = $pdo->prepare($sql);
             $statement->bindParam(':key', $qkey, PDO::PARAM_STR); 
