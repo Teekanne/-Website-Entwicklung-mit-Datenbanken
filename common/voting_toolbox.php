@@ -16,7 +16,6 @@
 function deactivateQuiz($quizId)
 {
     $retVal = false;
-    
     $pdo = new Database();
     
     $SqlDeactivate = "UPDATE T_QUIZ SET ISACTIVE=0 WHERE ID=".$quizId;
