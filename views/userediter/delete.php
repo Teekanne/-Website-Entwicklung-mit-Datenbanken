@@ -15,3 +15,4 @@ echo "<font color='#FFFF00'>Wollen Sie den User mit der ID:".$deleteid."(".$dele
 <form method="post" action="<?php echo URL; ?>user/index">
 <input id="change" type="submit" name="userChange" value="Abbrechen">
 </form>
+//
