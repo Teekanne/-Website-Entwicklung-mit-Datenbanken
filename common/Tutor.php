@@ -31,11 +31,11 @@
             $this->password = $password;
             $this->role = $role;
             $this->resetkey = $resetkey;
-            $this->pdo = new DataBase();
+            $this->pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
         }
         
         public static function Load($id){
-            $pdo = new DataBase();
+            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
             $sql= "SELECT * FROM T_TUTOR WHERE ID=:userid"; 
             $statement = $pdo->prepare($sql);
             $statement->bindParam(':userid', $id, PDO::PARAM_INT); 
@@ -43,7 +43,7 @@
             $result = $statement->fetchAll()[0];
             
             if(!$result){
-                echo "<p>User mit ID " . $id . " existiert nicht.</p>";
+                echo "<label id='commentLabel'><h3>User mit ID " . $id . " existiert nicht.</h3></label></p>";
                 return null;
             }
 
