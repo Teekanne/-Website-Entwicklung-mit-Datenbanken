@@ -70,7 +70,7 @@
             $result = $statement->fetchAll();
             
             if(!$result){
-                echo "Es wurde keine Frage gefunden.";
+                echo "<label>Es wurde keine Frage gefunden.</label>";
                 return null;
             }
             
