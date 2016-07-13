@@ -13,6 +13,18 @@
 
 <?php
 
+function deleteQuiz($quizId)
+{
+    $retVal = false;
+    $pdo = new Database();
+    
+    $SqlDeactivate = "DELETE FROM T_QUIZ WHERE ID=".$quizId;
+    $SqlDeactivateStmnt = $pdo->prepare($SqlDeactivate);
+    $retVal = $SqlDeactivateStmnt->execute();
+    
+    return $retVal;
+}
+
 function deactivateQuiz($quizId)
 {
     $retVal = false;

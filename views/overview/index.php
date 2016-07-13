@@ -53,7 +53,7 @@
     }
     
     if (isset($_GET['DELETE_QUIZ_ID'])) {
-        echo "LÖSCHEN: ".$_GET['DELETE_QUIZ_ID']."<br>";
+        deleteQuiz($_GET['DELETE_QUIZ_ID']);
     }
     
     echo
