@@ -59,7 +59,7 @@
         </tr>
     </table>
 </form>
-    <label id=overviewLabel>&nbsp;</label><br>
+    <label id="overviewLabel">&nbsp;</label><br>
 <form action="" method="post">	
     <table id='questionTable' border='0'>
         <tr>
