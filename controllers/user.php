@@ -8,8 +8,7 @@ class User extends Controller {
 
         $logged = Session::get('loggedIn');
         $role = Session::get('ROLE');
-        $test="test";
-        Session::set('TITLEEDIT', $test);
+
         if ($logged == false || $role != 'Administrator') {
             Session::destroy();
             header('location: ../login');
@@ -53,13 +52,18 @@ class User extends Controller {
     public function view(){
         $this->view->render('userediter/index'); 
     }
+    public function viewdelete(){
+        $this->view->render('userediter/delete'); 
+    }
+    public function deleted(){
+        $this->view->render('messages/deleted');
+    }
 
     public function editUser($id) {
         $change = new User_Model();
         $change->editUser($id);
         exit;
-        $editUser = new User_Model();  
-        $editUser->editUser($id);
+
     }
     public function updateUser() {
         $titel = $_POST['titelUser'];
@@ -94,12 +98,17 @@ class User extends Controller {
         $this->view->render('messages/editsuccess');  
         
     }
-
-    public function delete($id) {
+    public function renderDelete($id){
+        Session::set('UserDeleteID', $id);
+        $user = new User_Model();
+        $user->getUsertoDelte($id);
+    }
+    public function delete() {
+             $id=Session::get('DELETEID');
             $deleteUser = new User_Model();
-            echo $id;
-            exit;
             $deleteUser->deleteUser($id);
+         
+            
     }
 
 }

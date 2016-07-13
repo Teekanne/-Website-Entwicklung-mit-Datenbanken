@@ -8,8 +8,9 @@ class User_Model extends Model {
     function deleteUser($id){
         $deletesth = $this->db->prepare('DELETE FROM T_TUTOR WHERE ID = :id');
         $deletesth->execute(array(':id' => $id));
-         header('location: ..');
-        exit;
+         $message = new User();
+         $message->deleted();
+     
     }
 
     public function userList() {
@@ -23,7 +24,7 @@ class User_Model extends Model {
         $editsth->execute(array(':id' => $id));
         while ($row = $editsth->fetch(PDO::FETCH_ASSOC))
         {
-            $idEdit = $row['ID'];
+             $idEdit = $row['ID'];
             SESSION::set('EDITID', $idEdit);
             $titleEdit = $row['TITLE'];
             SESSION::set('TITLEEDIT', $titleEdit);
@@ -35,9 +36,34 @@ class User_Model extends Model {
             SESSION::set('EMAILEDIT', $emailEdit);
             $roleEdit = $row['ROLE'];
             SESSION::set('ROLEEDIT', $roleEdit);
+            
 
             $view = new User();
             $view->view();
+            exit;
+        }
+        exit;
+    }
+    public function getUsertoDelte($id){
+        $editsth = $this->db->prepare('SELECT ID, TITLE, FIRSTNAME, LASTNAME, EMAIL, ROLE FROM T_TUTOR WHERE ID = :id');
+        $editsth->execute(array(':id' => $id));
+        while ($row = $editsth->fetch(PDO::FETCH_ASSOC))
+        {
+             $idEdit = $row['ID'];
+            SESSION::set('DELETEID', $idEdit);
+            $titleEdit = $row['TITLE'];
+            SESSION::set('DELETETITTLE', $titleEdit);
+            $firstnameEdit = $row['FIRSTNAME'];
+            SESSION::set('DELETEFIRSTNAME', $firstnameEdit);
+            $lastnameEdit = $row['LASTNAME'];
+            SESSION::set('DELETELASTNAME', $lastnameEdit);
+            $emailEdit = $row['EMAIL'];
+            SESSION::set('DELETEEMAIL', $emailEdit);
+            $roleEdit = $row['ROLE'];
+            SESSION::set('DELETEROLE', $roleEdit);
+
+            $view = new User();
+            $view->viewdelete();
             exit;
         }
         exit;

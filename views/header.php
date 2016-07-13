@@ -35,14 +35,14 @@ header("Content-Type: text/html; charset=utf-8");
 		<nav class="nav">
 			<ul>
 				<?php if (Session::get('loggedIn') == false):?>
-					<li><a href="<?php echo URL; ?>index">Index</a></li>
+					<li><a href="<?php echo URL; ?>">Index</a></li>
                                         <li><a href="<?php echo URL; ?>registration">Registrierung</a></li>
 					<li><a href="<?php echo URL; ?>help">Help</a></li>
 				<?php endif; ?>	
 				<?php if (Session::get('loggedIn') == true):?>
                                         <li><a href="<?php echo URL; ?>newquestion">Fragen erstellen</a></li>
                                         <li><a href="<?php echo URL; ?>overview">Fragen Übersicht</a></li>
-                                        <li><a href="<?php echo URL; ?>categoryEdit">Kategorien verwalten</a></li>
+                                        <li><a href="<?php echo URL; ?>categoryEdit">Kategorieverwaltung</a></li>
 					<li><a href="<?php echo URL; ?>account">Account</a></li>
                                         
 				<?php if (Session::get('ROLE') == 'Administrator'):?>
