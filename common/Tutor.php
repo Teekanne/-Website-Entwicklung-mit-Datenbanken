@@ -43,7 +43,7 @@
             $result = $statement->fetchAll()[0];
             
             if(!$result){
-                echo "User mit ID " . $id . " existiert nicht.";
+                echo "<p>User mit ID " . $id . " existiert nicht.</p>";
                 return null;
             }
 
