@@ -5,7 +5,7 @@
 <h3>
     ... An einem Quiz Teilnehmen?
 </h3>
-<br>
+
 
 <p>
 bitte geben Sie den vom Dozenten freigegebenen Quiz-Key ein!<br> 
