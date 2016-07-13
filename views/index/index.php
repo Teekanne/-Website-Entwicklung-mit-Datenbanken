@@ -1,6 +1,6 @@
-<h2>
+<h3>
     Willkommen bei Testimeter! Wollen Sie ...
-</h2>
+</h3>
 
 <h3>
     ... An einem Quiz Teilnehmen?
