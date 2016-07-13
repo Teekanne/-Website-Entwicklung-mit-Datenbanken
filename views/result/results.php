@@ -46,8 +46,6 @@
 	
         $myQuestion->ShowTable();
         
-        $myQuestion->ShowTable();
-        
         $votes = $myQuestion->CountVotes();
         
         if($votes>0){
