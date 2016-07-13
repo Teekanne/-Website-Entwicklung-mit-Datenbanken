@@ -490,7 +490,7 @@ button {
 
 }
 
-@media screen and (max-width:783.5px) {
+@media screen and (max-width:808px) {
 	#main {
 		margin: 15em auto;
 	}
@@ -521,6 +521,7 @@ button {
 
 
 @media screen and (max-width:475px){
+	
 
    header ul {
 		display:none;
@@ -566,9 +567,10 @@ button {
 		width: 13.3em;
 	}
 	
+
 }
 
-@media screen and (max-width:370px) {
+@media screen and (max-width:411.5px) {
 		#main {
 		margin: 19em auto;
 	}
