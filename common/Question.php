@@ -145,10 +145,10 @@
 
             $sumVotes = $this->CountVotes();
             
-            echo "<table><tr>";
+            echo "<table border='0'><tr>";
 
             if($maxVotes==0 || $sumVotes==0){
-                echo "Bisher hat noch niemand abgestimmt.</tr></table>";
+                echo "<label>Bisher hat noch niemand abgestimmt.</label></tr></table>";
                 return;
             }
 
@@ -161,8 +161,8 @@
                 }else{
                     $percent = 0;
                 }
-                echo "<td valign='bottom'>";
-                echo "<input type='button' style='height:" . $percent*2 . "px;'>";
+                echo "<td valign='bottom'>&nbsp;&nbsp;";
+                echo "<input id='resultBtn' type='button' style='height:" . $percent*2 . "px;'>";
                 echo "</td>";
             }
 
@@ -170,7 +170,7 @@
 
             /* Vote-Anzahl in einer Zeile anzeigen */
             foreach($answers as $answer){
-                echo "<td>" . $answer->GetVotes() . " Votes</td>";
+                echo "<td>&nbsp;&nbsp;" . $answer->GetVotes() . " Vote(s)</td>";
             }
             
             echo "</tr><tr>";
@@ -186,14 +186,14 @@
                     $percent = 0;
                 }
                 
-                echo "<td>" . $percent . " %</td>";
+                echo "<td>&nbsp;&nbsp;" . $percent . " %</td>";
             }
             
             echo "</tr><tr>";
 
             /* Antwort in einer Zeile anzeigen */
             foreach($answers as $answer){
-                echo "<td>" . $answer->__get("answer") . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+                echo "<td>&nbsp;&nbsp;" . $answer->__get("answer") . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
             }
 
             echo "</tr></table>";
