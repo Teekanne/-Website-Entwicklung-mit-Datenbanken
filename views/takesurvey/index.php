@@ -19,6 +19,7 @@
     }
     
     $QuizAvailable = true;
+    $QuizFirstTime = 0;
 
     if (!isset($_SESSION['Quiz'])) {
         
@@ -63,8 +64,13 @@
                             $QuestionTmp->QuestionDescription = $QuestionRow['DESCRIPTION'];
                             $QuestionTmp->QuestionKey = $QuestionRow['QKEY'];
 
+                            if (isset($_SESSION['completed'.$QuestionTmp->QuestionKey])) {
+                                $QuizAvailable = false;
+                                $QuizFirstTime = 1;
+                            }
+                            
                             $AnswerSelect = "SELECT * FROM T_ANSWER WHERE FK_QUESTION = ".$QuestionRow['ID']." ORDER BY ANSWER_POS";
-                            $AnswerResult = $pdo->query($AnswerSelect);
+                            $AnswerResult = $pdo->query($AnswerSelect); 
 
                             $Answers = array();
 
@@ -96,7 +102,7 @@
     
     if (!$QuizAvailable) 
     {
-        header("Location: quizunavailable");
+        header("Location: quizunavailable?FIRSTTIME=".$QuizFirstTime);
         exit;
     }
 
