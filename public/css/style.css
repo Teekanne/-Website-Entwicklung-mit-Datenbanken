@@ -288,6 +288,11 @@ label:active {
 	color:#8B8989;
 }
 
+#messageLabel {
+	text-align:center;
+	font-size:1.2em;
+}
+
 #userLabel {
 	text-align:left;
 	border-bottom:0.1em solid #FFFFFF;
