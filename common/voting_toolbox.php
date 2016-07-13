@@ -1,5 +1,4 @@
 <?php
-    // QUESTION
     include_once("models/quiz_model.php");
     include_once("config/database.php");
     
@@ -52,6 +51,9 @@ function activateQuiz($quizId)
     return $retVal;
 }
 
+// upon activatig a quiz, this function is called.
+// If there are no results in the DB (t_vote_result), emtpy result rows are created.
+// If there are results already present, its vote-quantities are put to Zero (reset).
 function resetQuizResults($quizId)
 {
     $retVal = false;
@@ -61,6 +63,7 @@ function resetQuizResults($quizId)
     $QuizSelect = "SELECT * FROM T_QUIZ WHERE ID = ".$quizId;
     $QuizResult = $pdo->query($QuizSelect);
 
+    // iterating Quiz DB rows
     if ($QuizResult && $QuizResult->rowCount() > 0) {
         while ($QuizRow = $QuizResult->fetch(PDO::FETCH_ASSOC)) {
             
@@ -73,6 +76,7 @@ function resetQuizResults($quizId)
             $QuestionSelect = "SELECT * FROM T_QUESTION WHERE FK_QUIZ = ".$quizId." ORDER BY QUESTION_POS";
             $QuestionResult = $pdo->query($QuestionSelect);
 
+            // iterating Question DB rows
             if ($QuestionResult && $QuestionResult->rowCount() > 0) {
                 while ($QuestionRow = $QuestionResult->fetch(PDO::FETCH_ASSOC)) {
                     
@@ -85,10 +89,10 @@ function resetQuizResults($quizId)
                     $QuestionTmp->QuestionDescription = $QuestionRow['DESCRIPTION'];
                     $QuestionTmp->QuestionKey = $QuestionRow['QKEY'];
 
-
                     $AnswerSelect = "SELECT * FROM T_ANSWER WHERE FK_QUESTION = ".$QuestionRow['ID']." ORDER BY ANSWER_POS";
                     $AnswerResult = $pdo->query($AnswerSelect);
 
+                    // iterating Answer DB rows
                     if ($AnswerResult && $AnswerResult->rowCount() > 0) {
                         while ($AnswerRow = $AnswerResult->fetch(PDO::FETCH_ASSOC)) { 
 
@@ -97,6 +101,7 @@ function resetQuizResults($quizId)
                             $AnswerTmp->AnswerText = $AnswerRow['ANSWER'];
                             $AnswerTmp->QuestionChecked = 0;
 
+                            // Use the function, that otherwise would add to the vote counter
                             setQuestionResults($QuestionTmp->QuestionID, $AnswerTmp->AnswerID, false, true);
                         }  
                     }     
@@ -108,6 +113,9 @@ function resetQuizResults($quizId)
     return $retVal;
 }
 
+// upon finishing a quiz, this function is called.
+// it will affect the vote quantity of result rows.
+// It can be incremented or resetted...
 function setQuestionResults($questionId, $answerId, $increment, $reset)
 {
     $retVal = false;
@@ -122,14 +130,18 @@ function setQuestionResults($questionId, $answerId, $increment, $reset)
     $VoteResultResult = $pdo->query($VoteResultSelect);
 
     if ($VoteResultResult && $VoteResultResult->rowCount() > 0) {
+        // In This case, there are already Result Rows present
 
+        // no iteration, only one row plausible
         $VoteResultRow = $VoteResultResult->fetch(PDO::FETCH_ASSOC);
 
         if ($increment) {
+            // Adding 1 to the vote counter...
             $VoteQuantity = $VoteResultRow['QUANTITY'];
             $VoteQuantity++;
         }
         if ($reset) {
+            // Set the vote counter to zero...
             $VoteQuantity = 0;
         }
 
@@ -142,11 +154,15 @@ function setQuestionResults($questionId, $answerId, $increment, $reset)
         $VoteResultUpdateStmnt->execute();
 
     } else {     
+        // In This case, there are NO Result Rows present
+        // A new Row is created
         
         if ($increment) {
+            // If it is a Vote, it will already start with count "1"
             $VoteQuantity = 1;
         }
         if ($reset) {
+            // If it is a Reset, it will start with count "0"
             $VoteQuantity = 0;
         }
 
