@@ -57,7 +57,7 @@
                     if (Session::get('loggedIn') == false){
                         setUrl("", "Index");
                         setUrl("registration", "Registrierung");
-                        setUrl("help", "Help");
+                        setUrl("help", "Hilfe");
                         setUrl("login", "Login"); 
                     }elseif(Session::get('loggedIn') == true){
                          setUrl("newquestion", "Frage stellen");
