@@ -1,6 +1,5 @@
 <?php 
     if(isset($_POST["quizName"])){
-
         $currentCategory = Category::Load($_POST["category"]);
         $currentUser = Tutor::Load($_SESSION["ID"]);
         $currentQuiz = Quiz::Add($_POST["quizName"], $_POST["quizDescription"], $currentUser, $currentCategory);
@@ -58,9 +57,9 @@
             <td class='cells'><input type="text" name="quizDescription"/></td>
         </tr>
     </table>
-</form>
-    <label id=overviewLabel>&nbsp;</label><br>
-<form action="" method="post">	
+
+    <label id="overviewLabel">&nbsp;</label><br>
+
     <table id='questionTable' border='0'>
         <tr>
             <td class='cells'><label>Frage</label></td>

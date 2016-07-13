@@ -13,6 +13,7 @@ h1 {
 	color:#8B8989;
 	margin:0em;
 	text-align:center;
+	
 }
 
 h2 {
@@ -99,6 +100,11 @@ a:active {
 	color:#FFFFFF;
 }
 
+#userLink:hover {
+	border-bottom:0.1em inset #FFFF00;
+	border-radius:5px;
+}
+
 #start {
 	color:#66FF33;
 	
@@ -181,6 +187,7 @@ nav ul li a {
 nav ul li a:hover {
 	background:#0f3133;
 	border-bottom:0.19em solid #FFFF00;
+	border-radius:5px;
 }
 nav ul li a.active {
 	border-bottom:0.19em solid #FFFF00;
@@ -251,6 +258,7 @@ label {
 	padding: 0; 
 	margin: 0.6em 0 0;
 	text-align: right; 
+	color:#FFFFFF;
 }
 
 label:active {
@@ -258,11 +266,26 @@ label:active {
 }
 
 #userLabel {
-	text-align: center;
+	text-align:left;
+	border-bottom:0.1em solid #FFFFFF;
+	
 }
+
+#userChange {
+	text-align:left;
+}
+
 .radioLabel {
 	display: inline;
     font-weight: normal;
+}
+
+
+#passwordLabel:hover {
+	border-bottom:0.1em inset #FFFF00;
+	border-radius:5px;
+	
+	
 }
 
 #cbSub {
@@ -308,6 +331,11 @@ form input[type=button] {
 	
 }
 
+button {
+	width: 13.3em;
+	border-radius:5px;
+}
+
 form input[type=button]:hover {
 	cursor: pointer;
 	background: silver;
@@ -343,9 +371,22 @@ input[type='checkbox'] {
 	color: red;
 }
 
+#resultBtn {
+	background:#eecc33;
+	border:0.1em solid #FFFFFF;
+	box-shadow: 0 0 2px 2px #FFF;
+	width:4em;
+	margin-bottom:0em;
+	
+}
 #categorySub {
 	float:left;
 	
+}
+
+#userLi {
+	margin-left:2em;
+	display: inline;
 }
 
 table {

@@ -72,7 +72,6 @@
 
             $sql= "UPDATE T_QUIZ SET QKEY=:qkey WHERE ID=:id"; 
             
-            
             $replacePairs = array(
                 'ä' => 'ae',
                 'ö' => 'oe',
@@ -83,9 +82,10 @@
             $key = substr(strtr($tutor->__get("firstname"), $replacePairs),0,2)
                     . substr(strtr($tutor->__get("lastname"), $replacePairs),0,2)
                     . $quizId;
-            
+            $key = strtolower($key);
+
             $statement = $pdo->prepare($sql);
-            $statement->bindParam(':qkey', $qkey, PDO::PARAM_STR); 
+            $statement->bindParam(':qkey', $key, PDO::PARAM_STR); 
             $statement->bindParam(':id', $quizId, PDO::PARAM_STR); 
             $statement->execute();
             

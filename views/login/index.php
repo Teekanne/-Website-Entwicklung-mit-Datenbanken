@@ -12,7 +12,7 @@
 			<th><input type="password" name="password" /></th>
 		</tr>
 		<tr>
-			<th><label><a href="passwordlost">Passwort vergessen</a></label></th>
+			<th><label id="passwordLabel" ><a href="passwordlost">Passwort vergessen?</a></label></th>
 			<th><input id="change"  type="submit" /></th>
 		</tr>
 	</table>

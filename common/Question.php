@@ -70,7 +70,7 @@
             $result = $statement->fetchAll();
             
             if(!$result){
-                echo "Es wurde keine Frage gefunden.";
+                echo "<p>Es wurde keine Frage gefunden.</p>";
                 return null;
             }
             
@@ -145,10 +145,10 @@
 
             $sumVotes = $this->CountVotes();
             
-            echo "<table><tr>";
+            echo "<table border='0'><tr>";
 
             if($maxVotes==0 || $sumVotes==0){
-                echo "Bisher hat noch niemand abgestimmt.</tr></table>";
+                echo "<p>Bisher hat noch niemand abgestimmt.</p></tr></table>";
                 return;
             }
 
@@ -156,13 +156,11 @@
             foreach($answers as $answer){
                 $currentVotes = $answer->GetVotes();
                 
+                echo "<td valign='bottom'>&nbsp;&nbsp;";
                 if($currentVotes != 0){
-                    $percent =  $currentVotes / $maxVotes * 100;
-                }else{
-                    $percent = 0;
+                    echo "<input id='resultBtn' type='button' style='height:" . $currentVotes / $maxVotes * 100*2 . "px;'>";
                 }
-                echo "<td valign='bottom'>";
-                echo "<input type='button' style='height:" . $percent*2 . "px;'>";
+
                 echo "</td>";
             }
 
@@ -170,7 +168,7 @@
 
             /* Vote-Anzahl in einer Zeile anzeigen */
             foreach($answers as $answer){
-                echo "<td>" . $answer->GetVotes() . " Votes</td>";
+                echo "<td>&nbsp;&nbsp;" . $answer->GetVotes() . " Vote(s)</td>";
             }
             
             echo "</tr><tr>";
@@ -186,14 +184,14 @@
                     $percent = 0;
                 }
                 
-                echo "<td>" . $percent . " %</td>";
+                echo "<td>&nbsp;&nbsp;" . $percent . " %</td>";
             }
             
             echo "</tr><tr>";
 
             /* Antwort in einer Zeile anzeigen */
             foreach($answers as $answer){
-                echo "<td>" . $answer->__get("answer") . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+                echo "<td>&nbsp;&nbsp;" . $answer->__get("answer") . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
             }
 
             echo "</tr></table>";
