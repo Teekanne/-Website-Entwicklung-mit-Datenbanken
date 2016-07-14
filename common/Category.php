@@ -188,11 +188,12 @@
          * 
          * @return int Sum of first level categories
          */
-        public static function CountFirstLevelCategories(){
+        public static function CountFirstLevelCategories($tutorId){
             $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
             
-            $sql= "SELECT * FROM T_CATEGORY WHERE LEVEL=1"; 
+            $sql= "SELECT * FROM T_CATEGORY WHERE LEVEL=1 AND FK_TUTOR=" . $tutorId; 
             $statement = $pdo->prepare($sql);
+            
             $statement->execute();
             
             return $statement->rowCount();
