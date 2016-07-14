@@ -6,7 +6,7 @@ $lastnameEdit = Session::get('LASTNAMEEDIT');
 $emailEdit = Session::get('EMAILEDIT');
 $passwordEdit =Session::get('PASSWORDEDIT');
 ?>
-<form method="post" action="<?php echo URL; ?>Account/editAccount">
+<form method="post" action="<?php echo URL; ?>account/editAccount">
     <h2>Hier können Sie ihre Daten verwalten</h2>
 	<table border='0'>
 		<tr>

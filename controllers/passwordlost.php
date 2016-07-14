@@ -230,13 +230,14 @@ if(!$mail->send()) {
 
             $mail->setFrom('mueller@hs-flensburg.de', 'Prof. Dipl.-Kfm. Thomas Müller');
             $mail->addAddress($toemail, 'Benutzer');
-            $mail->addAddress('benjamin.juergens@stud.fh-flensburg.de', 'Ben');
+          
             
 
             $mail->Subject = 'Testimeter Resetkey';
-             $string = "Bitte nutzen Sie den folgenden Key um ihr Passwort neu zu setzen. \r\n\r\n";
-            $string .= "Benutzer:.$toemail.\r\n\r\n" ;
-            $string .= "Key:.$key. \r\n\r\n" ;
+             $string = "Bitte nutzen Sie den folgenden Key um Ihr Passwort neu zu setzen. \r\n\r\n";
+            $string .= "Benutzer: $toemail\r\n\r\n" ;
+            $string .= "Key: $key \r\n\r\n" ;
+            $string .= "http://projekt.wi.fh-flensburg.de/~projekt2015a/passwordlost";
             $stringHtml = str_replace("\r\n", "<br>", $string);
             
             $mail->Body    = $stringHtml;
@@ -245,7 +246,7 @@ if(!$mail->send()) {
 if (!$mail->send()) {
     echo "Mailer Error: " . $mail->ErrorInfo;
 } else {
-    echo "Message sent!";
+   // echo "Message sent!";
 }/*
         
         
