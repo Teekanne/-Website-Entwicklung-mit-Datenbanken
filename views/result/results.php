@@ -69,7 +69,7 @@
         }
         
         if(!$myQuestion->IsLastQuestion()){
-            echo <td><button id='buttonNext' type='submit' name='pos' value='" . ($myQuestion->__get("questionPos")-1) . "'    >←</button></td>"
+            echo "<td><button id='buttonNext' type='submit' name='pos' value='" . ($myQuestion->__get("questionPos")-1) . "'    >→</button></td>";
         }
         echo "</tr></table>";
         echo "</form>";
