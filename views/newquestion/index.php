@@ -13,9 +13,9 @@
         echo "</tr>";
         echo "</table></form>";
         
-        /* Einfach mal 100 Fragen durchlaufen */
+        /* Looping through 1000 questions */
         for ($questionNumber = 1; $questionNumber <= 1000; $questionNumber++) {
-            /* Wenn Frage Nummer x nicht mehr vorhanden, dann Abbruch */
+            /* Break the loop if question-number x isnt available anymore */
             if(!isset($_POST["question" . $questionNumber])){
                 break;
             }
@@ -29,6 +29,9 @@
             if(strlen($_POST["question" . $questionNumber]) < 2){return;}
             $currentQuestion = Question::Add($_POST["description" . $questionNumber], $_POST["question" . $questionNumber], $questionNumber, $singleChoice, $currentQuiz);
             
+            /**
+             * Saving the answers
+             */
             for($answerNumber = 1; $answerNumber < 11; $answerNumber++){
                 if(!isset($_POST["answer" . $questionNumber . "_" . $answerNumber])){ break; }
                 
