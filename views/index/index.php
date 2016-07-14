@@ -10,7 +10,7 @@
 <label id='indexLabel'>
 bitte geben Sie den vom Dozenten freigegebenen Quiz-Key ein! 
 </label>
-</br>
+<br />
 <form name="surveyform" method="post" action="takesurvey">
     Quiz-Key: 
     <input type='text' name='inputkey'>
@@ -28,5 +28,5 @@ bitte geben Sie den vom Dozenten freigegebenen Quiz-Key ein!
     <input type='submit' name='login' value='Einloggen!'>
 </label>
 
-<br>
-<br>
+<br />
+<br />
