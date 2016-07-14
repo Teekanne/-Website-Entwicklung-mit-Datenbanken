@@ -26,10 +26,10 @@
      */
     }elseif(isset($_POST["deleteCategory"])){
         if($sumMainCategories == 1){
-            echo "<p>Kategorie konnte nicht entfernt werden. Eine Haupt-Kategorie muss mindestens bestehend bleiben.</p>";
+            echo "<br><label id='messageLabel'>Kategorie konnte nicht entfernt werden. Eine Haupt-Kategorie muss mindestens bestehend bleiben.</label></br>";
         }else{
             Category::Delete($_POST["category"]);
-            echo "<p>Die Kategorie " . $_POST["category"] . " wurde entfernt.</p>";
+            echo "<br><label id='messageLabel'>Die Kategorie " . $_POST["category"] . " wurde entfernt.</label></br>";
         }
     }
     
@@ -37,7 +37,7 @@
      * Error-message
      */
     if(!isset($_SESSION["ID"])){
-        echo "<h3>Ausgeloggt</h3><p>Du bist nicht eingeloggt. :-(</label></p>";
+        echo "<br><br><br><label id='messageLabel'>Du bist nicht eingeloggt. :-(</label></br></br></br>";
     }else {
 ?>
 
