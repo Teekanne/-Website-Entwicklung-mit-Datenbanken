@@ -32,15 +32,10 @@ function generateQuizOverview($TutorId, $CategoryId)
                 '<td style="padding-right: 25px">';
 
             // Quiz-Name / Quiz-Key
-            if($IsQuizActive == 1) {  
-                // When a Quiz is active...
-                // ... display link to results (Quiz-Name) and Quiz-Key
-                echo '<a id="current" href="'.URL.'result?key='.$Quiz['QKEY'].'"> <b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'].' (Q-Key: '.$Quiz['QKEY'].')</a><br>';
-            } else {
-                // When a Quiz is inactive...
-                // ... display only Quiz-Name
-                echo '<a id="current" href="'.URL.'result?key='.$Quiz['QKEY'].'"> <b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'].' (Q-Key: '.$Quiz['QKEY'].')</a><br>';
-            }
+
+            // When a Quiz is active...
+            // ... display link to results (Quiz-Name) and Quiz-Key
+            echo '<a id="current" href="'.URL.'result?key='.$Quiz['QKEY'].'"> <b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'].' (Q-Key: '.$Quiz['QKEY'].')</a><br>';
 
             echo
                 '</td>'.
