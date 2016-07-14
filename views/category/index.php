@@ -1,5 +1,7 @@
 <?php 
-    
+    /**
+     * Creating a new category
+     */
     if(isset($_POST["createCategory"])){
         if(isset($_POST["mainCategory"])){
             $mainCategory = Category::Load($_POST["category"]);
@@ -10,6 +12,9 @@
         if(strlen($_POST["createCategory"])>2){
             Category::Add($_POST["createCategory"], $mainCategory, $_SESSION["ID"]);
         }
+    /**
+     * Deleting an existing category
+     */
     }elseif(isset($_POST["deleteCategory"])){
         if(Category::CountFirstLevelCategories() == 1){
             echo "<p>Kategorie konnte nicht entfernt werden. Eine Haupt-Kategorie muss mindestens bestehend bleiben.</p>";
@@ -19,6 +24,9 @@
         }
     }
     
+    /**
+     * Error-message
+     */
     if(!isset($_SESSION["ID"])){
         echo "<h3>Ausgeloggt</h3><p>Du bist nicht eingeloggt. :-(</label></p>";
     }else {

@@ -1,8 +1,11 @@
 <?php 
     if(isset($_GET["key"])){
         $key = $_GET["key"];
-        $disallowed = "<label>Nur der Fragenersteller kann die Ergebnisse sehen ;-)</label>";
+        $disallowed = "<br /><br /><br /><label id='messageLabel'>Nur der Fragenersteller kann die Ergebnisse sehen ;-)</label><br /><br /><br />";
         
+        /**
+         * Showing the vote-results
+         */
         if(isset($_SESSION["ID"]) && Quiz::LoadByKey($key)){
                 if($_SESSION["ID"] == Quiz::LoadByKey($key)->__get("fkTutor")){
            
@@ -17,6 +20,9 @@
                 }else{
                     echo $disallowed;
             }
+        /**
+         * Displaying an error-message
+         */
         }elseif(Quiz::LoadByKey($key)){
             echo $disallowed;
         }

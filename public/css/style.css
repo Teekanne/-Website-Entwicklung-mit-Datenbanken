@@ -377,6 +377,17 @@ button {
 	border-radius:5px;
 }
 
+#buttonNext {
+	font-size:1em;
+	width:8em;
+	
+}
+
+button:hover {
+	cursor: pointer;
+	background: silver;
+}
+
 form input[type=button]:hover {
 	cursor: pointer;
 	background: silver;
@@ -457,10 +468,6 @@ table {
 #loginTable {
 	margin-left: 21em;
 	margin-right:auto;
-}
-
-button {
-	width:5em;
 }
 
 #containerImg {

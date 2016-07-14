@@ -12,6 +12,9 @@
     $myQuestion = Question::LoadByQuiz($myQuiz, $pos);
     
     if($myQuestion){
+        /**
+         * Displaying general informations about the quiz 
+         */
         echo "</br><table>";
         echo "<tr>";
         echo "<td>Quiz:</td>";
@@ -50,17 +53,23 @@
             echo "<h3><center>Anzahl der abgegebenen Stimmen: " . $votes . "</center></h3>";
         }
         
+        /**
+         * Displaying the vote-results
+         */
         $myQuestion->ShowTable();
         
+        /**
+         * Displaying buttons for next- and previous-questions
+         */
         echo "<form method='GET'>";
         echo "<input type='text' hidden name='key' value='". $myQuiz->__get("qKey") . "'>";
         echo "<table><tr>";
         if($myQuestion->__get("questionPos") > 1){
-            echo "<td><button type='submit' name='pos' value='" . ($myQuestion->__get("questionPos")-1) . "'    >←</button></td>";
+            echo "<td><button id='buttonNext' type='submit' name='pos' value='" . ($myQuestion->__get("questionPos")-1) . "'    >←</button></td>";
         }
         
         if(!$myQuestion->IsLastQuestion()){
-            echo "<td><button id='next' type='submit' name='pos' value='" . ($myQuestion->__get("questionPos")+1) . "'>→</button></td>";
+            echo <td><button id='buttonNext' type='submit' name='pos' value='" . ($myQuestion->__get("questionPos")-1) . "'    >←</button></td>"
         }
         echo "</tr></table>";
         echo "</form>";
