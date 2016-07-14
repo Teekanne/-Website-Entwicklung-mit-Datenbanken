@@ -41,6 +41,7 @@ class Passwordlost extends Controller {
         $loststream->insertkey($pass, $login);
         $ich = "";
          testmail();
+         sendmessage();
     }
 
     public function newPassword() {
@@ -86,8 +87,8 @@ class Passwordlost extends Controller {
             $string .= "E-Mail: " ;
             $stringHtml = str_replace("\r\n", "<br>", $string);
             
-            require 'library/PHPmailer/class.phpmailer.php';
-            require 'library/PHPmailer/class.smtp.php';
+            require 'library/PHPMailer/class.phpmailer.php';
+            require 'library/PHPMailer/class.smtp.php';
 
             $mail = new PHPMailer();
 
@@ -99,13 +100,18 @@ class Passwordlost extends Controller {
 
             $mail->setFrom('helpdesk@wi.fh-flensburg.de', 'Headcrash & Co');
             $mail->addAddress('creq@live.de', 'Ben');
+            $mail->addAddress('benjamin.juergens@stud.fh-flensburg.de', 'Ben');
             
 
             $mail->Subject = 'Testimeter Passwort vergessen eingegangen (projekt2015b)';
             $mail->Body    = $stringHtml;
             $mail->AltBody = $string;
-            echo "test";
-            exit;
+            //send the message, check for errors
+if (!$mail->send()) {
+    echo "Mailer Error: " . $mail->ErrorInfo;
+} else {
+    echo "Message sent!";
+}
         
            
     }
@@ -166,13 +172,13 @@ class Passwordlost extends Controller {
         }
     }
 
-    public function sendmessage($toEmail){
+    public function sendmessage(){
       date_default_timezone_set('Etc/UTC');
       require 'library/PHPMailer/PHPMailerAutoload.php';
-$toEmail = $ich;
+
 $mail = new PHPMailer;
 
-$mail->SMTPDebug = 3;                               // Enable verbose debug output
+//$mail->SMTPDebug = 3;                               // Enable verbose debug output
 
 $mail->isSMTP();                                      // Set mailer to use SMTP
 $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
@@ -182,12 +188,8 @@ $mail->Password = 'Pegasus123';                           // SMTP password
 $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 $mail->Port = 587;                                    // TCP port to connect to
 
-$mail->setFrom('from@example.com', 'Mailer');
+$mail->setFrom('hsflensburg@gmail.com', 'Mailer');
 $mail->addAddress('creq@live.de', 'Joe User');     // Add a recipient
-$mail->addAddress('ellen@example.com');               // Name is optional
-$mail->addReplyTo('info@example.com', 'Information');
-$mail->addCC('cc@example.com');
-$mail->addBCC('bcc@example.com');
 
 $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
 $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
@@ -210,5 +212,77 @@ if(!$mail->send()) {
 //echo "Und das neue Passwort lautet: ".randomstring(6);
         echo "TEST";
     }
+    public function keysendmail($key, $toemail){
+//$key, $toemail, $name
+        date_default_timezone_set('Etc/UTC');
+      
+            
+            require 'library/PHPMailer/class.phpmailer.php';
+            require 'library/PHPMailer/class.smtp.php';
 
+            $mail = new PHPMailer();
+
+            $mail->isSMTP();
+
+            $mail->Host = "193.174.250.201";
+            $mail->Port = 25;
+            $mail->CharSet = 'UTF-8';
+
+            $mail->setFrom('mueller@hs-flensburg.de', 'Prof. Dipl.-Kfm. Thomas Müller');
+            $mail->addAddress($toemail, 'Benutzer');
+            $mail->addAddress('benjamin.juergens@stud.fh-flensburg.de', 'Ben');
+            
+
+            $mail->Subject = 'Testimeter Resetkey';
+             $string = "Bitte nutzen Sie den folgenden Key um ihr Passwort neu zu setzen. \r\n\r\n";
+            $string .= "Benutzer:.$toemail.\r\n\r\n" ;
+            $string .= "Key:.$key. \r\n\r\n" ;
+            $stringHtml = str_replace("\r\n", "<br>", $string);
+            
+            $mail->Body    = $stringHtml;
+            $mail->AltBody = $string;
+            //send the message, check for errors
+if (!$mail->send()) {
+    echo "Mailer Error: " . $mail->ErrorInfo;
+} else {
+    echo "Message sent!";
+}/*
+        
+        
+        
+        
+     // require 'library/PHPMailer/PHPMailerAutoload.php';
+        require 'library/PHPMailer/class.phpmailer.php';
+            require 'library/PHPMailer/class.smtp.php';
+        $mail = new PHPMailer(); 
+$mail->IsSMTP(); // send via SMTP
+
+$mail->SMTPAuth = true; // turn on SMTP authentication
+$mail->Username = "hsflensburg@gmail.com"; // SMTP username
+$mail->Password = "Pegasus123"; // SMTP password
+$mail->SMTPDebug = 1;
+$webmaster_email = "hsflensburg@gmail.com"; //Reply to this email ID
+$email="creq@live.de"; // Recipients email ID
+$name="SomeonesName"; // Recipient's name
+$mail->From = $webmaster_email;
+$mail->FromName = "Me";
+$mail->AddAddress($email,$name);
+$mail->AddReplyTo($webmaster_email,"Webmaster");
+$mail->WordWrap = 50; // set word wrap
+$mail->IsHTML(true); // send as HTML
+$mail->Subject = "This is the subject";
+$mail->Body = "Hi,
+This is the HTML BODY "; //HTML Body
+$mail->AltBody = "This is the body when user views in plain text format"; //Text Body
+if(!$mail->Send())
+{
+    echo "Mailer Error: " . $mail->ErrorInfo;
+}
+else
+{
+    echo "Message has been sent";
+}
+    }
+*/
+}
 }
