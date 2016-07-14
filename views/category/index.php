@@ -5,7 +5,7 @@
     $sumMainCategories = Category::CountFirstLevelCategories($_SESSION["ID"]);
 
     if($sumMainCategories == 0){
-        Category::Add("Default", null, $_SESSION["ID"]);
+        Category::Add("Standard-Kategorie", null, $_SESSION["ID"]);
     }
 
     /**
