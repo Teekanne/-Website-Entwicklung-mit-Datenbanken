@@ -55,7 +55,7 @@
 			<ul>
 				<li><a href="https://www.hs-flensburg.de/"> <img src="images/HS.png"/> </a></li> 
 			</ul>
-			<a href="index"><h1>Testimeter</h1></a>
+			<a href="/Mentimeter/"><h1>Testimeter</h1></a>
 		</header>
 		<nav class="nav">
 			<ul>
