@@ -60,6 +60,8 @@ class Passwordlost_Model extends Model {
             $preparedStatement->execute();
             $message = new Passwordlost();
             $message->messageKeySent();
+            $emailSender = new Passwordlost();
+            $emailSender->keysendmail($key, $login);
 
             //echo "finish";
             exit;
