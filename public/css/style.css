@@ -463,6 +463,13 @@ button {
 	width:5em;
 }
 
+#containerImg {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 /** Responsiv Area */
 @media screen and (max-width:1020px) {
