@@ -78,7 +78,9 @@
                             // Check if Quiz already completed (Session-Based)
                             // e.g. "completedHeBr105" --> HeBr105 completed
                             if (isset($_SESSION['completed'.$QuestionTmp->QuestionKey])) {                               
-                                if (isset($_SESSION['ROLE']) && $_SESSION['ROLE'] == "Administrator") {
+                                if (
+                                    isset($_SESSION['ROLE']) && 
+                                    ($_SESSION['ROLE'] == "Administrator" || $_SESSION['ROLE'] == "User")) {
                                     // The limited access to the Quiz doesn't affect Admins ... 
                                     // echo "Debug: AdminView<br>";
                                 } else {
