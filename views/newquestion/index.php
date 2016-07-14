@@ -7,7 +7,7 @@
         echo "<h2>Glückwunsch! Du hast ein neues Quiz erstellt!</h2>";
         echo "<form><table table border='0'>";
         echo "<tr>";
-        echo "<td class='cells'><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Abfrageurl</label></td>";
+        echo "<td class='cells'><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quiz-Key</label></td>";
         $key = $currentQuiz->__get("qKey");
         echo "<td class='cells'><input type='text' value='" . $key . "' onclick='this.select();'/></td>";
         echo "</tr>";
