@@ -25,7 +25,9 @@
      * Deleting an existing category
      */
     }elseif(isset($_POST["deleteCategory"])){
-        if($sumMainCategories == 1){
+        $tempCat = Category::Load(($_POST["category"]));
+        
+        if($sumMainCategories == 1 && $tempCat->__get("level") == 1){
             echo "<br><label id='messageLabel'>Kategorie konnte nicht entfernt werden. Eine Haupt-Kategorie muss mindestens bestehend bleiben.</label></br>";
         }else{
             Category::Delete($_POST["category"]);
