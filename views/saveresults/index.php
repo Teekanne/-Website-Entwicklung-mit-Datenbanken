@@ -16,10 +16,10 @@
     //session_destroy();
 ?>
 
-
-<h2>
+<p style="font-size: 250%; text-align: center;">
     Vielen Dank für Ihre Teilnahme!
-</h2>
+</p>
+    
 
 <br>
 
