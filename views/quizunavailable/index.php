@@ -52,7 +52,7 @@
     
     
     
-    <form name="homeform" method="post" action="index">
+    <form name="homeform" method="post" action="<?php echo URL; ?>">
         <input type='submit' name='login' value='Zurück!'>
     </form>
 </p>
