@@ -7,15 +7,15 @@
         echo "<h2>Glückwunsch! Du hast ein neues Quiz erstellt!</h2>";
         echo "<form><table table border='0'>";
         echo "<tr>";
-        echo "<td class='cells'><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Abfrageurl</label></td>";
+        echo "<td class='cells'><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quiz-Key</label></td>";
         $key = $currentQuiz->__get("qKey");
         echo "<td class='cells'><input type='text' value='" . $key . "' onclick='this.select();'/></td>";
         echo "</tr>";
         echo "</table></form>";
         
-        /* Einfach mal 100 Fragen durchlaufen */
+        /* Looping through 1000 questions */
         for ($questionNumber = 1; $questionNumber <= 1000; $questionNumber++) {
-            /* Wenn Frage Nummer x nicht mehr vorhanden, dann Abbruch */
+            /* Break the loop if question-number x isnt available anymore */
             if(!isset($_POST["question" . $questionNumber])){
                 break;
             }
@@ -29,6 +29,9 @@
             if(strlen($_POST["question" . $questionNumber]) < 2){return;}
             $currentQuestion = Question::Add($_POST["description" . $questionNumber], $_POST["question" . $questionNumber], $questionNumber, $singleChoice, $currentQuiz);
             
+            /**
+             * Saving the answers
+             */
             for($answerNumber = 1; $answerNumber < 11; $answerNumber++){
                 if(!isset($_POST["answer" . $questionNumber . "_" . $answerNumber])){ break; }
                 

@@ -17,9 +17,19 @@
 ?>
 
 
-<h2>
+<label style="font-size: 250%; text-align: center; font-family:Helvetica;">
+    
+    <br><br>
+    
     Vielen Dank für Ihre Teilnahme!
-</h2>
+    
+    <br>&nbsp;<br>
+    
+    <div id="containerImg">
+        <img src="images/check.png">
+    </div>
+</label>
+
 
 <br>
 
