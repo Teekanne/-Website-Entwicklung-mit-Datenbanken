@@ -22,11 +22,8 @@ class Registration extends Controller {
         try{$checkEMAIL = $email;
         //Romove all illegal characters from E-Mail.
         $cleanEmail = filter_var($checkEMAIL, FILTER_SANITIZE_EMAIL);
-echo $email;
-echo"</br>";
-echo $emailConfirmation;
-//exit;
-        if ((preg_match("/^[a-zA-Z0-9_.+-]+@fh-flensburg.de+$/", $cleanEmail) || preg_match("/^[a-zA-Z0-9_.+-]+@hs-flensburg.de+$/", $cleanEmail) )&& strlen($Checklength) >= 8){
+        
+        if ((preg_match("/^[a-zA-Z0-9_.+-]+@fh-flensburg.de+$/", $cleanEmail) || preg_match("/^[a-zA-Z0-9_.+-]+@hs-flensburg.de+$/", $cleanEmail) )){
 
             if($email == $emailConfirmation){
                 if($password == $passwordConfirmation){
