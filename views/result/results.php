@@ -44,9 +44,10 @@
         
         echo "</table><label id='overviewLabel'>&nbsp;</label><br>";
 	
-        $myQuestion->ShowTable();
-        
         $votes = $myQuestion->CountVotes();
+        
+        $myQuestion->ShowTable();
+
         
         if($votes>0){
             echo "<h3><center>Anzahl der abgegebenen Stimmen: " . $votes . "</center></h3>";
