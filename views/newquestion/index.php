@@ -4,7 +4,7 @@
         $currentUser = Tutor::Load($_SESSION["ID"]);
         $currentQuiz = Quiz::Add($_POST["quizName"], $_POST["quizDescription"], $currentUser, $currentCategory);
         
-        echo "<h2>Glückwunsch! Du hast ein neues Quiz erstellt!</h2>";
+        echo "<h2>Glückwunsch! Sie haben ein neues Quiz erstellt!</h2>";
         echo "<form><table table border='0'>";
         echo "<tr>";
         echo "<td class='cells'><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quiz-Key</label></td>";

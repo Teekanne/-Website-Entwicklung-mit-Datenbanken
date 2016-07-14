@@ -13,8 +13,17 @@
     }
 ?>
 
-<h2>
+<label style="font-size: 200%; text-align: center; font-family:Helvetica;">
+    
+    <br><br>
+    
     Das gewählte Quiz ist nicht verfügbar... ¯\_(ツ)_/¯
+    
+</label>
+
+
+<h2>
+    
 </h2>
 
 <p>
