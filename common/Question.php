@@ -1,26 +1,110 @@
 <?php
+/**
+ * Question.php
+ * 
+ * This file handles several database-operations for an specific question-object.
+ * 
+ * @author Christoph Pohl <christoph.pohl@stud.fh-flensburg.de>
+ * @version 1.0
+ */
     class Question {
+        /**
+         * ID of an question
+         * @access private
+         * @var int
+         */
         private $id;
+        
+        /**
+         * description of a question
+         * @access private
+         * @var string
+         */
         private $description;
+        
+        /**
+         * specific key for a question
+         * @access private
+         * @var string
+         */
         private $qkey;
+        
+        /**
+         * question-text
+         * @access private
+         * @var string
+         */
         private $question;
+        
+        /**
+         * position of a question
+         * @access private
+         * @var int
+         */
         private $questionPos;
+        
+        /**
+         * sets if the question is singlechoice/multiplechoice
+         * @access private
+         * @var boolean
+         */
         private $singleChoice;
+        
+        /**
+         * foreign-key of a quiz
+         * @access private
+         * @var int
+         */
         private $fkQuiz;
+        
+        /**
+         * contains the database-connection
+         * @access private
+         * @var PDO
+         */
         private $pdo;
         
+        /**
+         * Magic getter-method
+         * 
+         * This method returns the internal value of a variable if it exists.
+         * 
+         * @param string $key
+         * @return misc $key
+         */
         public function __get($key){
             if(property_exists($this, $key)){
                 return $this->$key;                
             }
         }
         
+        /**
+         * Magic setter-method
+         * 
+         * This method sets the internal value of a variable if it exists.
+         * 
+         * @param string $key
+         * @param misc $value
+         */
         public function __set($key, $value){
             if(property_exists($this, $key)){
                 $this->$key = $value;
             }
         }
 
+        /**
+         * Constructor of the question-class
+         * 
+         * Initializes a new object of the class 'question'
+         * 
+         * @param int $id
+         * @param string $description
+         * @param string $qkey
+         * @param string $question
+         * @param int $questionPos
+         * @param boolean $singleChoice
+         * @param int $fkQuiz
+         */
         public function __construct($id, $description, $qkey, $question, $questionPos, $singleChoice, $fkQuiz){
             $this->id = $id;
             $this->description = $description;
@@ -32,6 +116,16 @@
             $this->pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
         }
         
+        /**
+         * Adds a new question to the database
+         * 
+         * @param string $description
+         * @param string $question
+         * @param int $questionPos
+         * @param boolean $singleChoice
+         * @param Quiz $quiz
+         * @return \Question
+         */
         public static function Add($description, $question, $questionPos, $singleChoice, $quiz){
             $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
 
@@ -56,6 +150,13 @@
             return new Question($pdo->lastInsertId(), $description, $quiz->__get("qKey"), $question, $questionPos, $singleChoice, $quiz->__get("id"));
         }
         
+        /**
+         * Loads an question by a quiz out of the databench.
+         * 
+         * @param Quiz $quiz
+         * @param int $position
+         * @return \Question
+         */
         public static function LoadByQuiz($quiz, $position){
             if(!$quiz){
                 return;
@@ -78,6 +179,11 @@
             return new Question($result["ID"], $result["DESCRIPTION"], $result["QKEY"], $result["QUESTION"], $result["QUESTION_POS"], $result["ISSINGLECHOICE"], $result["FK_QUIZ"]);
         }
         
+        /**
+         * Checks if the current question is the last one in a quiz.
+         * 
+         * @return boolean
+         */
         public function IsLastQuestion(){
             $sql= "SELECT * FROM T_QUESTION WHERE FK_QUIZ=:quiz AND QUESTION_POS=:pos"; 
             $statement = $this->pdo->prepare($sql);
@@ -94,6 +200,11 @@
             }
         }
         
+        /**
+         * Gets the answers of a question
+         * 
+         * @return array of answers
+         */
         public function GetAnswers(){
             $sql= "SELECT * FROM T_ANSWER WHERE FK_QUESTION=:questionId"; 
             $statement = $this->pdo->prepare($sql);
@@ -109,6 +220,11 @@
             return $answers;
         }
         
+        /**
+         * Returns the maximum votes of a question
+         * 
+         * @return int Max Votes
+         */
         public function GetMaxVotes(){
             $answers = $this->GetAnswers();
             
@@ -125,6 +241,11 @@
             return $maxVotes;
         }
         
+        /**
+         * Gets the sum of all votes for a question
+         * 
+         * @return int sum of votes
+         */
         public function CountVotes(){
             $sql = "SELECT SUM(QUANTITY) AS 'QUANTITY' FROM T_VOTE_RESULT WHERE FK_QUESTION = :questionId";
             $statement = $this->pdo->prepare($sql);
@@ -139,6 +260,9 @@
             return $result[0]["QUANTITY"];
         }
         
+        /**
+         * Shows a result-diagram for a question
+         */
         public function ShowTable(){
             $answers = $this->GetAnswers();
             $maxVotes = $this->GetMaxVotes();
@@ -152,7 +276,7 @@
                 return;
             }
 
-            /* Buttons in einer Zeile anzeigen */
+            /* One line for buttons with specific heights */
             foreach($answers as $answer){
                 $currentVotes = $answer->GetVotes();
                 
@@ -166,14 +290,14 @@
 
             echo "</tr><tr>";
 
-            /* Vote-Anzahl in einer Zeile anzeigen */
+            /* One line for the several vote-sums */
             foreach($answers as $answer){
                 echo "<td>&nbsp;&nbsp;" . $answer->GetVotes() . " Vote(s)</td>";
             }
             
             echo "</tr><tr>";
             
-            /* Prozent in einer Zeile anzeigen */
+            /* One line for the procentual-sums */
             foreach($answers as $answer){
                 $currentVotes = $answer->GetVotes();
                 
