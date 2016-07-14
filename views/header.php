@@ -61,15 +61,15 @@
 			<ul>
 				<?php if (Session::get('loggedIn') == false):?>
 				
-					<li><a href="<?php echo URL; ?>">Index</a></li>
+					<li><a href="<?php echo URL; ?>">Startseite</a></li>
                                         <li><a href="<?php echo URL; ?>registration">Registrierung</a></li>
 					<li><a href="<?php echo URL; ?>help">Hilfe</a></li>
 				<?php endif; ?>	
 				<?php if (Session::get('loggedIn') == true):?>
-                                        <?php setUrl("newquestion", "Fragen erstellen"); ?>
-                                        <?php setUrl("overview", "Fragen-Übersicht"); ?>
+                                        <?php setUrl("newquestion", "Quiz erstellen"); ?>
+                                        <?php setUrl("overview", "Quiz-Übersicht"); ?>
                                         <?php setUrl("categoryEdit", "Kategorienverwaltung"); ?>
-                                        <?php setUrl("account", "Account"); ?>
+                                        <?php setUrl("account", "Konto"); ?>
                                         
 				<?php if (Session::get('ROLE') == 'Administrator'):?>
                                     <?php setUrl("user", "Benutzer"); ?>

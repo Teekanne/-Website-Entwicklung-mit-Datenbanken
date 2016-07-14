@@ -230,7 +230,7 @@ if(!$mail->send()) {
 
             $mail->setFrom('mueller@hs-flensburg.de', 'Prof. Dipl.-Kfm. Thomas Müller');
             $mail->addAddress($toemail, 'Benutzer');
-          
+         
             
 
             $mail->Subject = 'Testimeter Resetkey';
