@@ -39,7 +39,7 @@ function generateQuizOverview($TutorId, $CategoryId)
             } else {
                 // When a Quiz is inactive...
                 // ... display only Quiz-Name
-                echo '<b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'];
+                echo '<a id="current" href="'.URL.'result?key='.$Quiz['QKEY'].'"> <b>-</b> &nbsp;&nbsp;'.$Quiz['QUIZNAME'].' (Q-Key: '.$Quiz['QKEY'].')</a><br>';
             }
 
             echo
