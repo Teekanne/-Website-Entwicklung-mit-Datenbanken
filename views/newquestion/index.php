@@ -1,4 +1,11 @@
 <?php 
+	if(isset($_SESSION["ID"])){
+	    $sumMainCategories = Category::CountFirstLevelCategories($_SESSION["ID"]);
+	    if($sumMainCategories == 0){
+	        Category::Add("Standard-Kategorie", null, $_SESSION["ID"]);
+	    }
+	}
+
     if(isset($_POST["quizName"])){
         $currentCategory = Category::Load($_POST["category"]);
         $currentUser = Tutor::Load($_SESSION["ID"]);
