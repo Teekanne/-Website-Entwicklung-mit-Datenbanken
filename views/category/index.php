@@ -20,7 +20,7 @@
             echo "<p>Kategorie konnte nicht entfernt werden. Eine Haupt-Kategorie muss mindestens bestehend bleiben.</p>";
         }else{
             Category::Delete($_POST["category"]);
-            echo "<p>Die Kategorie " . $_POST["category"] . " wurde entfernt.</p>";
+            echo "<br /><br /><br /><label id='messageLabel'><br />Die Kategorie " . $_POST["category"] . " wurde entfernt.</label>";
         }
     }
     
@@ -28,7 +28,7 @@
      * Error-message
      */
     if(!isset($_SESSION["ID"])){
-        echo "<h3>Ausgeloggt</h3><p>Du bist nicht eingeloggt. :-(</label></p>";
+        echo "<h3>Ausgeloggt</h3><br /><br /><br /><label id='messageLabel'><br />Du bist nicht eingeloggt. :-(</label>";
     }else {
 ?>
 
@@ -48,7 +48,7 @@
 		
 </form>
 
-<label id=overviewLabel>&nbsp;</label><br>
+<label id=overviewLabel>&nbsp;</label><br />
 <h3>Kategorien hinzufügen</h3>
 <form method="POST" action="">
         <table border='0'>
