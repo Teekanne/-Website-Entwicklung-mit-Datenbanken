@@ -522,7 +522,7 @@ table {
 
 }
 
-@media screen and (max-width:808px) {
+@media screen and (max-width:750px) {
 	#main {
 		margin: 15em auto;
 	}
@@ -602,7 +602,7 @@ table {
 
 }
 
-@media screen and (max-width:411.5px) {
+@media screen and (max-width:395.5px) {
 		#main {
 		margin: 19em auto;
 	}
