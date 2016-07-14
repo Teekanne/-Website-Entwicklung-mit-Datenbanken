@@ -57,5 +57,8 @@ class Registration extends Controller {
         }
 
     }
+    public function sendthemail(){
+        
+    }
    
 }

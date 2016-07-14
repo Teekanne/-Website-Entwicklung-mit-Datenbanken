@@ -75,6 +75,10 @@ class Passwordlost extends Controller {
     public function messageNotFound() {
         $this->view->render('messages/loginnotfound');
     }
+    public function sendthemail(){
+        
+    }
+    
 
 // Ausgabe des Generatos Gibt eine 6 wertige Zeichenkette zurück
     public function echoout() {
