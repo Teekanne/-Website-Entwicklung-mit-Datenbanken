@@ -211,10 +211,16 @@
         // Start of Display
         echo "<h2>".$QuizTmp->QuizTitle."</h2>";  
 
-        echo "<p>";
-        echo "Frage (".($_SESSION['CurrPage']+1)."/".sizeof($QuestionsTmp).")<br><br>";
-        echo $QuestionTmp->QuestionText."<br>";
-        echo "</p>";
+        echo 
+            //"<p>".
+            "<div style=\"font-size: 150%; text-align: right;\">".
+            "Frage (".($_SESSION['CurrPage']+1)."/".sizeof($QuestionsTmp).")".
+            "</div>".
+            "<br><br>".
+            "<div style=\"font-size: 100%; text-align: justify;\">".
+            $QuestionTmp->QuestionText."<br>".
+            "</div>";    
+           //"</p>";
     ?>
 
     <br><br><br>	
@@ -255,7 +261,7 @@
                     // These values are remembered here
                     echo "<tr>";
                         echo "<td>&nbsp</td>";
-                        echo "<td colspan=\"4\" style=\"font-size: 100%; padding-top: 0px; padding-bottom: 0px; padding-right: 25px\">";
+                        echo "<td colspan=\"4\" style=\"font-size: 125%; padding-top: 10px; padding-bottom: 10px; padding-right: 25px\">";
                                 echo $AnswerTmp->AnswerText;
                         echo "</td>";
                         echo "<td><input type=\"".$QuestionType."\" name=\"Result[]\" id=\"Result\" value=\"".$index."\" ";
