@@ -5,7 +5,6 @@
  * This file handles several database-operations for an specific answer-object.
  * @author Christoph Pohl <christoph.pohl@stud.fh-flensburg.de>
  * @version 1.0
- * @package sample
  */
 
     class Answer {
