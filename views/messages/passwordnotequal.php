@@ -1,3 +1,3 @@
 <?php
 
-echo "<font color='#FFFF00'>Die eingegebenen Passwörter sind nicht gleich.</font>";
+echo "<label id='messageLabel'></br>Die eingegebenen Passwörter sind nicht identisch.</label>";

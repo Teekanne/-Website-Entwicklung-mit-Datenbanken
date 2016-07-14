@@ -6,13 +6,17 @@ $deletelastname = Session::get('DELETELASTNAME');
 $deleteemail = Session::get('DELETEEMAIL');
 $deleterole = Session::get('DELETEROLE');
 
-echo "<font color='#FFFF00'>Wollen Sie den User mit der ID:".$deleteid."(".$deletetitle." ".$deletefirstname." ".$deletelastname." ".$deleteemail.") mit der Rolle:".$deleterole." wirklich löschen?</font>";
+echo "<label id='messageLabel'></br>Wollen Sie den User mit der ID:".$deleteid."(".$deletetitle." ".$deletefirstname." ".$deletelastname." ".$deleteemail.")</br> mit der Rolle:".$deleterole." wirklich löschen?</label>";
 ?>
-</br>   
-<form method="post" action="<?php echo URL; ?>user/delete">
-<input id="change" type="submit" name="userChange" value="Löschen">
-</form>
-<form method="post" action="<?php echo URL; ?>user/index">
-<input id="change" type="submit" name="userChange" value="Abbrechen">
-</form>
-//
+</br>
+</br>
+<table border='0'>
+	<tr>
+		<td><form method="post" action="<?php echo URL; ?>user/delete">
+		<input id='change' type="submit" name="userChange" value="Löschen">
+		</form></td>
+		<td><form method="post" action="<?php echo URL; ?>user/index">
+		<input id='change' type="submit" name="userChange" value="Abbrechen">
+		</form></td>
+	</tr>
+</table>

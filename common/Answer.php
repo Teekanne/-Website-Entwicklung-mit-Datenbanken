@@ -25,11 +25,11 @@
             $this->answer = $answer;
             $this->iscorrect = $iscorrect;
             $this->fkQuestion = $fkQuestion;
-            $this->pdo = new Database();
+            $this->pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
         }
         
         public static function Add($answerPos, $answer, $iscorrect, $question){
-            $pdo = new Database();
+            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
 
             $sql= "INSERT INTO T_ANSWER (ANSWER_POS, ANSWER, ISCORRECT, FK_QUESTION) " .
                     "VALUES (:pos, :answer, :iscorrect, :fkQuestion)"; 

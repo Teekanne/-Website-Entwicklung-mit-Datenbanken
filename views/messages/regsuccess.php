@@ -1,3 +1,3 @@
 <?php
 
-echo "<font color='#FFFF00'>Sie haben sich erfolgreich registriert.</font>";
+echo "<label id='messageLabel'></br>Sie haben sich erfolgreich registriert.</label>";

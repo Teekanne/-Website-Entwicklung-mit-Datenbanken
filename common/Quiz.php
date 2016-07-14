@@ -29,11 +29,11 @@
             $this->fkTutor = $fkTutor;
             $this->fkCategory = $fkCategory;
             $this->qKey = $qKey;
-            $this->pdo = new DataBase();
+            $this->pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
         }
         
         public static function LoadByKey($qkey){
-            $pdo = new DataBase();
+            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
             $sql= "SELECT * FROM T_QUIZ WHERE QKEY=:key"; 
             $statement = $pdo->prepare($sql);
             $statement->bindParam(':key', $qkey, PDO::PARAM_STR); 
@@ -51,7 +51,7 @@
         }
         
         public static function Add($name, $description, $tutor, $category){
-            $pdo = new DataBase();
+            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
             $sql= "INSERT INTO T_QUIZ (QUIZNAME, DESCRIPTION, ISACTIVE, FK_TUTOR, FK_CATEGORY) " .
                     "VALUES (:name, :description, :isactive, :fktutor, :fkcategory)"; 
 
@@ -68,7 +68,7 @@
         }
         
         private static function addKey($tutor, $quizId){
-            $pdo = new DataBase();
+            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
 
             $sql= "UPDATE T_QUIZ SET QKEY=:qkey WHERE ID=:id"; 
             

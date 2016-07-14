@@ -1,5 +1,7 @@
 <?php
     // OVERVIEW
+    // Table-Based View of prepared Quizes
+
     include_once("models/quiz_model.php");
     include_once("config/database.php");
     include_once("common/voting_toolbox.php");
@@ -21,6 +23,8 @@
 <br>
 
 <?php
+    // If User is not logged in,
+    // He will be relocated to Login Page
     $logged = $_SESSION['loggedIn'];
     if ($logged == false){
         echo "NICHT EINGELOGGT!<br>";
@@ -29,21 +33,23 @@
         exit;
     }
 
-    
+    // Tutor from Session
     $Tutor_ID = $_SESSION['ID'];
 
+    // Reset Navigation for all Quizes
+    // (Just in Case...)
     if (!isset($_SESSION['CurrPage'])) {
         $_SESSION['CurrPage'] = 0;
     }
 
-    
+    // Get DB Connection
     $pdo = new Database();
 
     if (!$pdo) {
         echo "Verbindungsfehler!<br />";
     } 
     
-    
+    // Handling of Quiz operation Actions
     if (isset($_GET['DEACTIVATE_QUIZ_ID'])) {
         deactivateQuiz($_GET['DEACTIVATE_QUIZ_ID']);
     } 
@@ -56,6 +62,7 @@
         deleteQuiz($_GET['DELETE_QUIZ_ID']);
     }
     
+    // Print table body
     echo
         '<table style="border:0px solid #647852; border-collapse: collapse;" border="0">'.
         '<tbody>'.
@@ -76,6 +83,7 @@
 
     $CategoryParentResult = $pdo->query($CategoryParentSelect);
 
+    // Iterating through Quiz Data for Display purposes
     if ($CategoryParentResult && $CategoryParentResult->rowCount() > 0) {
         while ($CategoryParent = $CategoryParentResult->fetch(PDO::FETCH_ASSOC)) {
 
@@ -88,7 +96,8 @@
                 '</tr>';
 
             $CategoryParentID = $CategoryParent['ID'];
-              
+            
+            // Printing Quiz Content for Parent Categories
             generateQuizOverview($Tutor_ID, $CategoryParentID);
 
             $CategoryChildSelect = 
@@ -115,7 +124,8 @@
                         '</tr>';
 
                     $CategoryChildID = $CategoryChild['ID'];
-
+                    
+                    // Printing Quiz Content for Child Categories
                     generateQuizOverview($Tutor_ID, $CategoryChildID);
                 }
             }
@@ -127,6 +137,7 @@
             '</p></p>';
         
     } else {
+        // Show message for no existing Quizes...
         echo "<p>Keine Umfragen angelegt!</p><br />";
     }
  ?>
