@@ -44,13 +44,13 @@
         
         echo "</table><label id='overviewLabel'>&nbsp;</label><br>";
 	
-        $myQuestion->ShowTable();
-        
         $votes = $myQuestion->CountVotes();
         
         if($votes>0){
             echo "<h3><center>Anzahl der abgegebenen Stimmen: " . $votes . "</center></h3>";
         }
+        
+        $myQuestion->ShowTable();
         
         echo "<form method='GET'>";
         echo "<input type='text' hidden name='key' value='". $myQuiz->__get("qKey") . "'>";

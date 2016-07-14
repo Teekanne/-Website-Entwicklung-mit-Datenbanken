@@ -1,24 +1,94 @@
 <?php
+/**
+ * Category.php
+ * 
+ * This file handles several database-operations for an specific category-object.
+ * 
+ * @author Christoph Pohl <christoph.pohl@stud.fh-flensburg.de>
+ * @version 1.0
+ */
     class Category {
+        /**
+         * ID of an category
+         * @access private
+         * @var integer
+         */
         private $id;
+        
+        /**
+         * name of the category
+         * @access private
+         * @var string
+         */
         private $catname;
+        
+        /**
+         * Level of the category
+         * @access private
+         * @var integer
+         */
         private $level;
+        
+        /**
+         * ID of the tutor
+         * @access private
+         * @var integer
+         */
         private $fkTutor;
+        
+        /**
+         * ID of an parent-category
+         * @access private
+         * @var integer
+         */
         private $fkParentId;
+        
+        /**
+         * contains the database-connection
+         * @access private
+         * @var PDO
+         */
         private $pdo;
         
+        /**
+         * Magic getter-method
+         * 
+         * This method returns the internal value of a variable if it exists.
+         * 
+         * @param string $key
+         * @return misc $key
+         */
         public function __get($key){
             if(property_exists($this, $key)){
                 return $this->$key;                
             }
         }
         
+        /**
+         * Magic setter-method
+         * 
+         * This method sets the internal value of a variable if it exists.
+         * 
+         * @param string $key
+         * @param misc $value
+         */
         public function __set($key, $value){
             if(property_exists($this, $key)){
                 $this->$key = $value;
             }
         }
 
+        /**
+         * Constructor of the category-class
+         * 
+         * Initializes a new object of the class 'category'
+         * 
+         * @param integer $id
+         * @param string $catname
+         * @param integer $level
+         * @param integer $fkTutor
+         * @param integer $fkParentId
+         */
         public function __construct($id, $catname, $level, $fkTutor, $fkParentId){
             $this->id = $id;
             $this->catname = $catname;
@@ -28,6 +98,14 @@
             $this->pdo = new DataBase();
         }
         
+        /**
+         * Adds a new category to the databse.
+         * 
+         * @param string $name
+         * @param category $mainCategory
+         * @param string $fkTutor
+         * @return \Category
+         */
         public static function Add($name, $mainCategory, $fkTutor){
             $cat = Category::Load($name);
             
@@ -59,6 +137,11 @@
             return new Category($pdo->lastInsertId(), $name, $level, $fkTutor, $fkParentId);
         }
         
+        /**
+         * Deletes an category from the databse.
+         * 
+         * @param string $name
+         */
         public static function Delete($name) {
             $category = Category::Load($name);
             
@@ -77,6 +160,12 @@
             $statement->execute();
         }
         
+        /**
+         * Loads a category from the database.
+         * 
+         * @param string $name
+         * @return \Category
+         */
         public static function Load($name) {
             $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
             $sql= "SELECT * FROM T_CATEGORY WHERE CATNAME=:catName"; 
@@ -94,6 +183,11 @@
             return new Category($result["ID"], $result["CATNAME"], $result["LEVEL"], $result["FK_TUTOR"], $result["FK_PARENT_ID"]);
         }
         
+        /**
+         * Counts the available first level categories.
+         * 
+         * @return int Sum of first level categories
+         */
         public static function CountFirstLevelCategories(){
             $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
             
@@ -104,7 +198,12 @@
             return $statement->rowCount();
         }
         
-        /* Gibt eine Liste des generischen Typs "Category" zurück */
+        /**
+         * Returns an array of first level categories.
+         * 
+         * @param integer $id
+         * @return array of categories
+         */
         private static function getFirstLevelCategories($id){
             $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
             $result = $pdo->query("SELECT * FROM T_CATEGORY WHERE LEVEL=1 AND FK_TUTOR=" . $id . " ORDER BY ID");
@@ -115,6 +214,12 @@
             return $categories;
         }
         
+        /**
+         * Returns an array of second level categories.
+         * 
+         * @param integer $id
+         * @return array of categories
+         */
         private function getSecondLevelCategories(){
             $result = $this->pdo->query("SELECT * FROM T_CATEGORY WHERE FK_PARENT_ID=" . $this->id);
             $categories = array();
@@ -126,6 +231,13 @@
             return $categories;            
         }
         
+        /**
+         * Shows an selectbox with categories
+         * 
+         * @param type $id
+         * @param boolean $secondLevel
+         * @param integer $width
+         */
         public static function ShowSelectBoxWithCategories($id, $secondLevel, $width){
             $firstOption = true;
             echo "<select style=width:13.3em; name='category' ";

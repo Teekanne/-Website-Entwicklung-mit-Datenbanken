@@ -1,3 +1,3 @@
 <?php
 
-echo "<label id='messageLabel'></br>Sie haben sich erfolgreich registriert.</label>";
+echo "</br></br></br><label id='messageLabel'></br>Sie haben sich erfolgreich registriert.</label></br></br></br>";
