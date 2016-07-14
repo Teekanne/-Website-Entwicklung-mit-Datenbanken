@@ -61,7 +61,7 @@
 			<ul>
 				<?php if (Session::get('loggedIn') == false):?>
 				
-					<li><a href="<?php echo URL; ?>">Index</a></li>
+					<li><a href="<?php echo URL; ?>">Startseite</a></li>
                                         <li><a href="<?php echo URL; ?>registration">Registrierung</a></li>
 					<li><a href="<?php echo URL; ?>help">Hilfe</a></li>
 				<?php endif; ?>	
