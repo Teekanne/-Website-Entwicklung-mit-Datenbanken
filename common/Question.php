@@ -171,7 +171,7 @@
             $result = $statement->fetchAll();
             
             if(!$result){
-                echo "<label id='messageLabel'></br>Es wurde keine Frage gefunden.</label>";
+                echo "</br></br></br><label id='messageLabel'></br>Es wurde keine Frage gefunden.</label></br></br></br>";
                 return null;
             }
             
@@ -272,7 +272,7 @@
             echo "<table border='0'><tr>";
 
             if($maxVotes==0 || $sumVotes==0){
-                echo "<label id='messageLabel'></br>Bisher hat noch niemand abgestimmt.</label></tr></table></tr></table>";
+                echo "</br></br></br><label id='messageLabel'></br>Bisher hat noch niemand abgestimmt.</label></br></br></br></tr></table></tr></table>";
                 return;
             }
 
