@@ -131,7 +131,7 @@
             $result = $statement->fetchAll();
             
             if(!$result){
-                echo "<p>Quiz mit Key '" . $qkey . "' existiert nicht.</p>";
+                echo "<br /><br /><br /><label id='messageLabel'><br />Quiz mit Key '" . $qkey . "' existiert nicht.</label>";
                 return null;
             }
             
