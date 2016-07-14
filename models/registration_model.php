@@ -1,11 +1,11 @@
 <?php
-
+//contains the functions to insert a new user on the db
 class Registration_Model extends Model {
 
     public function __construct() {
         parent::__construct();
     }
-
+//reg the new user
     public function reg($title, $firstname, $lastname, $email, $password, $rolereg) {
         
         $Checklength = $password;

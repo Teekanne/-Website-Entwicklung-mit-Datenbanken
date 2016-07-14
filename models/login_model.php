@@ -1,6 +1,6 @@
 <?php
 
-
+//handles the db connection to check if a user is registred 
 class Login_Model extends Model
 {
 	public function __construct()

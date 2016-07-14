@@ -1,4 +1,5 @@
 <?php
+//contains the functions for the Account Administration
 class Account extends Controller {
 
 	function __construct() {

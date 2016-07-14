@@ -1,10 +1,11 @@
 <?php
-
+//Contains the functions to handle the databaseconnection of the user administration
 class User_Model extends Model {
 
     public function __construct() {
         parent::__construct();
     }
+    //delete user from DB
     function deleteUser($id){
         $deletesth = $this->db->prepare('DELETE FROM T_TUTOR WHERE ID = :id');
         $deletesth->execute(array(':id' => $id));
@@ -12,12 +13,13 @@ class User_Model extends Model {
          $message->deleted();
      
     }
-
+    //get userlist from DB
     public function userList() {
         $sth = $this->db->prepare('Select ID, TITLE, FIRSTNAME, LASTNAME, EMAIL, ROLE from T_TUTOR');
         $sth->execute();
         return $sth->fetchAll();
     }
+    //edit the user on the db
     public function editUser($id){
       
         $editsth = $this->db->prepare('SELECT ID, TITLE, FIRSTNAME, LASTNAME, EMAIL, ROLE FROM T_TUTOR WHERE ID = :id');
@@ -44,6 +46,7 @@ class User_Model extends Model {
         }
         exit;
     }
+    //get the informations of the user you want to delete
     public function getUsertoDelte($id){
         $editsth = $this->db->prepare('SELECT ID, TITLE, FIRSTNAME, LASTNAME, EMAIL, ROLE FROM T_TUTOR WHERE ID = :id');
         $editsth->execute(array(':id' => $id));
@@ -68,6 +71,7 @@ class User_Model extends Model {
         }
         exit;
     }
+    //update the user on the db
     public function updateUser($titel, $firstname, $lastname, $email, $role) {
     
             $ID = SESSION::get('EDITID');
@@ -78,6 +82,7 @@ class User_Model extends Model {
             $message->success();
   
     }
+    //register a new user
     public function reg($title, $firstname, $lastname, $email, $password, $rolereg) {
         $Checklength = $password;
         $checkEMAIL = $email;

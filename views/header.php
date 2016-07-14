@@ -74,7 +74,7 @@
 				<?php if (Session::get('ROLE') == 'Administrator'):?>
                                     <?php setUrl("user", "Benutzer"); ?>
 				<?php endif; ?>
-                                    <?php setUrl("dashboard/logout", "Logout"); ?>	
+                                    <?php setUrl("functions/logout", "Logout"); ?>	
 				<?php else: ?>
 					<li><a href="<?php echo URL; ?>login">Login</a></li>
 				<?php endif; ?>

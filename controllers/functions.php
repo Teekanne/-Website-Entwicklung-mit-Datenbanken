@@ -1,6 +1,6 @@
 <?php
 /* */
-class Dashboard extends Controller {
+class Functions extends Controller {
 
 	function __construct() {
 		parent::__construct();
@@ -13,32 +13,22 @@ class Dashboard extends Controller {
 		}
                // print_r($_SESSION);
              
-                $this->view->js = array('dashboard/js/default.js');
+                $this->view->js = array('function/js/default.js');
 	}
 	
 	function index() 
 	{	
-		$this->view->render('dashboard/index');
+		$this->view->render('function/index');
 	}
-	
+	/*  
+         * Logout function
+         *          */
 	function logout()
 	{
 		Session::destroy();
 		header('location: ../login');
 		exit;
 	}
-      function xhrInsert()
-	{
-		$this->model->xhrInsert();
-	}
-        
-        function xhrGetListings()
-        {
-            $this->model->xhrGetListings();
-        }
-function xhrDeleteListing()
-	{
-		$this->model->xhrDeleteListing();
-	}
+ 
 
 }

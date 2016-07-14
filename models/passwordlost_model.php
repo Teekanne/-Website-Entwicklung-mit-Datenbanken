@@ -1,5 +1,5 @@
 <?php
-
+//contains the functions to handle the key and new pw handler to the db
 class Passwordlost_Model extends Model {
 
     public function __construct() {
