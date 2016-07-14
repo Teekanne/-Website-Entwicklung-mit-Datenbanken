@@ -16,6 +16,10 @@ h1 {
 	
 }
 
+#index	{
+	color:#FFFFFF;
+}
+
 h2 {
 	font-size:1.5em;
 	line-height:1.8em;
@@ -291,6 +295,15 @@ label:active {
 #messageLabel {
 	text-align:center;
 	font-size:1.2em;
+	font-family:Helvetica;
+}
+
+#indexLabel	{
+	line-height:1.8em;
+	font-family:Helvetica;
+	font-weight:100;
+	margin-left:1em;
+	text-align:left;
 }
 
 #userLabel {
