@@ -96,7 +96,7 @@
             $this->answer = $answer;
             $this->iscorrect = $iscorrect;
             $this->fkQuestion = $fkQuestion;
-            $this->pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $this->pdo = new DataBench();
         }
         
         /**
@@ -109,7 +109,7 @@
          * @return \Answer
          */
         public static function Add($answerPos, $answer, $iscorrect, $question){
-            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $pdo = new DataBench();
 
             $sql= "INSERT INTO T_ANSWER (ANSWER_POS, ANSWER, ISCORRECT, FK_QUESTION) " .
                     "VALUES (:pos, :answer, :iscorrect, :fkQuestion)"; 

@@ -95,7 +95,7 @@
             $this->level = $level;
             $this->fkTutor = $fkTutor;
             $this->fkParentId = $fkParentId;
-            $this->pdo = new DataBase();
+            $this->pdo = new DataBench();
         }
         
         /**
@@ -122,7 +122,7 @@
                 $fkParentId = null;
             }
             
-            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $pdo = new DataBase();
             
             $sql= "INSERT INTO T_CATEGORY(CATNAME, LEVEL, FK_TUTOR, FK_PARENT_ID) " .
                     "VALUES (:name, :level, :fkTutor, :fkParentId)";
@@ -145,7 +145,7 @@
         public static function Delete($name) {
             $category = Category::Load($name);
             
-            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $pdo = new DataBench();
             
             if(!$category->__get("fkParentId")){
                 $sql= "DELETE FROM T_CATEGORY WHERE FK_PARENT_ID=:parentId"; 
@@ -167,7 +167,7 @@
          * @return \Category
          */
         public static function Load($name) {
-            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $pdo = new DataBench();
             $sql= "SELECT * FROM T_CATEGORY WHERE CATNAME=:catName"; 
             $statement = $pdo->prepare($sql);
             $statement->bindParam(':catName', $name, PDO::PARAM_STR); 
@@ -189,7 +189,7 @@
          * @return int Sum of first level categories
          */
         public static function CountFirstLevelCategories($tutorId){
-            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $pdo = new DataBench();
             
             $sql= "SELECT * FROM T_CATEGORY WHERE LEVEL=1 AND FK_TUTOR=" . $tutorId; 
             $statement = $pdo->prepare($sql);
@@ -206,7 +206,7 @@
          * @return array of categories
          */
         private static function getFirstLevelCategories($id){
-            $pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $pdo = new DataBench();
             $result = $pdo->query("SELECT * FROM T_CATEGORY WHERE LEVEL=1 AND FK_TUTOR=" . $id . " ORDER BY ID");
             $categories = array();
             foreach($result as $category){

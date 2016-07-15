@@ -12,4 +12,5 @@
     include_once("Quiz.php");
     include_once("Tutor.php");
     include_once("Answer.php");
+    include_once("Data.php");
 ?>

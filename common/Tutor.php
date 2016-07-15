@@ -122,7 +122,7 @@
             $this->password = $password;
             $this->role = $role;
             $this->resetkey = $resetkey;
-            $this->pdo = new PDO('mysql:host=projekt.wi.fh-flensburg.de;dbname=projekt2015a', 'projekt2015a', 'P2016s7');
+            $this->pdo = new DataBench();
         }
         
         /**
